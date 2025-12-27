@@ -8,8 +8,13 @@ class Database {
             $config = require __DIR__ . '/../config/config.php';
 
             try {
+                $host = $config['db']['host'];
+                $port = $config['db']['port'] ?? 3306;
+                $charset = $config['db']['charset'] ?? 'utf8mb4';
+
+                $dsn = "mysql:host={$host};port={$port};charset={$charset}";
                 $pdo = new PDO(
-                    "mysql:host={$config['db']['host']}",
+                    $dsn,
                     $config['db']['user'],
                     $config['db']['pass'],
                     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function testConnection() {
     try {
-        const response = await fetch('/api/user', {
+        const response = await fetch('api/user', {
             method: 'GET',
         });
 

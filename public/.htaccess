@@ -1,7 +1,13 @@
 RewriteEngine On
 
+# Route API calls to the API front controller outside public/
+# Works on macOS and Windows (MAMP/XAMPP) when public/ is the document root
+RewriteRule ^api/?(.*)$ ../api/index.php [L,QSA]
+
+# If the requested file or directory exists, serve it directly
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
+# Otherwise, route everything else to the public front controller
 RewriteRule ^ index.php [L]
