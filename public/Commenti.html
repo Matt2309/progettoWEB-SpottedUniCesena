@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commenti</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{ background:#f5f5f5; }
+
+/* CARD POST PRINCIPALE */
+.post-card{
+  border-radius:20px;
+  padding:18px;
+  background:white;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Offcanvas stile foglio che sale dal basso */
+.offcanvas-bottom{
+  height:80vh;
+  border-top-left-radius:25px;
+  border-top-right-radius:25px;
+}
+
+/* Commento Singolo */
+.comment-box{
+  margin-top:15px;
+}
+
+.avatar{
+  width:35px;
+  height:35px;
+  background:#6cd0ff;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:bold;
+}
+
+.input-comment{
+  border-radius:25px;
+  padding:10px 15px;
+  border:none;
+  background:#f1f1f1;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER APP -->
+<nav class="navbar bg-white shadow-sm">
+  <div class="container d-flex justify-content-center">
+      <h5 class="m-0 text-danger">SpottedUniCesena</h5>
+  </div>
+</nav>
+
+<div class="container mt-4">
+
+  <!-- POST -->
+  <div class="post-card">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <div class="avatar">P</div>
+        <div class="ms-2">
+          <b>pippo_franco</b><br>
+          <small class="text-muted">2 ore fa</small>
+        </div>
+      </div>
+
+      <span class="badge bg-light text-dark">persone</span>
+    </div>
+
+    <p class="mt-3">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry...
+    </p>
+
+    <!-- BOTTONE PER APRIRE COMMENTI -->
+    <button class="btn btn-outline-secondary w-100"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#commentsDrawer">
+        Apri Commenti
+    </button>
+  </div>
+</div>
+
+
+<!-- =========================
+     OFFCANVAS COMMENTI
+========================= -->
+<div class="offcanvas offcanvas-bottom"
+     tabindex="-1"
+     id="commentsDrawer">
+
+  <div class="offcanvas-header justify-content-center">
+    <h6 class="text-danger fw-bold">Commenti</h6>
+  </div>
+
+  <div class="offcanvas-body">
+
+      <!-- COMMENTO 1 -->
+      <div class="comment-box d-flex">
+        <div class="avatar">P</div>
+        <div class="ms-2">
+          <b>pippo_franco</b>
+          <small class="text-muted ms-2">2 ore fa</small>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing industry...
+          </p>
+        </div>
+      </div>
+
+      <!-- COMMENTO 2 -->
+      <div class="comment-box d-flex">
+        <div class="avatar">P</div>
+        <div class="ms-2">
+          <b>pippo_franco</b>
+          <small class="text-muted ms-2">2 ore fa</small>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing industry...
+          </p>
+        </div>
+      </div>
+
+      <!-- COMMENTO 3 -->
+      <div class="comment-box d-flex">
+        <div class="avatar">P</div>
+        <div class="ms-2">
+          <b>pippo_franco</b>
+          <small class="text-muted ms-2">2 ore fa</small>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing industry...
+          </p>
+        </div>
+      </div>
+
+  </div>
+
+  <!-- INPUT COMMENTO FISSO IN BASSO -->
+  <div class="p-3">
+      <div class="input-group">
+          <input type="text" class="form-control input-comment" placeholder="Aggiungi un commento...">
+          <button class="btn btn-light">
+              ✈️
+          </button>
+      </div>
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
