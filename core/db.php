@@ -43,4 +43,75 @@ class Database {
 
         return self::$instance;
     }
+
+    //Lista Spotted accettati
+    public function getSpottedAccept($state){
+        $query = "SELECT * from Spotted WHERE state=ACCEPTED";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $state);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    //lista spotted per utente
+    public function getSpottedUser($username){
+        $query = "SELECT * FROM Spotted WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    //lista utenti
+    public function getUsers(){
+        $query = "SELECT username FROM Users";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute();
+    }
+
+    //lista commenti per un certo utente
+    public function getCommentUser($username){
+        $query = "SELECT * FROM Comments, Users WHERE username=usernameComments AND username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    //lista commenti spotted
+    public function getCommentSpotted($title){
+        $query = "SELECT * FROM Spotted, Comments WHERE title=titleComments AND title = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    //bannare utente
+    public function userBan($username){
+        $query = "UPDATE Users SET isBanned=true WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        return $stmt->execute();
+    }
+
+    //sbannare utente
+    public function userSban($username){
+        $query = "UPDATE Users SET isBanned=false WHERE username=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        return $stmt->execute();
+    }
+
+    //accettazione spotted
+    public function spottedOk($title){
+        $query = "UPDATE Spotted SET state=ACCEPTED WHERE title=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $title);
+        return $stmt->execute();
+    }
 }
