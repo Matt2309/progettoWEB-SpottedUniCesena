@@ -2,6 +2,12 @@
 
 class Database {
     private static ?PDO $instance = null;
+    private PDO $db;
+
+    public function __construct()
+    {
+        $this->db = self::getConnection();
+    }
 
     public static function getConnection(): PDO {
         if (!self::$instance) {
@@ -55,14 +61,13 @@ class Database {
     }
 
     //lista spotted per utente
-    public function getSpottedUser($username){
-        $query = "SELECT * FROM Spotted WHERE username = ?";
+    public function getSpottedUser($userId) {
+        $query = "SELECT * FROM spotted WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     //lista utenti
     public function getUsers(){
@@ -83,12 +88,10 @@ class Database {
 
     //lista commenti spotted
     public function getCommentSpotted($title){
-        $query = "SELECT * FROM Spotted, Comments WHERE title=titleComments AND title = ?";
+        $query = "SELECT * FROM Spotted, Comments WHERE title=titleComments AND title = :title";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->execute([':title' => $title]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //bannare utente
