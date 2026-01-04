@@ -43,6 +43,71 @@ class UserController {
             $this->usersList();
             return;
         }
+
+        //GET /api/user/getCommentUser
+        if ($resource === 'user' && $subroute === 'getCommentUser') {
+            $userId = $_GET['userId'] ?? '';
+            if ($userId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'userId' parameter"
+                ], 400);
+            }
+            $this->commentUserList($userId);
+            return;
+        }
+
+        //GET /api/user/getCommentSpotted
+        if ($resource === 'user' && $subroute === 'getCommentSpotted') {
+            $spottedId = $_GET['spottedId'] ?? '';
+            if ($spottedId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'userId' parameter"
+                ], 400);
+            }
+            $this->commentSpottedList($spottedId);
+            return;
+        }
+
+        //GET /api/user/userBan
+        if ($resource === 'user' && $subroute === 'userBan') {
+            $userId = $_GET['userId'] ?? '';
+            if ($userId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'userId' parameter"
+                ], 400);
+            }
+            $this->banUser($userId);
+            return;
+        }
+
+        //GET /api/user/userSban
+        if ($resource === 'user' && $subroute === 'userSban') {
+            $userId = $_GET['userId'] ?? '';
+            if ($userId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'userId' parameter"
+                ], 400);
+            }
+            $this->sbanUser($userId);
+            return;
+        }
+
+        //GET /api/user/spottedOk
+        if ($resource === 'user' && $subroute === 'spottedOk') {
+            $spottedId = $_GET['spottedId'] ?? '';
+            if ($spottedId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'userId' parameter"
+                ], 400);
+            }
+            $this->validateSpotted($spottedId);
+            return;
+        }
     }
 
     Response::json(['error' => 'Not found'], 404);
@@ -99,6 +164,101 @@ class UserController {
 
             Response::json([
                 'status' => 'success',
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function commentUserList(string $userId): void {
+        try{
+            $db = new Database();
+            $spotted = $db->getCommentUser($userId);
+
+            Response::json([
+                'status' => 'success',
+                'userId'=> $userId,
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function commentSpottedList(string $spottedId): void {
+        try{
+            $db = new Database();
+            $spotted = $db->getCommentSpotted($spottedId);
+
+            Response::json([
+                'status' => 'success',
+                'spottedId'=> $spottedId,
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function banUser(string $userId): void {
+        try{
+            $db = new Database();
+            $spotted = $db->userBan($userId);
+
+            Response::json([
+                'status' => 'success',
+                'userId'=> $userId,
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function sbanUser(string $userId): void {
+        try{
+            $db = new Database();
+            $spotted = $db->userSban($userId);
+
+            Response::json([
+                'status' => 'success',
+                'userId'=> $userId,
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function validateSpotted(string $spottedId): void {
+        try{
+            $db = new Database();
+            $spotted = $db->spottedOk($spottedId);
+
+            Response::json([
+                'status' => 'success',
+                'spottedId'=> $spottedId,
                 'data' => $spotted
             ]);
         } catch ( Throwable $e){

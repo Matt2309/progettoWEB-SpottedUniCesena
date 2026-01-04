@@ -72,51 +72,48 @@ class Database {
 
     //lista utenti
     public function getUsers(){
-        $query = "SELECT username FROM Users";
+        $query = "SELECT username FROM users";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //lista commenti per un certo utente
-    public function getCommentUser($username){
-        $query = "SELECT * FROM Comments, Users WHERE username=usernameComments AND username = ?";
+    public function getCommentUser($userId){
+        $query = "SELECT text FROM comments WHERE comments.user_id = :userId";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //lista commenti spotted
-    public function getCommentSpotted($title){
-        $query = "SELECT * FROM Spotted, Comments WHERE title=titleComments AND title = :title";
+    public function getCommentSpotted($spottedId){
+        $query = "SELECT * FROM comments WHERE spotted_id = :spottedId";
         $stmt = $this->db->prepare($query);
-        $stmt->execute([':title' => $title]);
+        $stmt->execute([':spottedId' => $spottedId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //bannare utente
-    public function userBan($username){
-        $query = "UPDATE Users SET isBanned=true WHERE username=?";
+    public function userBan($userId){
+        $query = "UPDATE users SET isBanned=1 WHERE id = :userId";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username);
+        $stmt->execute(['userId' => $userId]);
         return $stmt->execute();
     }
 
     //sbannare utente
-    public function userSban($username){
-        $query = "UPDATE Users SET isBanned=false WHERE username=?";
+    public function userSban($userId){
+        $query = "UPDATE users SET isBanned=0 WHERE id = :userId";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username);
+        $stmt->execute(['userId' => $userId]);
         return $stmt->execute();
     }
-
     //accettazione spotted
-    public function spottedOk($title){
-        $query = "UPDATE Spotted SET state=ACCEPTED WHERE title=?";
+    public function spottedOk($spottedId){
+        $query = "UPDATE spotted SET status='APPROVED' WHERE id = :spottedId";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $title);
+        $stmt->execute([':spottedId' => $spottedId]);
         return $stmt->execute();
     }
 }
