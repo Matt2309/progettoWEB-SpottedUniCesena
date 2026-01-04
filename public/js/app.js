@@ -25,7 +25,7 @@ async function testConnection() {
         `;
 
     } catch (error) {
-        console.error("Error:", error);
+        //console.error("Error:", error);
         document.getElementById('app-content').innerHTML = `
             <div class="alert alert-danger">Error: ${error.message}</div>
         `;
