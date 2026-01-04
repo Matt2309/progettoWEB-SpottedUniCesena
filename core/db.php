@@ -51,14 +51,15 @@ class Database {
     }
 
     //Lista Spotted accettati
-    public function getSpottedAccept($state){
-        $query = "SELECT * from Spotted WHERE state=ACCEPTED";
+    public function getSpottedAccept(): array {
+        $query = "SELECT * FROM spotted WHERE status = :status";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $state);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->execute([
+            ':status' => 'APPROVED'
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     //lista spotted per utente
     public function getSpottedUser($userId) {
@@ -73,7 +74,8 @@ class Database {
     public function getUsers(){
         $query = "SELECT username FROM Users";
         $stmt = $this->db->prepare($query);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //lista commenti per un certo utente

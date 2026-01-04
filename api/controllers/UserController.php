@@ -4,29 +4,48 @@ class UserController {
 
     public function handle() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // /api/user/getUserSpotted
-            $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-            $path = parse_url($requestUri, PHP_URL_PATH) ?? '/';
-            $segments = array_values(array_filter(explode('/', trim($path, '/'))));
 
-            $apiIndex = array_search('api', $segments, true);
-            $resource = $apiIndex !== false ? ($segments[$apiIndex + 1] ?? null) : null;
-            $subroute = $apiIndex !== false ? ($segments[$apiIndex + 2] ?? null) : null;
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $path = parse_url($requestUri, PHP_URL_PATH) ?? '/';
+        $segments = array_values(array_filter(explode('/', trim($path, '/'))));
 
-            if ($resource === 'user' && $subroute === 'getUserSpotted') {
-                $userId = isset($_GET['userId']) ? trim((string)$_GET['userId']) : '';
-                if ($userId === '') {
-                    Response::json([
-                        'status' => 'error',
-                        'message' => "Missing required 'userId' parameter"
-                    ], 400);
-                }
-                $this->spottedByUser($userId);
-                return;
-            }
-        } else {
-            Response::json(['error' => 'Method not allowed'], 405);
+        $apiIndex = array_search('api', $segments, true);
+        $resource = $apiIndex !== false ? ($segments[$apiIndex + 1] ?? null) : null;
+        $subroute = $apiIndex !== false ? ($segments[$apiIndex + 2] ?? null) : null;
+
+        //GET /api/user
+        if ($resource === 'user' && $subroute === null) {
+            $this->testMessage();
+            return;
         }
+
+        //GET /api/user/getUserSpotted
+        if ($resource === 'user' && $subroute === 'getUserSpotted') {
+            $userId = $_GET['userId'] ?? '';
+            if ($userId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'userId' parameter"
+                ], 400);
+            }
+            $this->spottedByUser($userId);
+            return;
+        }
+
+        //GET /api/user/getSpottedAccept
+        if ($resource === 'user' && $subroute === 'getSpottedAccept') {
+            $this->spottedAccept();
+            return;
+        }
+
+        //GET /api/user/getUsers
+        if ($resource === 'user' && $subroute === 'getUsers'){
+            $this->usersList();
+            return;
+        }
+    }
+
+    Response::json(['error' => 'Not found'], 404);
     }
 
     private function testMessage() {
@@ -47,6 +66,42 @@ class UserController {
                 'data' => $spotted
             ]);
         } catch (Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function spottedAccept(): void {
+        try{
+            $db = new Database();
+            $spotted = $db->getSpottedAccept();
+
+            Response::json([
+                'status' => 'success',
+                'data' => $spotted
+            ]);
+        } catch (Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function usersList(): void {
+        try{
+            $db = new Database();
+            $spotted = $db->getUsers();
+
+            Response::json([
+                'status' => 'success',
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
             Response::json([
                 'status' => 'error',
                 'message' => 'Failed to fetch spotted for user',
