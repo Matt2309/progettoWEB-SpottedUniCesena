@@ -19,6 +19,21 @@
   --bs-btn-disabled-border-color: var(--bs-primary);
 }
 
+/* Text utilities mapped to brand color without changing HTML */
+.text-primary { color: var(--bs-primary) !important; }
+.border-primary { border-color: var(--bs-primary) !important; }
+
+/* Links that use text-danger: provide a slightly darker hover for feedback */
+a.text-primary:hover,
+a.text-primary:focus,
+.link-primary:hover,
+.link-primary:focus { color: #8f1a1a !important; }
+
+/* Optional: brand-colored links when using Bootstrap link utilities */
+.link-primary { color: var(--bs-primary) !important; }
+.link-primary:hover,
+.link-primary:focus { color: #8f1a1a !important; }
+
 .bg-background {
   background-color: var(--bs-background-color);
 }
