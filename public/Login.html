@@ -5,92 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login</title>
 
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    body{
-      background:#ffffff;
-    }
-
-    .app-title{
-      color:#a51e1e;
-      font-weight:500;
-    }
-
-    .login-box{
-      max-width:420px;
-      margin:auto;
-      margin-top:30px;
-      text-align:center;
-    }
-
-    .login-title{
-      color:#a51e1e;
-      font-weight:600;
-      margin-top:30px;
-      margin-bottom:20px;
-    }
-
-    .rounded-input{
-      border-radius:25px;
-      border:2px solid #a51e1e;
-      padding:12px;
-    }
-
-    .btn-login{
-      background:#a51e1e;
-      color:white;
-      border-radius:25px;
-      font-size:18px;
-      padding:10px 0;
-      border:none;
-    }
-
-    .btn-login:hover{
-      background:#8c1818;
-    }
-
-    .register-text{
-      margin-top:20px;
-      color:#a51e1e;
-    }
-
-    .register-text a{
-      color:#a51e1e;
-      text-decoration:underline;
-    }
-
-  </style>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-white">
 
-  <div class="login-box">
+  <div class="container min-vh-100 d-flex justify-content-center align-items-start">
+    <div class="w-100" style="max-width:420px;">
 
-      <h2 class="app-title">SpottedUniCesena</h2>
+      <!-- Titolo App -->
+      <h2 class="text-danger text-center fw-semibold mt-4">
+        SpottedUniCesena
+      </h2>
 
-      <h4 class="login-title">Login</h4>
+      <!-- Titolo Pagina -->
+      <h4 class="text-danger text-center fw-bold mt-4 mb-4">
+        Login
+      </h4>
 
+      <!-- FORM -->
       <form action="login.php" method="POST">
 
-          <input type="text" class="form-control rounded-input mb-3"
-                 placeholder="Nome utente *" name="username" required>
+        <input type="text"
+               name="username"
+               class="form-control rounded-pill border-danger mb-3"
+               placeholder="Nome utente *"
+               required>
 
-          <input type="password" class="form-control rounded-input mb-4"
-                 placeholder="Password *" name="password" required>
+        <input type="password"
+               name="password"
+               class="form-control rounded-pill border-danger mb-4"
+               placeholder="Password *"
+               required>
 
-          <button type="submit" class="btn btn-login w-50">
-              Accedi
+        <div class="text-center">
+          <button type="submit" class="btn btn-danger rounded-pill px-5 fw-semibold">
+            <i class="bi bi-box-arrow-in-right me-1"></i>
+            Accedi
           </button>
+        </div>
+
       </form>
 
-      <p class="register-text">
-          Non hai un account?
-          <a href="Registrazione.html">Registrati.</a>
+      <!-- Link registrazione -->
+      <p class="text-center text-danger mt-4">
+        Non hai un account?
+        <a href="Registrazione.html" class="text-danger fw-semibold">
+          Registrati
+        </a>
       </p>
 
+    </div>
   </div>
 
 </body>
 </html>
-
