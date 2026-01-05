@@ -1,0 +1,24 @@
+:root {
+  /* Primary brand color */
+  --bs-primary: #a51e1e;
+    --bs-background-color: #EDEDED;
+
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  /* Slightly darker shade for hover/active states */
+  --bs-btn-hover-bg: #8f1a1a;
+  --bs-btn-hover-border-color: #8a1919;
+  --bs-btn-active-bg: #7c1616;
+  --bs-btn-active-border-color: #771515;
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+.bg-background {
+  background-color: var(--bs-background-color);
+}
