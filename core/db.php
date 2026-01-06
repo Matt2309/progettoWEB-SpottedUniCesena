@@ -116,4 +116,39 @@ class Database {
         $stmt->execute([':spottedId' => $spottedId]);
         return $stmt->execute();
     }
+
+    //registrazione
+    public function register($nome, $cognome, $email, $username, $hash){
+        $query = "
+        INSERT INTO users (name, surname, email, username, password, role_id)
+        VALUES (
+            :n,
+            :c,
+            :e,
+            :u,
+            :p,
+            (SELECT id FROM roles WHERE title = 'USER')
+        )
+        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            'n' => $nome,
+            'c' => $cognome,
+            'e' => $email,
+            'u' => $username,
+            'p' => $hash
+        ]);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    //login
+    public function login($email){
+        $query = "SELECT id, password FROM users WHERE email = :e OR username = :e";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(['e' => $email]);
+        return $stmt->fetch();
+    }
 }

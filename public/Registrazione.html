@@ -28,7 +28,7 @@
       </h4>
 
       <!-- FORM -->
-      <form action="register.php" method="POST">
+      <form action="/api/auth/register.php" method="POST">
 
         <input type="text"
                name="nome"
@@ -41,6 +41,12 @@
                class="form-control rounded-pill border-danger mb-3"
                placeholder="Cognome *"
                required>
+
+        <input type="text"
+                name="username"
+                class="form-control rounded-pill border-danger mb-3"
+                placeholder="Username *"
+                required>
 
         <input type="email"
                name="email"
