@@ -1,0 +1,39 @@
+:root {
+  /* Primary brand color */
+  --bs-primary: #a51e1e;
+    --bs-background-color: #EDEDED;
+
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  /* Slightly darker shade for hover/active states */
+  --bs-btn-hover-bg: #8f1a1a;
+  --bs-btn-hover-border-color: #8a1919;
+  --bs-btn-active-bg: #7c1616;
+  --bs-btn-active-border-color: #771515;
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+/* Text utilities mapped to brand color without changing HTML */
+.text-primary { color: var(--bs-primary) !important; }
+.border-primary { border-color: var(--bs-primary) !important; }
+
+/* Links that use text-danger: provide a slightly darker hover for feedback */
+a.text-primary:hover,
+a.text-primary:focus,
+.link-primary:hover,
+.link-primary:focus { color: #8f1a1a !important; }
+
+/* Optional: brand-colored links when using Bootstrap link utilities */
+.link-primary { color: var(--bs-primary) !important; }
+.link-primary:hover,
+.link-primary:focus { color: #8f1a1a !important; }
+
+.bg-background {
+  background-color: var(--bs-background-color);
+}
