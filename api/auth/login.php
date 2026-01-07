@@ -20,4 +20,4 @@ if (!password_verify($password, $user['password'])) {
 }
 
 $db->createSession($user['id']);
-header('Location: ../public/index.php');
+header('Location: ../../public/index.php');

@@ -1,8 +1,10 @@
 <?php
+require_once __DIR__ . '/../../core/db.php';
 
 class UserController {
 
     public function handle() {
+        $db = Database::getInstance();
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
@@ -12,6 +14,8 @@ class UserController {
         $apiIndex = array_search('api', $segments, true);
         $resource = $apiIndex !== false ? ($segments[$apiIndex + 1] ?? null) : null;
         $subroute = $apiIndex !== false ? ($segments[$apiIndex + 2] ?? null) : null;
+        $user = $db->getAuthenticatedUser();
+        $userId = $user['id'] ?? '';
 
         //GET /api/user
         if ($resource === 'user' && $subroute === null) {
@@ -21,7 +25,6 @@ class UserController {
 
         //GET /api/user/getUserSpotted
         if ($resource === 'user' && $subroute === 'getUserSpotted') {
-            $userId = $_GET['userId'] ?? '';
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
