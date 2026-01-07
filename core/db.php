@@ -2,11 +2,20 @@
 
 class Database {
     private static ?PDO $instance = null;
+    private static ?Database $dbInstance = null;
     private PDO $db;
 
-    public function __construct()
+    private function __construct()
     {
         $this->db = self::getConnection();
+    }
+
+    // istanza singleton per non creare n istanze diverse
+    public static function getInstance(): Database {
+        if (!self::$dbInstance) {
+            self::$dbInstance = new Database();
+        }
+        return self::$dbInstance;
     }
 
     public static function getConnection(): PDO {
@@ -151,4 +160,64 @@ class Database {
         $stmt->execute(['e' => $email]);
         return $stmt->fetch();
     }
+
+    public function createSession(int $userId) {
+        $rawToken = bin2hex(random_bytes(32));
+        $tokenHash = hash('sha256', $rawToken);
+
+        $expires = (new DateTime('+7 days'))->format('Y-m-d H:i:s');
+
+        $stmt = $this->db->prepare("
+        REPLACE INTO sessions (user_id, token, expiredIn)
+        VALUES (:uid, :token, :exp)
+    ");
+
+        $stmt->execute([
+            'uid' => $userId,
+            'token' => $tokenHash,
+            'exp' => $expires
+        ]);
+
+        setcookie(
+            'SESSION_TOKEN',
+            $rawToken,
+            [
+                'expires'  => strtotime($expires),
+                'path'     => '/',
+                'secure'   => false,
+                'httponly' => false,
+                'samesite' => 'Strict'
+            ]
+        );
+    }
+
+
+    function getAuthenticatedUser() {
+        if (empty($_COOKIE['SESSION_TOKEN'])) {
+            return null;
+        }
+
+        $tokenHash = hash('sha256', $_COOKIE['SESSION_TOKEN']);
+
+        $stmt = $this->db->prepare("
+        SELECT u.*
+        FROM sessions s
+        JOIN users u ON u.id = s.user_id
+        WHERE s.token = :token
+          AND s.expiredIn > NOW()
+        LIMIT 1
+    ");
+
+        $stmt->execute(['token' => $tokenHash]);
+        return $stmt->fetch();
+    }
+
+
+    public function removeSession(string $token) {
+        $stmt = $this->db->prepare("DELETE FROM sessions WHERE token = :t");
+        $stmt->execute([
+            't' => hash('sha256', $token)
+        ]);
+    }
+
 }

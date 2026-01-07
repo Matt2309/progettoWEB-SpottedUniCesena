@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profilo</title>
+  <title>Profilo Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,7 @@
 
   <!-- TOP BAR -->
   <div class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
-    <a href="index.html" class="text-dark fs-4 text-decoration-none">
+    <a href="index.php" class="text-dark fs-4 text-decoration-none">
       <i class="bi bi-x-lg"></i>
     </a>
 
@@ -29,17 +29,17 @@
 
   <div class="container">
 
-    <!-- USER INFO -->
+    <!-- ADMIN INFO -->
     <div class="d-flex justify-content-between align-items-center py-4">
       <div class="d-flex align-items-center gap-3">
         <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
              style="width:70px;height:70px;">
-          P
+          F
         </div>
 
         <div>
-          <h5 class="mb-0">Pippo Franco</h5>
-          <small class="text-muted">pippo_franco</small>
+          <h5 class="mb-0">Francesco</h5>
+          <small class="text-muted fw-semibold">Admin</small>
         </div>
       </div>
 
@@ -48,11 +48,21 @@
       </small>
     </div>
 
-    <p class="text-center text-muted fw-semibold">
-      Spotted pubblicati
-    </p>
+    <!-- TABS -->
+    <ul class="nav nav-tabs justify-content-center mb-4">
+      <li class="nav-item">
+        <button class="nav-link">
+          Spotted pubblicati
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link active fw-semibold text-danger">
+          Gestione post
+        </button>
+      </li>
+    </ul>
 
-    <!-- POST -->
+    <!-- POST DA MODERARE -->
     <div class="card rounded-4 shadow-sm mb-4">
       <div class="card-body">
 
@@ -77,21 +87,29 @@
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
 
-        <div class="d-flex justify-content-between text-muted">
-          <span>
-            <i class="bi bi-hand-thumbs-up"></i> 3
-            <i class="bi bi-hand-thumbs-down ms-2"></i>
-          </span>
-          <span>
-            <i class="bi bi-chat"></i> 3 Commenti
-          </span>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+          <div>
+            <button class="btn btn-success btn-sm fw-semibold">
+              <i class="bi bi-check-lg"></i> Accetta
+            </button>
+
+            <button class="btn btn-danger btn-sm fw-semibold ms-2">
+              <i class="bi bi-x-lg"></i> Rifiuta
+            </button>
+          </div>
+
+          <a href="#" class="text-danger fw-semibold text-decoration-none">
+            <i class="bi bi-slash-circle"></i> Banna utente
+          </a>
+
         </div>
 
       </div>
     </div>
 
-    <!-- POST -->
-    <div class="card rounded-4 shadow-sm mb-4">
+    <!-- POST DA MODERARE (ESEMPIO) -->
+    <div class="card rounded-4 shadow-sm mb-5">
       <div class="card-body">
 
         <div class="d-flex justify-content-between align-items-start">
@@ -115,42 +133,18 @@
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
 
-        <div class="d-flex justify-content-between text-muted">
-          <span>
-            <i class="bi bi-hand-thumbs-up"></i> 3
-            <i class="bi bi-hand-thumbs-down ms-2"></i>
-          </span>
-          <span>
-            <i class="bi bi-chat"></i> 3 Commenti
-          </span>
-        </div>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
 
-      </div>
-    </div>
+          <div>
+            <button class="btn btn-success btn-sm fw-semibold">
+              <i class="bi bi-check-lg"></i> Accetta
+            </button>
 
-  </div>
+            <button class="btn btn-danger btn-sm fw-semibold ms-2">
+              <i class="bi bi-x-lg"></i> Rifiuta
+            </button>
+          </div>
 
-  <!-- BOTTOM NAV (MOBILE) -->
-  <nav class="navbar fixed-bottom bg-white border-top d-md-none">
-    <div class="container d-flex justify-content-around text-center">
-
-      <a href="index.html" class="text-dark text-decoration-none">
-        <i class="bi bi-house fs-4"></i><br>
-        <small>Home</small>
-      </a>
-
-      <a href="Crea.html" class="text-dark text-decoration-none">
-        <i class="bi bi-plus-square fs-4"></i><br>
-        <small>Crea</small>
-      </a>
-
-      <a href="UtentePersonalArea.html" class="text-dark text-decoration-none">
-        <i class="bi bi-person fs-4"></i><br>
-        <small>Profilo</small>
-      </a>
-
-    </div>
-  </nav>
-
-</body>
-</html>
+          <a href="#" class="text-danger fw-semibold text-decoration-none">
+            <i class="bi bi-slash-circle"></i> Banna utente
+          </

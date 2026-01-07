@@ -16,7 +16,7 @@
 
   <!-- TOP BAR -->
   <div class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
-    <a href="index.html" class="text-dark fs-4 text-decoration-none">
+    <a href="index.php" class="text-dark fs-4 text-decoration-none">
       <i class="bi bi-x-lg"></i>
     </a>
 

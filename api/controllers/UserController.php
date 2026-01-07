@@ -122,7 +122,7 @@ class UserController {
 
     private function spottedByUser(string $username): void {
         try {
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getSpottedUser($username);
 
             Response::json([
@@ -141,7 +141,7 @@ class UserController {
 
     private function spottedAccept(): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getSpottedAccept();
 
             Response::json([
@@ -159,7 +159,7 @@ class UserController {
 
     private function usersList(): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getUsers();
 
             Response::json([
@@ -177,7 +177,7 @@ class UserController {
 
     private function commentUserList(string $userId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getCommentUser($userId);
 
             Response::json([
@@ -196,7 +196,7 @@ class UserController {
 
     private function commentSpottedList(string $spottedId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getCommentSpotted($spottedId);
 
             Response::json([
@@ -215,7 +215,7 @@ class UserController {
 
     private function banUser(string $userId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->userBan($userId);
 
             Response::json([
@@ -234,7 +234,7 @@ class UserController {
 
     private function sbanUser(string $userId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->userSban($userId);
 
             Response::json([
@@ -253,7 +253,7 @@ class UserController {
 
     private function validateSpotted(string $spottedId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->spottedOk($spottedId);
 
             Response::json([

@@ -1,3 +1,4 @@
+<?php require_once '../api/auth/auth-check.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -43,12 +44,12 @@
                 <span>Home</span>
             </a>
 
-            <a href="Crea.html" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+            <a href="Crea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
                 <i class="bi bi-plus-square"></i>
                 <span>Crea</span>
             </a>
 
-            <a href="UtentePersonalArea.html" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+            <a href="UtentePersonalArea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
                 <i class="bi bi-person"></i>
                 <span>Profilo</span>
             </a>
@@ -96,7 +97,7 @@
                             <i class="bi bi-hand-thumbs-down ms-2"></i>
                         </span>
 
-                        <a href="Commenti.html" class="text-muted text-decoration-none">
+                        <a href="Commenti.php" class="text-muted text-decoration-none">
                             <i class="bi bi-chat"></i> 3 Commenti
                         </a>
                     </div>
@@ -133,7 +134,7 @@
                             <i class="bi bi-hand-thumbs-down ms-2"></i>
                         </span>
 
-                        <a href="Commenti.html" class="text-muted text-decoration-none">
+                        <a href="Commenti.php" class="text-muted text-decoration-none">
                             <i class="bi bi-chat"></i> 3 Commenti
                         </a>
                     </div>
@@ -178,12 +179,12 @@
             <small>Home</small>
         </div>
 
-        <a href="Crea.html" class="text-dark text-decoration-none">
+        <a href="Crea.php" class="text-dark text-decoration-none">
             <i class="bi bi-plus-square fs-4"></i><br>
             <small>Crea</small>
         </a>
 
-        <a href="UtentePersonalArea.html" class="text-dark text-decoration-none">
+        <a href="UtentePersonalArea.php" class="text-dark text-decoration-none">
             <i class="bi bi-person fs-4"></i><br>
             <small>Profilo</small>
         </a>

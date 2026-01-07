@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     exit;
 }
-$db = new Database();
+$db = Database::getInstance();
 
 $nome = trim($_POST['nome']);
 $cognome = trim($_POST['cognome']);
