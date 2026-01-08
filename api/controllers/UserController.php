@@ -1,8 +1,10 @@
 <?php
+require_once __DIR__ . '/../../core/db.php';
 
 class UserController {
 
     public function handle() {
+        $db = Database::getInstance();
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
@@ -12,6 +14,8 @@ class UserController {
         $apiIndex = array_search('api', $segments, true);
         $resource = $apiIndex !== false ? ($segments[$apiIndex + 1] ?? null) : null;
         $subroute = $apiIndex !== false ? ($segments[$apiIndex + 2] ?? null) : null;
+        $user = $db->getAuthenticatedUser();
+        $userId = $user['id'] ?? '';
 
         //GET /api/user
         if ($resource === 'user' && $subroute === null) {
@@ -21,7 +25,6 @@ class UserController {
 
         //GET /api/user/getUserSpotted
         if ($resource === 'user' && $subroute === 'getUserSpotted') {
-            $userId = $_GET['userId'] ?? '';
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -46,7 +49,6 @@ class UserController {
 
         //GET /api/user/getCommentUser
         if ($resource === 'user' && $subroute === 'getCommentUser') {
-            $userId = $_GET['userId'] ?? '';
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -72,7 +74,10 @@ class UserController {
 
         //GET /api/user/userBan
         if ($resource === 'user' && $subroute === 'userBan') {
-            $userId = $_GET['userId'] ?? '';
+            if (!$db->checkAdmin($userId)) {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -85,7 +90,10 @@ class UserController {
 
         //GET /api/user/userSban
         if ($resource === 'user' && $subroute === 'userSban') {
-            $userId = $_GET['userId'] ?? '';
+            if (!$db->checkAdmin($userId)) {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -98,6 +106,10 @@ class UserController {
 
         //GET /api/user/spottedOk
         if ($resource === 'user' && $subroute === 'spottedOk') {
+            if (!$db->checkAdmin($userId)) {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
             $spottedId = $_GET['spottedId'] ?? '';
             if ($spottedId === '') {
                 Response::json([
@@ -122,7 +134,7 @@ class UserController {
 
     private function spottedByUser(string $username): void {
         try {
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getSpottedUser($username);
 
             Response::json([
@@ -141,7 +153,7 @@ class UserController {
 
     private function spottedAccept(): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getSpottedAccept();
 
             Response::json([
@@ -159,7 +171,7 @@ class UserController {
 
     private function usersList(): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getUsers();
 
             Response::json([
@@ -177,7 +189,7 @@ class UserController {
 
     private function commentUserList(string $userId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getCommentUser($userId);
 
             Response::json([
@@ -196,7 +208,7 @@ class UserController {
 
     private function commentSpottedList(string $spottedId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->getCommentSpotted($spottedId);
 
             Response::json([
@@ -215,7 +227,7 @@ class UserController {
 
     private function banUser(string $userId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->userBan($userId);
 
             Response::json([
@@ -234,7 +246,7 @@ class UserController {
 
     private function sbanUser(string $userId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->userSban($userId);
 
             Response::json([
@@ -253,7 +265,7 @@ class UserController {
 
     private function validateSpotted(string $spottedId): void {
         try{
-            $db = new Database();
+            $db = Database::getInstance();
             $spotted = $db->spottedOk($spottedId);
 
             Response::json([

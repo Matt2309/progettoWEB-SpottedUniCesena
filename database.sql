@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     name VARCHAR(100),
     surname VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
     role_id INT NOT NULL,
     isBanned TINYINT(1) DEFAULT 0,
     CONSTRAINT fk_users_role
