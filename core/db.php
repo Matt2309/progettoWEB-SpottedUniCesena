@@ -118,12 +118,22 @@ class Database {
         $stmt->execute(['userId' => $userId]);
         return $stmt->execute();
     }
+
     //accettazione spotted
     public function spottedOk($spottedId){
         $query = "UPDATE spotted SET status='APPROVED' WHERE id = :spottedId";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':spottedId' => $spottedId]);
         return $stmt->execute();
+    }
+
+    //Controllo utente admin
+    public function checkAdmin($userId){
+        $query = "SELECT role_id FROM users WHERE id = :userId";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(['userId' => $userId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result && $result['role_id'] == 2;
     }
 
     //registrazione
