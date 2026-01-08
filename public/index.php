@@ -27,17 +27,17 @@
     </div>
 </nav>
 
-<div class="container-fluid my-4">
+<div class="container-fluid">
     <div class="row">
 
-        <!-- SIDEBAR SINISTRA (DESKTOP) -->
-        <aside class="col-md-3 d-none d-md-flex flex-column bg-white border-end min-vh-100 p-4">
+        <!-- SIDEBAR SINISTRA -->
+        <aside class="col-md-2 d-none d-md-flex flex-column bg-white border-end p-4 min-vh-100">
 
-            <h4 class="fw-bold text-danger text-break">
+            <h4 class="fw-bold text-danger mb-3">
                 SpottedUniCesena
             </h4>
 
-            <hr>
+            <hr class="my-2">
 
             <a href="#" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
                 <i class="bi bi-house"></i>
@@ -54,8 +54,10 @@
                 <span>Profilo</span>
             </a>
 
-            <div class="mt-auto">
-                <a href="Login.html" class="btn btn-danger w-100 mt-3">
+            <hr>
+
+            <div class="mb-3">
+                <a href="Login.html" class="btn btn-danger w-100">
                     <i class="bi bi-box-arrow-in-right me-1"></i>
                     Login
                 </a>
@@ -63,109 +65,113 @@
 
         </aside>
 
-        <!-- COLONNA CENTRALE -->
-        <main class="col-12 col-md-6">
+        <!-- POST + FUNZIONAMENTO -->
+        <div class="col-md-9">
+            <div class="container py-5">
 
-            <h4 class="fw-bold mb-4">Ultimi spotted:</h4>
+                <h4 class="fw-bold mb-4">Ultimi spotted:</h4>
 
-            <!-- POST 1 -->
-            <div class="card rounded-4 shadow-sm mb-4">
-                <div class="card-body">
+                <div class="row align-items-start">
 
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                                 style="width:35px;height:35px;">
-                                P
-                            </div>
-                            <div>
-                                <strong>pippo_franco</strong><br>
-                                <small class="text-muted">2 ore fa</small>
-                            </div>
-                        </div>
+                    <!-- COLONNA CENTRALE -->
+                    <main class="col-md-8">
 
-                        <span class="badge bg-light text-dark rounded-pill">persone</span>
-                    </div>
+                        <div class="card rounded-4 shadow-sm mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
+                                             style="width:35px;height:35px;">
+                                            P
+                                        </div>
+                                        <div>
+                                            <strong>pippo_franco</strong><br>
+                                            <small class="text-muted">2 ore fa</small>
+                                        </div>
+                                    </div>
 
-                    <p class="mt-3">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-                    </p>
+                                    <span class="badge bg-light text-dark rounded-pill">persone</span>
+                                </div>
 
-                    <div class="d-flex justify-content-between text-muted">
-                        <span>
-                            <i class="bi bi-hand-thumbs-up"></i> 3
-                            <i class="bi bi-hand-thumbs-down ms-2"></i>
-                        </span>
+                                <p class="mt-3">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry...
+                                </p>
 
-                        <a href="Commenti.php" class="text-muted text-decoration-none">
-                            <i class="bi bi-chat"></i> 3 Commenti
-                        </a>
-                    </div>
+                                <div class="d-flex justify-content-between text-muted">
+                                    <span>
+                                        <i class="bi bi-hand-thumbs-up"></i> 3
+                                        <i class="bi bi-hand-thumbs-down ms-2"></i>
+                                    </span>
 
-                </div>
-            </div>
-
-            <!-- POST 2 -->
-            <div class="card rounded-4 shadow-sm mb-4">
-                <div class="card-body">
-
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="rounded-circle bg-success text-white fw-bold d-flex justify-content-center align-items-center"
-                                 style="width:35px;height:35px;">
-                                M
-                            </div>
-                            <div>
-                                <strong>mario_rossi</strong><br>
-                                <small class="text-muted">2 ore fa</small>
+                                    <a href="Commenti.php" class="text-muted text-decoration-none">
+                                        <i class="bi bi-chat"></i> 3 Commenti
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                        <span class="badge bg-danger-subtle text-danger rounded-pill">avvisi</span>
-                    </div>
+                        <div class="card rounded-4 shadow-sm mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle bg-success text-white fw-bold d-flex justify-content-center align-items-center"
+                                             style="width:35px;height:35px;">
+                                            M
+                                        </div>
+                                        <div>
+                                            <strong>mario_rossi</strong><br>
+                                            <small class="text-muted">2 ore fa</small>
+                                        </div>
+                                    </div>
 
-                    <p class="mt-3">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-                    </p>
+                                    <span class="badge bg-danger-subtle text-danger rounded-pill">avvisi</span>
+                                </div>
 
-                    <div class="d-flex justify-content-between text-muted">
-                        <span>
-                            <i class="bi bi-hand-thumbs-up"></i> 3
-                            <i class="bi bi-hand-thumbs-down ms-2"></i>
-                        </span>
+                                <p class="mt-3">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry...
+                                </p>
 
-                        <a href="Commenti.php" class="text-muted text-decoration-none">
-                            <i class="bi bi-chat"></i> 3 Commenti
-                        </a>
-                    </div>
+                                <div class="d-flex justify-content-between text-muted">
+                                    <span>
+                                        <i class="bi bi-hand-thumbs-up"></i> 3
+                                        <i class="bi bi-hand-thumbs-down ms-2"></i>
+                                    </span>
+
+                                    <a href="Commenti.php" class="text-muted text-decoration-none">
+                                        <i class="bi bi-chat"></i> 3 Commenti
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+
+                    <!-- COLONNA DESTRA -->
+                    <aside class="col-md-4 d-none d-md-block">
+                        <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
+
+                            <h5 class="fw-bold">Come funziona spotted?</h5>
+
+                            <ul class="mt-3">
+                                <li>Scrivi per spottare chiunque</li>
+                                <li>I messaggi restano anonimi</li>
+                                <li>Mantieni il rispetto</li>
+                                <li>Evita dati personali</li>
+                                <li>Scegli la categoria giusta</li>
+                            </ul>
+
+                            <div class="mt-2">
+                                <span class="badge bg-success">generale</span>
+                                <span class="badge bg-primary">persone</span>
+                                <span class="badge bg-danger">avvisi</span>
+                            </div>
+
+                        </div>
+                    </aside>
 
                 </div>
             </div>
-
-        </main>
-
-        <!-- COLONNA DESTRA (DESKTOP) -->
-        <aside class="col-md-3 d-none d-md-block">
-
-            <div class="card rounded-4 shadow-sm p-4">
-                <h5 class="fw-bold">Come funziona spotted?</h5>
-
-                <ul class="mt-3">
-                    <li>Scrivi per spottare chiunque</li>
-                    <li>I messaggi restano anonimi</li>
-                    <li>Mantieni il rispetto</li>
-                    <li>Evita dati personali</li>
-                    <li>Scegli la categoria giusta</li>
-                </ul>
-
-                <div class="mt-2">
-                    <span class="badge bg-success">generale</span>
-                    <span class="badge bg-primary">persone</span>
-                    <span class="badge bg-danger">avvisi</span>
-                </div>
-            </div>
-
-        </aside>
+        </div>
 
     </div>
 </div>
