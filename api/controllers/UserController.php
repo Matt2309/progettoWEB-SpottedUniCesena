@@ -49,7 +49,6 @@ class UserController {
 
         //GET /api/user/getCommentUser
         if ($resource === 'user' && $subroute === 'getCommentUser') {
-            $userId = $_GET['userId'] ?? '';
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -75,7 +74,10 @@ class UserController {
 
         //GET /api/user/userBan
         if ($resource === 'user' && $subroute === 'userBan') {
-            $userId = $_GET['userId'] ?? '';
+            if (!$db->checkAdmin($userId)) {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -88,7 +90,10 @@ class UserController {
 
         //GET /api/user/userSban
         if ($resource === 'user' && $subroute === 'userSban') {
-            $userId = $_GET['userId'] ?? '';
+            if (!$db->checkAdmin($userId)) {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -101,6 +106,10 @@ class UserController {
 
         //GET /api/user/spottedOk
         if ($resource === 'user' && $subroute === 'spottedOk') {
+            if (!$db->checkAdmin($userId)) {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
             $spottedId = $_GET['spottedId'] ?? '';
             if ($spottedId === '') {
                 Response::json([

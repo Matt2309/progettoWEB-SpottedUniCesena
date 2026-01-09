@@ -34,7 +34,7 @@ async function testConnection() {
 
 async function getUserSpotted() {
     try {
-        const response = await fetch('api/user/getUserSpotted', {
+        const response = await fetch('api/user/commentUserList', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
