@@ -43,5 +43,4 @@ if (!password_verify($password, $user['password'])) {
 }
 
 $db->createSession($user['id']);
-
 echo json_encode(["success" => true]);

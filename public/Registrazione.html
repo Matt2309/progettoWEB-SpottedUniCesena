@@ -30,43 +30,56 @@
       </h4>
 
       <!-- FORM -->
-      <form action="/api/auth/register.php" method="POST">
+      <form onsubmit="validateAndSubmitRegister(event);">
 
         <input type="text"
                name="nome"
-               class="form-control rounded-pill border-primary mb-3"
+               id="nome"
+               class="form-control rounded-pill border-primary"
                placeholder="Nome *"
                required>
+          <p class="error mb-3 text-danger mb-3" id="nomeError"></p>
 
         <input type="text"
                name="cognome"
-               class="form-control rounded-pill border-primary mb-3"
+               id="cognome"
+               class="form-control rounded-pill border-primary"
                placeholder="Cognome *"
                required>
+          <p class="error mb-3 text-danger mb-3" id="cognomeError"></p>
 
         <input type="text"
                 name="username"
-                class="form-control rounded-pill border-danger mb-3"
+               id="username"
+               class="form-control rounded-pill border-danger"
                 placeholder="Username *"
                 required>
+          <p class="error mb-3 text-danger mb-3" id="usernameError"></p>
 
         <input type="email"
                name="email"
-               class="form-control rounded-pill border-primary mb-3"
+               id="email"
+               class="form-control rounded-pill border-primary"
                placeholder="Email *"
                required>
+          <p class="error mb-3 text-danger mb-3" id="emailError"></p>
 
         <input type="password"
                name="password"
-               class="form-control rounded-pill border-primary mb-3"
+               id="password"
+               class="form-control rounded-pill border-primary"
                placeholder="Password *"
                required>
+          <p class="error mb-3 text-danger mb-3" id="passwordError"></p>
 
         <input type="password"
                name="confirm_password"
-               class="form-control rounded-pill border-primary mb-4"
+               id="confirm_password"
+               class="form-control rounded-pill border-primary"
                placeholder="Conferma password *"
                required>
+          <p class="error mb-3 text-danger mb-4" id="cfPasswordError"></p>
+          <p class="error mb-3 text-danger mb-4" id="formError"></p>
 
         <div class="text-center">
           <button type="submit" class="btn btn-primary rounded-pill px-5 fw-semibold">
@@ -74,7 +87,6 @@
             Registrati
           </button>
         </div>
-
       </form>
 
       <!-- Link Login -->
@@ -87,6 +99,6 @@
 
     </div>
   </div>
-
+  <script src="js/auth/auth.js"></script>
 </body>
 </html>
