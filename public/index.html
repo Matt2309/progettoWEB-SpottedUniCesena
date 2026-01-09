@@ -19,9 +19,14 @@
 <nav class="navbar bg-white shadow-sm d-md-none">
     <div class="container d-flex justify-content-between align-items-center">
         <span></span>
-        <h5 class="fw-semibold m-0 text-danger text-truncate">SpottedUniCesena</h5>
-        <a href="Login.html" class="btn btn-danger btn-sm">
-            <i class="bi bi-box-arrow-in-right"></i>
+
+        <h1 class="h5 fw-semibold m-0 text-primary text-truncate">
+            SpottedUniCesena
+        </h1>
+
+        <a href="Login.html" class="btn btn-primary btn-sm">
+            <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+            <span class="visually-hidden">Login</span>
         </a>
     </div>
 </nav>
@@ -29,38 +34,46 @@
 <div class="container-fluid my-4">
     <div class="row">
 
-        <!-- SIDEBAR SINISTRA (DESKTOP) -->
-        <aside class="col-md-3 d-none d-md-flex flex-column bg-white border-end min-vh-100 p-4">
+      <!-- BARRA LATERALE SINISTRA (DESKTOP) -->
+<aside
+    class="col-md-3 d-none d-md-flex flex-column bg-white border-end min-vh-100 p-4"
+    role="complementary"
+    aria-labelledby="sidebar-title"
+>
 
-            <h4 class="fw-bold text-danger text-break">
-                SpottedUniCesena
-            </h4>
+    <h2 id="sidebar-title" class="h4 fw-bold text-primary text-break">
+        AvvistatoUniCesena
+    </h2>
 
-            <hr>
+    <hr>
 
-            <a href="#" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
-                <i class="bi bi-house"></i>
-                <span>Home</span>
-            </a>
+    <a href="#"
+       class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2"
+       aria-current="page">
+        <i class="bi bi-house" aria-hidden="true"></i>
+        <span>Casa</span>
+    </a>
 
-            <a href="Crea.html" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
-                <i class="bi bi-plus-square"></i>
-                <span>Crea</span>
-            </a>
+    <a href="Crea.html"
+       class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+        <i class="bi bi-plus-square" aria-hidden="true"></i>
+        <span>Crea</span>
+    </a>
 
-            <a href="UtentePersonalArea.html" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
-                <i class="bi bi-person"></i>
-                <span>Profilo</span>
-            </a>
+    <a href="UtentePersonalArea.html"
+       class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+        <i class="bi bi-person" aria-hidden="true"></i>
+        <span>Profilo</span>
+    </a>
 
-            <div class="mt-auto">
-                <a href="Login.html" class="btn btn-danger w-100 mt-3">
-                    <i class="bi bi-box-arrow-in-right me-1"></i>
-                    Login
-                </a>
-            </div>
+    <div class="mt-auto">
+        <a href="Login.html" class="btn btn-primary w-100 mt-3">
+            <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
+            Login
+        </a>
+    </div>
 
-        </aside>
+</aside>
 
         <!-- COLONNA CENTRALE -->
         <main class="col-12 col-md-6">
@@ -120,7 +133,7 @@
                             </div>
                         </div>
 
-                        <span class="badge bg-danger-subtle text-danger rounded-pill">avvisi</span>
+                        <span class="badge bg-danger-subtle text-primary rounded-pill">avvisi</span>
                     </div>
 
                     <p class="mt-3">
