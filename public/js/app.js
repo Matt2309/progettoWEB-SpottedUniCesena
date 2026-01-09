@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("App started...");
-    testConnection();
+    getUserSpotted();
 });
 
 async function testConnection() {
@@ -25,7 +25,34 @@ async function testConnection() {
         `;
 
     } catch (error) {
-        console.error("Error:", error);
+        //console.error("Error:", error);
+        document.getElementById('app-content').innerHTML = `
+            <div class="alert alert-danger">Error: ${error.message}</div>
+        `;
+    }
+}
+
+async function getUserSpotted() {
+    try {
+        const response = await fetch('api/user/commentUserList', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log("Raw response object:", response);
+
+        if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+        }
+
+        const data = await response.json();
+        console.log("Parsed JSON:", data);
+
+
+    } catch (error) {
+        //console.error("Error:", error);
         document.getElementById('app-content').innerHTML = `
             <div class="alert alert-danger">Error: ${error.message}</div>
         `;
