@@ -17,6 +17,7 @@ class UserController {
         $user = $db->getAuthenticatedUser();
         $userId = $user['id'] ?? '';
 
+        // TODO - da modificare in getUserInfo (passa tutti i dati utente tranne password - stessa metodologia di getUserSpotted)
         //GET /api/user
         if ($resource === 'user' && $subroute === null) {
             $this->testMessage();
@@ -35,6 +36,7 @@ class UserController {
             return;
         }
 
+        // TODO - da modificare nome in getSpottedAccepted (anche il metodo)
         //GET /api/user/getSpottedAccept
         if ($resource === 'user' && $subroute === 'getSpottedAccept') {
             $this->spottedAccept();
@@ -104,6 +106,7 @@ class UserController {
             return;
         }
 
+        //TODO - da trasformare in POST (valutare se spostare in un file a parte (es /api/spotted/acceptSpotted)
         //GET /api/user/spottedOk
         if ($resource === 'user' && $subroute === 'spottedOk') {
             if (!$db->checkAdmin($userId)) {
@@ -120,7 +123,9 @@ class UserController {
             $this->validateSpotted($spottedId);
             return;
         }
-    }
+
+            //TODO - aggiungere anche rejectSpotted
+        }
 
     Response::json(['error' => 'Not found'], 404);
     }
@@ -132,6 +137,7 @@ class UserController {
         ]);
     }
 
+    // TODO: da fare con la stessa struttura di spottedAccept
     private function spottedByUser(string $username): void {
         try {
             $db = Database::getInstance();
@@ -151,23 +157,45 @@ class UserController {
         }
     }
 
+    //TODO: aggiungere nell'array_map un campo comments col numero di commenti di quello spotted (va modificata anche la query)
     private function spottedAccept(): void {
-        try{
+        try {
             $db = Database::getInstance();
-            $spotted = $db->getSpottedAccept();
+            $rows = $db->getSpottedAccept();
+
+            $spotted = array_map(fn($row) => [
+                'id' => (int) $row['spotted_id'],
+                'title' => $row['spotted_title'],
+                'text' => $row['spotted_text'],
+                'likes' => (int) $row['numLike'],
+                'dislikes' => (int) $row['numDislike'],
+                'status' => $row['status'],
+                'createdAt' => $row['spotted_created_at'],
+                'category' => [
+                    'id' => (int) $row['category_id'],
+                    'name' => $row['category_name']
+                ],
+                'user' => [
+                    'id' => (int) $row['user_id'],
+                    'username' => $row['username'],
+                    'name' => $row['user_name'],
+                    'surname' => $row['surname']
+                ]
+            ], $rows);
 
             Response::json([
                 'status' => 'success',
                 'data' => $spotted
             ]);
-        } catch (Throwable $e){
+        } catch (Throwable $e) {
             Response::json([
                 'status' => 'error',
-                'message' => 'Failed to fetch spotted for user',
+                'message' => 'Failed to fetch spotted',
                 'detail' => $e->getMessage()
             ], 500);
         }
     }
+
 
     private function usersList(): void {
         try{

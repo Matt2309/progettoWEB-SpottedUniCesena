@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +11,7 @@
 
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
 </head>
 
 <body class="bg-white">
@@ -20,7 +22,7 @@
       <i class="bi bi-x-lg"></i>
     </a>
 
-    <h5 class="text-danger fw-semibold m-0">
+    <h5 class="text-primary fw-semibold m-0">
       Il mio profilo
     </h5>
 
@@ -33,7 +35,7 @@
     <div class="d-flex justify-content-between align-items-center py-4">
       <div class="d-flex align-items-center gap-3">
         <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-             style="width:70px;height:70px;">
+          style="width:70px;height:70px;">
           P
         </div>
 
@@ -59,7 +61,7 @@
         <div class="d-flex justify-content-between align-items-start">
           <div class="d-flex align-items-center gap-2">
             <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                 style="width:35px;height:35px;">
+              style="width:35px;height:35px;">
               P
             </div>
             <div>
@@ -97,7 +99,7 @@
         <div class="d-flex justify-content-between align-items-start">
           <div class="d-flex align-items-center gap-2">
             <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                 style="width:35px;height:35px;">
+              style="width:35px;height:35px;">
               P
             </div>
             <div>
@@ -153,4 +155,5 @@
   </nav>
 
 </body>
+
 </html>

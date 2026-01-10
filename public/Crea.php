@@ -10,6 +10,7 @@
 
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
 </head>
 
 <body class="bg-white">
@@ -20,11 +21,11 @@
       <i class="bi bi-x-lg"></i>
     </a>
 
-    <h5 class="text-danger fw-semibold m-0">
+    <h5 class="text-primary fw-semibold m-0">
       Crea spotted
     </h5>
 
-    <button class="btn btn-danger btn-sm fw-semibold rounded-pill px-3">
+    <button class="btn btn-primary btn-sm fw-semibold rounded-pill px-3">
       Post
     </button>
   </div>
