@@ -12,9 +12,9 @@ async function loadSpotted() {
         const container = document.getElementById("spottedList");
         container.innerHTML = "";
 
-        spotted.data.forEach(post => {
-            container.appendChild(createSpottedCard(post));
-        });
+        for (const post of spotted.data) {
+            container.appendChild(await createSpottedCard(post));
+        }
 
     } catch (e) {
         console.log(e)
@@ -23,11 +23,32 @@ async function loadSpotted() {
     }
 }
 
+async function getCommentsSpotted(id) {
+    const response = await fetch("api/user/getCommentSpotted?spottedId=" + id);
+    const comments = await response.json();
 
-function createSpottedCard(post) {
+    console.log("res ", comments)
+
+    const container = document.createElement("div");
+
+    if (!comments.data.length) {
+        container.innerHTML = "<p class='text-muted text-center'>Nessun commento</p>";
+        return container;
+    }
+
+    comments.data.forEach(comment => {
+        container.appendChild(createCommentCard(comment));
+    });
+
+    return container;
+}
+
+
+async function createSpottedCard(post) {
     const card = document.createElement("div");
     card.className = "card rounded-4 shadow-sm mb-4";
 
+    const offcanvasId = `commentsDrawer-${post.id}`;
     const initial = post.user.username.charAt(0).toUpperCase();
     const timeAgo = formatTime(Date.parse(post.createdAt));
 
@@ -44,7 +65,6 @@ function createSpottedCard(post) {
                         <small class="text-muted">${timeAgo}</small>
                     </div>
                 </div>
-
                 <span class="badge bg-light text-dark rounded-pill">
                     ${post.category.name}
                 </span>
@@ -55,13 +75,82 @@ function createSpottedCard(post) {
             <div class="d-flex justify-content-between text-muted">
                 <span>
                     <i class="bi bi-hand-thumbs-up"></i> ${post.likes}
-                    <i class="bi bi-hand-thumbs-down ms-2"></i>
                 </span>
 
-                <a href="Commenti.php?id=${post.id}" class="text-muted text-decoration-none">
-                    <i class="bi bi-chat ms-3"></i> 2 commenti
-                </a>
+                <button class="bg-transparent border-0 text-muted"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#${offcanvasId}">
+                    <i class="bi bi-chat"></i> commenti
+                </button>
             </div>
+        </div>
+
+        <div class="offcanvas offcanvas-bottom"
+             tabindex="-1"
+             id="${offcanvasId}"
+             data-loaded="false">
+
+            <div class="offcanvas-header justify-content-center">
+                <h6 class="text-danger fw-bold m-0">Commenti</h6>
+            </div>
+
+            <div class="offcanvas-body text-center">
+                <div class="spinner-border text-secondary" role="status"></div>
+            </div>
+
+            <div class="border-top p-3 bg-white">
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control rounded-pill bg-light border-0"
+                           placeholder="Aggiungi un commento...">
+                    <button class="btn btn-light rounded-pill ms-2">
+                        <i class="bi bi-send"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const offcanvas = card.querySelector(`#${offcanvasId}`);
+
+    offcanvas.addEventListener("show.bs.offcanvas", async () => {
+        if (offcanvas.dataset.loaded === "true") return;
+
+        const body = offcanvas.querySelector(".offcanvas-body");
+        body.innerHTML = "";
+
+        try {
+            const comments = await getCommentsSpotted(post.id);
+            body.appendChild(comments);
+            offcanvas.dataset.loaded = "true";
+        } catch {
+            body.innerHTML =
+                "<p class='text-danger text-center'>Errore nel caricamento</p>";
+        }
+    });
+
+    return card;
+}
+
+
+
+function createCommentCard(comment) {
+    const card = document.createElement("div");
+    const timeAgo = formatTime(Date.parse(comment.created_at));
+
+    card.className = "d-flex gap-2 mb-3";
+
+    card.innerHTML = `
+        <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
+          style="width:35px;height:35px;">
+          P
+        </div>
+        <div>
+          <strong>pippo_franco</strong>
+          <small class="text-muted ms-2">${timeAgo}</small>
+          <p class="mb-0">
+            ${comment.text}
+          </p>
         </div>
     `;
 
