@@ -73,7 +73,7 @@
             </a>
 
             <hr>
-            <div class="mb-3">
+            <div class="mb-3" id="user-area">
                 <a href="Login.html" class="btn btn-primary w-100 mt-3">
                     <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
                     Login
@@ -92,75 +92,7 @@
 
                     <!-- COLONNA CENTRALE -->
                     <main class="col-md-8">
-
-                        <div class="card rounded-4 shadow-sm mb-4">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                                             style="width:35px;height:35px;">
-                                            P
-                                        </div>
-                                        <div>
-                                            <strong>pippo_franco</strong><br>
-                                            <small class="text-muted">2 ore fa</small>
-                                        </div>
-                                    </div>
-
-                                    <span class="badge bg-light text-dark rounded-pill">persone</span>
-                                </div>
-
-                                <p class="mt-3">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-                                </p>
-
-                                <div class="d-flex justify-content-between text-muted">
-                                    <span>
-                                        <i class="bi bi-hand-thumbs-up"></i> 3
-                                        <i class="bi bi-hand-thumbs-down ms-2"></i>
-                                    </span>
-
-                                    <a href="Commenti.php" class="text-muted text-decoration-none">
-                                        <i class="bi bi-chat"></i> 3 Commenti
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card rounded-4 shadow-sm mb-4">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="rounded-circle bg-success text-white fw-bold d-flex justify-content-center align-items-center"
-                                             style="width:35px;height:35px;">
-                                            M
-                                        </div>
-                                        <div>
-                                            <strong>mario_rossi</strong><br>
-                                            <small class="text-muted">2 ore fa</small>
-                                        </div>
-                                    </div>
-
-                                    <span class="badge bg-danger-subtle text-danger rounded-pill">avvisi</span>
-                                </div>
-
-                                <p class="mt-3">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry...
-                                </p>
-
-                                <div class="d-flex justify-content-between text-muted">
-                                    <span>
-                                        <i class="bi bi-hand-thumbs-up"></i> 3
-                                        <i class="bi bi-hand-thumbs-down ms-2"></i>
-                                    </span>
-
-                                    <a href="Commenti.php" class="text-muted text-decoration-none">
-                                        <i class="bi bi-chat"></i> 3 Commenti
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
+                        <div id="spottedList"></div>
                     </main>
 
                     <!-- COLONNA DESTRA -->
@@ -216,7 +148,9 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/app.js"></script>
+<script src="js/spotted.js"></script>
+<script src="js/user.js"></script>
+
 </body>
 
 </html>

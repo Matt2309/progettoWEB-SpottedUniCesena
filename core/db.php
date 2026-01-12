@@ -61,11 +61,35 @@ class Database {
 
     //Lista Spotted accettati
     public function getSpottedAccept(): array {
-        $query = "SELECT * FROM spotted WHERE status = :status";
+        $query = "
+        SELECT
+            s.id            AS spotted_id,
+            s.title         AS spotted_title,
+            s.text          AS spotted_text,
+            s.numLike,
+            s.numDislike,
+            s.status,
+            s.created_at    AS spotted_created_at,
+
+            c.id            AS category_id,
+            c.name          AS category_name,
+
+            u.id            AS user_id,
+            u.username,
+            u.name          AS user_name,
+            u.surname
+        FROM spotted s
+        JOIN categories c ON s.category_id = c.id
+        JOIN users u ON s.user_id = u.id
+        WHERE s.status = :status
+        ORDER BY s.created_at DESC
+    ";
+
         $stmt = $this->db->prepare($query);
         $stmt->execute([
             ':status' => 'APPROVED'
         ]);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
