@@ -146,7 +146,28 @@ class UserController {
     private function spottedByUser(string $username): void {
         try {
             $db = Database::getInstance();
-            $spotted = $db->getSpottedUser($username);
+            $rows = $db->getSpottedUser($username);
+
+            $spotted = array_map(fn($row) => [
+                'id' => (int) $row['spotted_id'],
+                'title' => $row['spotted_title'],
+                'text' => $row['spotted_text'],
+                'likes' => (int) $row['numLike'],
+                'dislikes' => (int) $row['numDislike'],
+                'status' => $row['status'],
+                'createdAt' => $row['spotted_created_at'],
+                'commentsCount' => (int) ($row['comments_count'] ?? 0),
+                'category' => [
+                    'id' => (int) $row['category_id'],
+                    'name' => $row['category_name']
+                ],
+                'user' => [
+                    'id' => (int) $row['user_id'],
+                    'username' => $row['username'],
+                    'name' => $row['user_name'],
+                    'surname' => $row['surname']
+                ]
+            ], $rows);
 
             Response::json([
                 'status' => 'success',
@@ -161,7 +182,7 @@ class UserController {
             ], 500);
         }
     }
-    
+
     private function spottedAccept(): void {
         try {
             $db = Database::getInstance();
