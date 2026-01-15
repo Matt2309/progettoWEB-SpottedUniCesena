@@ -133,6 +133,10 @@ class Database {
             u.id
         ORDER BY s.created_at DESC
     ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -179,6 +183,14 @@ class Database {
     //accettazione spotted
     public function spottedOk($spottedId){
         $query = "UPDATE spotted SET status='APPROVED' WHERE id = :spottedId";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([':spottedId' => $spottedId]);
+        return $stmt->execute();
+    }
+
+    // reject spotted
+    public function spottedReject($spottedId){
+        $query = "UPDATE spotted SET status='REJECTED' WHERE id = :spottedId";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':spottedId' => $spottedId]);
         return $stmt->execute();

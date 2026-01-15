@@ -130,6 +130,28 @@ class UserController {
         }
 
             //TODO - aggiungere anche rejectSpotted
+        if ($resource === 'user' && $subroute === 'spottedReject') {
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
+            if (!$db->checkAdmin($userId)) {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
+            $data = json_decode(file_get_contents('php://input'), true);
+            $spottedId = $data['spottedId'] ?? '';
+            if ($spottedId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'spottedId' parameter"
+                ], 400);
+                return;
+            }
+            $this->rejectSpotted($spottedId);
+            Response::json(['status' => 'ok'], 200);
+            return;
+        }
         }
 
     Response::json(['error' => 'Not found'], 404);
@@ -142,7 +164,6 @@ class UserController {
         ]);
     }
 
-    // TODO: da fare con la stessa struttura di spottedAccept
     private function spottedByUser(string $username): void {
         try {
             $db = Database::getInstance();
@@ -331,6 +352,26 @@ class UserController {
             Response::json([
                 'status' => 'error',
                 'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function rejectSpotted($spottedId)
+    {
+        try{
+            $db = Database::getInstance();
+            $spotted = $db->spottedReject($spottedId);
+
+            Response::json([
+                'status' => 'success',
+                'spottedId'=> $spottedId,
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to reject spotted for user',
                 'detail' => $e->getMessage()
             ], 500);
         }
