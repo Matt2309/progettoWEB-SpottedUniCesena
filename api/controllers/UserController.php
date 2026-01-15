@@ -106,21 +106,26 @@ class UserController {
             return;
         }
 
-        //TODO - da trasformare in POST (valutare se spostare in un file a parte (es /api/spotted/acceptSpotted)
-        //GET /api/user/spottedOk
         if ($resource === 'user' && $subroute === 'spottedOk') {
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
             if (!$db->checkAdmin($userId)) {
                 Response::json(['error' => 'Unauthorized'], 401);
                 return;
             }
-            $spottedId = $_GET['spottedId'] ?? '';
+            $data = json_decode(file_get_contents('php://input'), true);
+            $spottedId = $data['spottedId'] ?? '';
             if ($spottedId === '') {
                 Response::json([
                     'status' => 'error',
-                    'message' => "Missing required 'userId' parameter"
+                    'message' => "Missing required 'spottedId' parameter"
                 ], 400);
+                return;
             }
             $this->validateSpotted($spottedId);
+            Response::json(['status' => 'ok'], 200);
             return;
         }
 
