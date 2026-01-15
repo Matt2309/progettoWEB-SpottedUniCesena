@@ -78,10 +78,17 @@ class Database {
             u.username,
             u.name          AS user_name,
             u.surname
+        
+            COUNT(co.id)    AS commenst_count
         FROM spotted s
         JOIN categories c ON s.category_id = c.id
         JOIN users u ON s.user_id = u.id
+        LEFT JOIN comments co ON co.spotted_id = s.id
         WHERE s.status = :status
+        GROUP BY
+            s.id,
+            c.id,
+            u.id
         ORDER BY s.created_at DESC
     ";
 

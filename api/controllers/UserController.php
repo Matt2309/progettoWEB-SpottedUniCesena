@@ -161,8 +161,7 @@ class UserController {
             ], 500);
         }
     }
-
-    //TODO: aggiungere nell'array_map un campo comments col numero di commenti di quello spotted (va modificata anche la query)
+    
     private function spottedAccept(): void {
         try {
             $db = Database::getInstance();
@@ -176,6 +175,7 @@ class UserController {
                 'dislikes' => (int) $row['numDislike'],
                 'status' => $row['status'],
                 'createdAt' => $row['spotted_created_at'],
+                'commentsCount' => (int) ($row['comments_count'] ?? 0),
                 'category' => [
                     'id' => (int) $row['category_id'],
                     'name' => $row['category_name']
