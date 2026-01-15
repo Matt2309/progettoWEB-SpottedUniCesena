@@ -19,8 +19,15 @@ class UserController {
 
         // TODO - da modificare in getUserInfo (passa tutti i dati utente tranne password - stessa metodologia di getUserSpotted)
         //GET /api/user
-        if ($resource === 'user' && $subroute === null) {
-            $this->testMessage();
+        if ($resource === 'user' && $subroute === 'getUsers') {
+            if ($userId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => 'Unauthorized'
+                ], 401);
+                return;
+            }
+            $this->getUserInfo();
             return;
         }
 
@@ -39,7 +46,7 @@ class UserController {
         // TODO - da modificare nome in getSpottedAccepted (anche il metodo)
         //GET /api/user/getSpottedAccept
         if ($resource === 'user' && $subroute === 'getSpottedAccept') {
-            $this->spottedAccept();
+            $this->getSpottedAccept();
             return;
         }
 
@@ -128,7 +135,7 @@ class UserController {
             Response::json(['status' => 'ok'], 200);
             return;
         }
-        
+
         if ($resource === 'user' && $subroute === 'spottedReject') {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 Response::json(['error' => 'Method Not Allowed'], 405);
@@ -161,6 +168,35 @@ class UserController {
             'status' => 'success',
             'message' => 'API is working'
         ]);
+    }
+
+    private function getUserInfo(string $userId): void{
+        try{
+            $db = Database::getInstance();
+            $rows = $db->getUserInformation($userId);
+
+            $user = array_map(fn($row) => [
+                'user' => [
+                    'id' => (int) $row['user_id'],
+                    'username' => $row['username'],
+                    'name' => $row['user_name'],
+                    'surname' => $row['surname'],
+                    'email' => $row['email'],
+                    'isAdmin' => (bool) $row['isAdmin']
+                ]
+            ], $rows);
+
+            Response::json([
+                'status' => 'success',
+                'data' => $user
+            ]);
+        } catch(Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
     }
 
     private function spottedByUser(string $username): void {
@@ -203,7 +239,7 @@ class UserController {
         }
     }
 
-    private function spottedAccept(): void {
+    private function getSpottedAccept(): void {
         try {
             $db = Database::getInstance();
             $rows = $db->getSpottedAccept();

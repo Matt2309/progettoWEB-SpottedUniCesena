@@ -198,11 +198,17 @@ class Database {
 
     //Controllo utente admin
     public function checkAdmin($userId){
-        $query = "SELECT role_id FROM users WHERE id = :userId";
+        $query = "SELECT (r.title = 'admin') AS isAdmin
+        FROM users u
+        JOIN roles r ON r.id = u.role_id
+        WHERE u.id = :userId
+        LIMIT 1";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(['userId' => $userId]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result && $result['role_id'] == 2;
+        $stmt->execute([
+            ':userId' => $userId
+        ]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     //registrazione
@@ -298,5 +304,31 @@ class Database {
             't' => hash('sha256', $token)
         ]);
     }
+
+    public function getUserInformation(string $userId)
+    {
+        $query = "
+        SELECT
+            u.id,
+            u.username,
+            u.name,
+            u.surname,
+            u.email,
+            r.title AS role,
+            (r.title = 'admin') AS isAdmin
+        FROM users u
+        JOIN roles r ON r.id = u.role_id
+        WHERE u.id = :userId
+        LIMIT 1
+    ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            ':userId' => $userId
+        ]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }
