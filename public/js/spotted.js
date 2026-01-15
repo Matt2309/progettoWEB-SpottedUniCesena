@@ -7,8 +7,6 @@ async function loadSpotted() {
         const response = await fetch("api/user/getSpottedAccept");
         const spotted = await response.json();
 
-        console.log("res: ", spotted)
-
         const container = document.getElementById("spottedList");
         container.innerHTML = "";
 
@@ -26,8 +24,6 @@ async function loadSpotted() {
 async function getCommentsSpotted(id) {
     const response = await fetch("api/user/getCommentSpotted?spottedId=" + id);
     const comments = await response.json();
-
-    console.log("res ", comments)
 
     const container = document.createElement("div");
 
@@ -77,10 +73,11 @@ async function createSpottedCard(post) {
                     <i class="bi bi-hand-thumbs-up"></i> ${post.likes}
                 </span>
 
-                <button class="bg-transparent border-0 text-muted"
+                <button class="bg-transparent border-0 text-muted d-flex align-items-center gap-1"
                         data-bs-toggle="offcanvas"
                         data-bs-target="#${offcanvasId}">
-                    <i class="bi bi-chat"></i> commenti
+                    <i class="bi bi-chat"></i>
+                    <span>${post.commentsCount} commenti</span>
                 </button>
             </div>
         </div>

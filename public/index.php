@@ -1,4 +1,3 @@
-<?php require_once '../api/auth/auth-check.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 

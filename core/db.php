@@ -309,11 +309,11 @@ class Database {
     {
         $query = "
         SELECT
-            u.id,
-            u.username,
-            u.name,
-            u.surname,
-            u.email,
+            u.id AS user_id,
+            u.username AS username,
+            u.name AS user_name,
+            u.surname AS surname,
+            u.email AS email,
             r.title AS role,
             (r.title = 'admin') AS isAdmin
         FROM users u
