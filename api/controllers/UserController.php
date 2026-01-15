@@ -17,7 +17,6 @@ class UserController {
         $user = $db->getAuthenticatedUser();
         $userId = $user['id'] ?? '';
 
-        // TODO - da modificare in getUserInfo (passa tutti i dati utente tranne password - stessa metodologia di getUserSpotted)
         //GET /api/user
         if ($resource === 'user' && $subroute === 'getUsers') {
             if ($userId === '') {
@@ -42,8 +41,7 @@ class UserController {
             $this->spottedByUser($userId);
             return;
         }
-
-        // TODO - da modificare nome in getSpottedAccepted (anche il metodo)
+        
         //GET /api/user/getSpottedAccept
         if ($resource === 'user' && $subroute === 'getSpottedAccept') {
             $this->getSpottedAccept();
