@@ -77,11 +77,18 @@ class Database {
             u.id            AS user_id,
             u.username,
             u.name          AS user_name,
-            u.surname
+            u.surname,
+        
+            COUNT(co.id)    AS comments_count
         FROM spotted s
         JOIN categories c ON s.category_id = c.id
         JOIN users u ON s.user_id = u.id
+        LEFT JOIN comments co ON co.spotted_id = s.id
         WHERE s.status = :status
+        GROUP BY
+            s.id,
+            c.id,
+            u.id
         ORDER BY s.created_at DESC
     ";
 
@@ -96,9 +103,39 @@ class Database {
 
     //lista spotted per utente
     public function getSpottedUser($userId) {
-        $query = "SELECT * FROM spotted WHERE user_id = :user_id";
+        $query = "
+        SELECT
+            s.id            AS spotted_id,
+            s.title         AS spotted_title,
+            s.text          AS spotted_text,
+            s.numLike,
+            s.numDislike,
+            s.status,
+            s.created_at    AS spotted_created_at,
+
+            c.id            AS category_id,
+            c.name          AS category_name,
+
+            u.id            AS user_id,
+            u.username,
+            u.name          AS user_name,
+            u.surname,
+        
+            COUNT(co.id)    AS comments_count
+        FROM spotted s
+        JOIN categories c ON s.category_id = c.id
+        JOIN users u ON s.user_id = u.id
+        LEFT JOIN comments co ON co.spotted_id = s.id
+        WHERE s.user_id = :userId
+        GROUP BY
+            s.id,
+            c.id,
+            u.id
+        ORDER BY s.created_at DESC
+    ";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(['user_id' => $userId]);
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -151,13 +188,27 @@ class Database {
         return $stmt->execute();
     }
 
+    // reject spotted
+    public function spottedReject($spottedId){
+        $query = "UPDATE spotted SET status='REJECTED' WHERE id = :spottedId";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([':spottedId' => $spottedId]);
+        return $stmt->execute();
+    }
+
     //Controllo utente admin
     public function checkAdmin($userId){
-        $query = "SELECT role_id FROM users WHERE id = :userId";
+        $query = "SELECT (r.title = 'admin') AS isAdmin
+        FROM users u
+        JOIN roles r ON r.id = u.role_id
+        WHERE u.id = :userId
+        LIMIT 1";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(['userId' => $userId]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result && $result['role_id'] == 2;
+        $stmt->execute([
+            ':userId' => $userId
+        ]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     //registrazione
@@ -253,5 +304,31 @@ class Database {
             't' => hash('sha256', $token)
         ]);
     }
+
+    public function getUserInformation(string $userId)
+    {
+        $query = "
+        SELECT
+            u.id,
+            u.username,
+            u.name,
+            u.surname,
+            u.email,
+            r.title AS role,
+            (r.title = 'admin') AS isAdmin
+        FROM users u
+        JOIN roles r ON r.id = u.role_id
+        WHERE u.id = :userId
+        LIMIT 1
+    ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            ':userId' => $userId
+        ]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }
