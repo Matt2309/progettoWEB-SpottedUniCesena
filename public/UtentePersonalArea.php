@@ -123,13 +123,13 @@
       <!-- TABS -->
       <ul class="nav nav-tabs mb-4">
         <li class="nav-item">
-          <button class="nav-link active text-primary fw-semibold">Spotted</button>
+          <button class="nav-link active text-primary fw-semibold" id="spotted">Spotted</button>
         </li>
         <li class="nav-item">
-          <button class="nav-link text-muted">Commenti</button>
+          <button class="nav-link text-muted" id="comments">Commenti</button>
         </li>
         <li class="nav-item">
-          <button class="nav-link text-muted">Like</button>
+          <button class="nav-link text-muted" id="likes">Like</button>
         </li>
       </ul>
 
