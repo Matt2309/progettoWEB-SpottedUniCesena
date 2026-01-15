@@ -128,8 +128,7 @@ class UserController {
             Response::json(['status' => 'ok'], 200);
             return;
         }
-
-            //TODO - aggiungere anche rejectSpotted
+        
         if ($resource === 'user' && $subroute === 'spottedReject') {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 Response::json(['error' => 'Method Not Allowed'], 405);

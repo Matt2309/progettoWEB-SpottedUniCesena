@@ -73,7 +73,7 @@
             </a>
 
             <hr>
-            <div class="mb-3">
+            <div class="mb-3" id="user-area">
                 <a href="Login.html" class="btn btn-primary w-100 mt-3">
                     <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
                     Login
@@ -149,6 +149,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/spotted.js"></script>
+<script src="js/user.js"></script>
+
 </body>
 
 </html>
