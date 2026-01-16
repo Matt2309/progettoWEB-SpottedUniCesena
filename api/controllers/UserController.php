@@ -17,8 +17,8 @@ class UserController {
         $user = $db->getAuthenticatedUser();
         $userId = $user['id'] ?? '';
 
-        //GET /api/user
-        if ($resource === 'user' && $subroute === 'getUsers') {
+        //GET /api/getUsers
+        if ($resource === 'user' && $subroute === 'getUserInfo') {
             if ($userId === '') {
                 Response::json([
                     'status' => 'error',
@@ -26,7 +26,7 @@ class UserController {
                 ], 401);
                 return;
             }
-            $this->getUserInfo();
+            $this->getUserInfo($userId);
             return;
         }
 
@@ -171,18 +171,7 @@ class UserController {
     private function getUserInfo(string $userId): void{
         try{
             $db = Database::getInstance();
-            $rows = $db->getUserInformation($userId);
-
-            $user = array_map(fn($row) => [
-                'user' => [
-                    'id' => (int) $row['user_id'],
-                    'username' => $row['username'],
-                    'name' => $row['user_name'],
-                    'surname' => $row['surname'],
-                    'email' => $row['email'],
-                    'isAdmin' => (bool) $row['isAdmin']
-                ]
-            ], $rows);
+            $user = $db->getUserInformation($userId);
 
             Response::json([
                 'status' => 'success',

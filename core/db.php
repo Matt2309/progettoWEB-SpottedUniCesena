@@ -150,7 +150,7 @@ class Database {
 
     //lista commenti per un certo utente
     public function getCommentUser($userId){
-        $query = "SELECT text FROM comments WHERE comments.user_id = :userId";
+        $query = "SELECT text, created_at FROM comments WHERE comments.user_id = :userId";
         $stmt = $this->db->prepare($query);
         $stmt->execute(['userId' => $userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -309,11 +309,11 @@ class Database {
     {
         $query = "
         SELECT
-            u.id,
-            u.username,
-            u.name,
-            u.surname,
-            u.email,
+            u.id AS user_id,
+            u.username AS username,
+            u.name AS user_name,
+            u.surname AS surname,
+            u.email AS email,
             r.title AS role,
             (r.title = 'admin') AS isAdmin
         FROM users u
