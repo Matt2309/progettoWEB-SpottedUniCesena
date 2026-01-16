@@ -1,3 +1,4 @@
+<?php require_once '../api/auth/auth-check.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -56,36 +57,9 @@
     </p>
 
     <!-- POST -->
-    <div class="card rounded-4 shadow-sm mb-4">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start">
-          <div class="d-flex align-items-center gap-2">
-            <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                 style="width:35px;height:35px;">P</div>
-            <div>
-              <strong>pippo_franco</strong><br>
-              <small class="text-muted">2 ore fa</small>
-            </div>
-          </div>
-
-          <span class="badge bg-light text-dark rounded-pill">persone</span>
-        </div>
-
-        <p class="mt-3">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        </p>
-
-        <div class="d-flex justify-content-between text-muted">
-          <span>
-            <i class="bi bi-hand-thumbs-up"></i> 3
-            <i class="bi bi-hand-thumbs-down ms-2"></i>
-          </span>
-          <span>
-            <i class="bi bi-chat"></i> 3 Commenti
-          </span>
-        </div>
-      </div>
-    </div>
+      <main class="col-md-8">
+          <div class="userList"></div>
+      </main>
 
   </div>
 
@@ -149,53 +123,27 @@
       <!-- TABS -->
       <ul class="nav nav-tabs mb-4">
         <li class="nav-item">
-          <button class="nav-link active text-primary fw-semibold">Spotted</button>
+          <button class="nav-link active text-primary fw-semibold" id="spotted">Spotted</button>
         </li>
         <li class="nav-item">
-          <button class="nav-link text-muted">Commenti</button>
+          <button class="nav-link text-muted" id="comments">Commenti</button>
         </li>
         <li class="nav-item">
-          <button class="nav-link text-muted">Like</button>
+          <button class="nav-link text-muted" id="likes">Like</button>
         </li>
       </ul>
 
       <!-- POST DESKTOP -->
-      <div class="card rounded-4 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start">
-            <div class="d-flex align-items-center gap-2">
-              <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                   style="width:35px;height:35px;">P</div>
-              <div>
-                <strong>pippo_franco</strong><br>
-                <small class="text-muted">2 ore fa</small>
-              </div>
-            </div>
-
-            <span class="badge bg-light text-dark rounded-pill">persone</span>
-          </div>
-
-          <p class="mt-3">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-          </p>
-
-          <div class="d-flex justify-content-between text-muted">
-            <span>
-              <i class="bi bi-hand-thumbs-up"></i> 3
-              <i class="bi bi-hand-thumbs-down ms-2"></i>
-            </span>
-            <span>
-              <i class="bi bi-chat"></i> 3 Commenti
-            </span>
-          </div>
-        </div>
-      </div>
+        <main class="col-md-8">
+            <div class="userList"></div>
+        </main>
 
     </main>
 
   </div>
 </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/profile.js"></script>
 </body>
 </html>
