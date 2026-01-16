@@ -41,7 +41,7 @@
     </div>
 </nav>
 
-<div class="container-fluid my-4">
+<div class="container-fluid">
     <div class="row">
 
         <!-- BARRA LATERALE SINISTRA (DESKTOP) -->
