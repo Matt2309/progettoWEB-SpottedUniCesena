@@ -196,6 +196,64 @@ class Database {
         return $stmt->execute();
     }
 
+    //Post Spotted
+    public function createSpotted($title, $text, $userId, $categoryId){
+        $query = "INSERT INTO spotted 
+              (title, text, numLike, numDislike, user_id, category_id, status, created_at)
+              VALUES 
+              (:title, :text, 0, 0, :user_id, :category_id, 'PENDING', NOW())";
+
+        $stmt = $this->db->prepare($query);
+
+        return $stmt->execute([
+            ':title' => $title,
+            ':text' => $text,
+            ':user_id' => $userId,
+            ':category_id' => $categoryId
+        ]);
+    }
+
+    //like spotted
+    public function likeSpotted(string $spottedId): bool {
+        $query = "UPDATE spotted 
+              SET numLike = numLike + 1 
+              WHERE id = :spottedId";
+
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ':spottedId' => $spottedId
+        ]);
+    }
+
+    public function dislikeSpotted(string $spottedId): bool {
+        $query = "UPDATE spotted 
+              SET numDislike = numDislike + 1 
+              WHERE id = :spottedId";
+
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ':spottedId' => $spottedId
+        ]);
+    }
+
+    public function createComment(string $text, string $userId, string $spottedId): bool {
+        $query = "INSERT INTO comments (text, user_id, spotted_id, created_at)
+              VALUES (:text, :user_id, :spotted_id, NOW())";
+
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ':text' => $text,
+            ':user_id' => $userId,
+            ':spotted_id' => $spottedId
+        ]);
+    }
+
+    public function getCategories(): array {
+        $query = "SELECT id, name FROM categories";
+        $stmt = $this->pdo->query($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     //Controllo utente admin
     public function checkAdmin($userId){
         $query = "SELECT (r.title = 'admin') AS isAdmin
