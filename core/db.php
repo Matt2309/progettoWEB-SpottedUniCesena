@@ -250,7 +250,8 @@ class Database {
 
     public function getCategories(): array {
         $query = "SELECT id, name FROM categories";
-        $stmt = $this->pdo->query($query);
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

@@ -11,7 +11,6 @@ document.getElementById('comments').addEventListener("click", function (e) {
     loadUserComments();
 })
 document.getElementById('likes').addEventListener("click", function (e) {
-    e.target.addClass("active text-primary fw-semibold")
     setActiveTab(e.currentTarget);
 })
 

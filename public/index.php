@@ -108,11 +108,7 @@
                                 <li>Scegli la categoria giusta</li>
                             </ul>
 
-                            <div class="mt-2">
-                                <span class="badge bg-success">generale</span>
-                                <span class="badge bg-primary">persone</span>
-                                <span class="badge bg-danger">avvisi</span>
-                            </div>
+                            <div class="mt-2 d-flex flex-wrap gap-2" id="categories"></div>
 
                         </div>
                     </aside>
