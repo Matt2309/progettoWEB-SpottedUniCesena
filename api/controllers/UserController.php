@@ -156,7 +156,125 @@ class UserController {
             Response::json(['status' => 'ok'], 200);
             return;
         }
+
+        if ($resource === 'user' && $subroute === 'createSpotted') {
+
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
+
+            if ($userId === '') {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
+
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            $title = $data['title'] ?? '';
+            $text = $data['text'] ?? '';
+            $categoryId = $data['category_id'] ?? '';
+
+            if ($title === '' || $text === '' || $categoryId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => 'Missing required parameters'
+                ], 400);
+                return;
+            }
+
+            $this->createSpotted($title, $text, $userId, $categoryId);
+            return;
         }
+
+        if ($resource === 'user' && $subroute === 'likeSpotted') {
+
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
+
+            if ($userId === '') {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
+
+            $data = json_decode(file_get_contents('php://input'), true);
+            $spottedId = $data['spottedId'] ?? '';
+
+            if ($spottedId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'spottedId' parameter"
+                ], 400);
+                return;
+            }
+
+            $this->likeSpotted($spottedId);
+            return;
+        }
+
+        if ($resource === 'user' && $subroute === 'dislikeSpotted') {
+
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
+
+            if ($userId === '') {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
+
+            $data = json_decode(file_get_contents('php://input'), true);
+            $spottedId = $data['spottedId'] ?? '';
+
+            if ($spottedId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'spottedId' parameter"
+                ], 400);
+                return;
+            }
+
+            $this->dislikeSpotted($spottedId);
+            return;
+        }
+
+        if ($resource === 'user' && $subroute === 'createComment') {
+
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
+
+            if ($userId === '') {
+                Response::json(['error' => 'Unauthorized'], 401);
+                return;
+            }
+
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            $text = $data['text'] ?? '';
+            $spottedId = $data['spottedId'] ?? '';
+
+            if ($text === '' || $spottedId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => 'Missing required parameters'
+                ], 400);
+                return;
+            }
+
+            $this->createComment($text, $userId, $spottedId);
+            return;
+        }
+
+        if ($resource === 'user' && $subroute === 'getCategories') {
+            $this->getCategories();
+            return;
+        }
+    }
 
     Response::json(['error' => 'Not found'], 404);
     }
@@ -394,6 +512,100 @@ class UserController {
             Response::json([
                 'status' => 'error',
                 'message' => 'Failed to reject spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function createSpotted(string $title, string $text, string $userId, string $categoryId): void {
+        try {
+            $db = Database::getInstance();
+            $db->createSpotted($title, $text, $userId, $categoryId);
+
+            Response::json([
+                'status' => 'success',
+                'message' => 'Spotted created successfully'
+            ], 201);
+
+        } catch (Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to create spotted',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function likeSpotted(string $spottedId): void {
+        try {
+            $db = Database::getInstance();
+            $db->likeSpotted($spottedId);
+
+            Response::json([
+                'status' => 'success',
+                'spottedId' => $spottedId
+            ], 200);
+
+        } catch (Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to like spotted',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function dislikeSpotted(string $spottedId): void {
+        try {
+            $db = Database::getInstance();
+            $db->dislikeSpotted($spottedId);
+
+            Response::json([
+                'status' => 'success',
+                'spottedId' => $spottedId
+            ], 200);
+
+        } catch (Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to dislike spotted',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function createComment(string $text, string $userId, string $spottedId): void {
+        try {
+            $db = Database::getInstance();
+            $db->createComment($text, $userId, $spottedId);
+
+            Response::json([
+                'status' => 'success',
+                'message' => 'Comment created successfully'
+            ], 201);
+
+        } catch (Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to create comment',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function getCategories(): void {
+        try {
+            $db = Database::getInstance();
+            $categories = $db->getCategories();
+
+            Response::json([
+                'status' => 'success',
+                'data' => $categories
+            ]);
+        } catch (Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch categories',
                 'detail' => $e->getMessage()
             ], 500);
         }
