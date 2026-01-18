@@ -405,12 +405,22 @@ class UserController {
     private function commentUserList(string $userId): void {
         try{
             $db = Database::getInstance();
-            $spotted = $db->getCommentUser($userId);
+            $rows =$db->getCommentUser($userId);
+
+            $comments = array_map(fn($row) => [
+                'id' => (int) $row['comment_id'],
+                'text' => $row['text'],
+                'created_at' => $row['created_at'],
+                'user' => [
+                    'id' => (int) $row['user_id'],
+                    'username' => $row['username']
+                ]
+            ], $rows);
 
             Response::json([
                 'status' => 'success',
                 'userId'=> $userId,
-                'data' => $spotted
+                'data' => $comments
             ]);
         } catch ( Throwable $e){
             Response::json([
@@ -424,12 +434,22 @@ class UserController {
     private function commentSpottedList(string $spottedId): void {
         try{
             $db = Database::getInstance();
-            $spotted = $db->getCommentSpotted($spottedId);
+            $rows = $db->getCommentSpotted($spottedId);
+
+            $comments = array_map(fn($row) => [
+                'id' => (int) $row['comment_id'],
+                'text' => $row['text'],
+                'created_at' => $row['created_at'],
+                'user' => [
+                    'id' => (int) $row['user_id'],
+                    'username' => $row['username']
+                ]
+            ], $rows);
 
             Response::json([
                 'status' => 'success',
                 'spottedId'=> $spottedId,
-                'data' => $spotted
+                'data' => $comments
             ]);
         } catch ( Throwable $e){
             Response::json([

@@ -1,4 +1,16 @@
 window.Common = (function () {
+    const ICON_COLORS = [
+        "blue",
+        "indigo",
+        "pink",
+        "red",
+        "orange",
+    ];
+
+    function getIconColor(index) {
+        return ICON_COLORS[index % ICON_COLORS.length];
+    }
+
     function formatTime(dateInput) {
         const diff = (Date.now() - new Date(dateInput)) / 1000;
 
@@ -38,17 +50,20 @@ window.Common = (function () {
     function createCommentCard(comment) {
         const card = document.createElement("div");
         const timeAgo = formatTime(Date.parse(comment.created_at));
+        const initial = comment.user.username.charAt(0).toUpperCase();
 
         card.className = "d-flex gap-2 mb-3";
 
         card.innerHTML = `
         <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
           style="width:35px;height:35px;">
-          P
+          ${initial}
         </div>
         <div>
-          <strong>pippo_franco</strong>
-          <small class="text-muted ms-2">${timeAgo}</small>
+            <div class="d-flex align-items-center gap-2">
+                <strong>@${comment.user.username}</strong>
+                <small class="text-muted ms-2">${timeAgo}</small>
+            </div>
           <p class="mb-0">
             ${comment.text}
           </p>
@@ -78,20 +93,14 @@ window.Common = (function () {
 
     async function loadCategories() {
         try {
-            const colors = [
-                "blue",
-                "indigo",
-                "pink",
-                "red",
-                "orange",
-            ]
             const categories = await Common.getCategories();
 
             const container = document.getElementById("categories");
             container.innerHTML = "";
 
-            for (const category of categories) {
-                container.appendChild(await Common.createCategoryCard(category.name, colors[categories.indexOf(category)]));
+            for (let i = 0; i < categories.length; i++) {
+                const color = getIconColor(i);
+                container.appendChild(await Common.createCategoryCard(categories[i].name, color));
             }
 
         } catch (e) {
@@ -108,13 +117,7 @@ window.Common = (function () {
         const offcanvasId = `commentsDrawer-${post.id}`;
         const initial = post.user.username.charAt(0).toUpperCase();
         const timeAgo = formatTime(Date.parse(post.createdAt));
-        const colors = [
-            "blue",
-            "indigo",
-            "pink",
-            "red",
-            "orange",
-        ]
+        const categoryColor = getIconColor(post.category.id - 1);
 
         card.innerHTML = `
         <div class="card-body">
@@ -175,7 +178,7 @@ window.Common = (function () {
     `;
 
         const categoryPlaceholder = card.querySelector("#categoryPlaceholder");
-        categoryPlaceholder.replaceWith(createCategoryCard(post.category.name, colors[post.category.id]));
+        categoryPlaceholder.replaceWith(createCategoryCard(post.category.name, categoryColor));
 
         const offcanvas = card.querySelector(`#${offcanvasId}`);
 
@@ -206,6 +209,7 @@ window.Common = (function () {
         createSpottedCard,
         getCategories,
         createCategoryCard,
-        loadCategories
+        loadCategories,
+        getIconColor
     };
 })();

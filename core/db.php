@@ -150,15 +150,33 @@ class Database {
 
     //lista commenti per un certo utente
     public function getCommentUser($userId){
-        $query = "SELECT text, created_at FROM comments WHERE comments.user_id = :userId";
+        $query = "SELECT 
+                    c.id as comment_id, 
+                    c.text, 
+                    c.created_at, 
+                    c.user_id, 
+                    u.username 
+                    FROM comments c 
+                        JOIN users u ON c.user_id = u.id 
+                    WHERE c.user_id = :userId
+                    ORDER BY c.created_at DESC";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(['userId' => $userId]);
+        $stmt->execute([':userId' => $userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //lista commenti spotted
     public function getCommentSpotted($spottedId){
-        $query = "SELECT * FROM comments WHERE spotted_id = :spottedId";
+        $query = "SELECT 
+                    c.id as comment_id, 
+                    c.text, 
+                    c.created_at, 
+                    c.user_id, 
+                    u.username 
+                    FROM comments c 
+                        JOIN users u ON c.user_id = u.id 
+                    WHERE c.spotted_id = :spottedId 
+                    ORDER BY c.created_at DESC";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':spottedId' => $spottedId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
