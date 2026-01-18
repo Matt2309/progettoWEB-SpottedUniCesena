@@ -74,7 +74,7 @@
                 <span>Home</span>
             </a>
 
-            <a href="Crea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2" aria-current="page">
+            <a href="Crea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 fw-bold" aria-current="page">
                 <i class="bi bi-plus-square" aria-hidden="true"></i>
                 <span>Crea</span>
             </a>

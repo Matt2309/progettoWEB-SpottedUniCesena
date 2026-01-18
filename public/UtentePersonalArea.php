@@ -69,7 +69,7 @@
         <i class="bi bi-plus-square fs-4"></i><br>
         <small>Crea</small>
       </a>
-      <a href="UtentePersonalArea.php" class="text-dark text-decoration-none">
+      <a href="#" class="text-dark text-decoration-none fw-bold">
         <i class="bi bi-person fs-4"></i><br>
         <small>Profilo</small>
       </a>
@@ -101,8 +101,8 @@
         <span>Crea</span>
       </a>
 
-      <a href="UtentePersonalArea.php"
-         class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2" aria-current="page">
+      <a href="#"
+         class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 fw-bold" aria-current="page">
         <i class="bi bi-person" aria-hidden="true"></i>
         <span>Profilo</span>
       </a>

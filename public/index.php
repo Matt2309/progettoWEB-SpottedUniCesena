@@ -54,7 +54,7 @@
 
             <hr>
 
-            <a href="#" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2"
+            <a href="#" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 fw-bold"
                aria-current="page">
                 <i class="bi bi-house" aria-hidden="true"></i>
                 <span>Home</span>
@@ -124,7 +124,7 @@
 <nav class="navbar fixed-bottom bg-white border-top d-md-none">
     <div class="container d-flex justify-content-around text-center">
 
-        <div>
+        <div class="fw-bold">
             <i class="bi bi-house fs-4"></i><br>
             <small>Home</small>
         </div>
