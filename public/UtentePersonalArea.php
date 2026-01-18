@@ -38,13 +38,8 @@
     <!-- USER INFO -->
     <div class="d-flex justify-content-between align-items-center py-4">
       <div class="d-flex align-items-center gap-3">
-        <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-             style="width:70px;height:70px;">P</div>
-
-        <div>
-          <h5 class="mb-0">Pippo Franco</h5>
-          <small class="text-muted">pippo_franco</small>
-        </div>
+          <div class="user-area">
+          </div>
       </div>
 
       <small class="text-muted text-end">
@@ -89,34 +84,40 @@
   <div class="row min-vh-100">
 
     <!-- SIDEBAR -->
-    <aside class="col-md-2 bg-white border-end p-4 d-flex flex-column">
-      <h5 class="text-primary fw-bold mb-0">SpottedUniCesena</h5>
-      <hr class="mt-1 mb-3 opacity-50">
+    <aside class="col-md-3 bg-white border-end p-4 d-flex flex-column" role="complementary" aria-labelledby="sidebar-title">
+      <h2 id="sidebar-title" class="h4 fw-bold text-primary text-break">
+        SpottedUniCesena
+      </h2>
 
-      <nav class="nav flex-column gap-3">
-        <a href="index.php" class="nav-link text-dark d-flex gap-2">
-          <i class="bi bi-house"></i> Home
-        </a>
-        <a href="Crea.php" class="nav-link text-dark d-flex gap-2">
-          <i class="bi bi-plus-square"></i> Crea
-        </a>
-        <a href="UtentePersonalArea.php" class="nav-link fw-semibold text-dark d-flex gap-2">
-          <i class="bi bi-person"></i> Profilo
-        </a>
-      </nav>
+      <hr>
 
-      <div class="mt-auto pt-4 border-top d-flex gap-2">
-        <div class="rounded-circle bg-info text-white d-flex justify-content-center align-items-center"
-             style="width:36px;height:36px;">P</div>
-        <div>
-          <div class="fw-semibold">Pippo Franco</div>
-          <small class="text-muted">pippo_franco</small>
-        </div>
+      <a href="index.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+        <i class="bi bi-house" aria-hidden="true"></i>
+        <span>Home</span>
+      </a>
+
+      <a href="Crea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+        <i class="bi bi-plus-square" aria-hidden="true"></i>
+        <span>Crea</span>
+      </a>
+
+      <a href="UtentePersonalArea.php"
+         class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2" aria-current="page">
+        <i class="bi bi-person" aria-hidden="true"></i>
+        <span>Profilo</span>
+      </a>
+
+      <hr>
+      <div class="mb-3 user-area">
+        <a href="Login.html" class="btn btn-primary w-100 mt-3">
+          <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
+          Login
+        </a>
       </div>
     </aside>
 
     <!-- MAIN -->
-    <main class="col-md-10 bg-background py-5 px-5">
+    <main class="col-md-9 bg-background py-5 px-5">
 
       <h4 class="fw-bold mb-2">Il mio profilo:</h4>
 
@@ -144,6 +145,7 @@
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/user.js"></script>
     <script src="js/profile.js"></script>
 </body>
 </html>
