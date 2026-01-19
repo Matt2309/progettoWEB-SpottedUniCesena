@@ -210,7 +210,18 @@ class UserController {
                 return;
             }
 
-            $this->likeSpotted($spottedId);
+            $this->likeSpotted($spottedId, $userId);
+            return;
+        }
+
+        if ($resource === 'user' && $subroute === 'getLikedSpotted') {
+            if ($userId === '') {
+                Response::json([
+                    'status' => 'error',
+                    'message' => "Missing required 'userId' parameter"
+                ], 400);
+            }
+            $this->likedSpottedList($userId);
             return;
         }
 
@@ -460,6 +471,46 @@ class UserController {
         }
     }
 
+    private function likedSpottedList(string $userId): void {
+        try{
+            $db = Database::getInstance();
+            $rows = $db->getLikedSpottedByUser($userId);
+
+            $spotted = array_map(fn($row) => [
+                'id' => (int) $row['spotted_id'],
+                'title' => $row['spotted_title'],
+                'text' => $row['spotted_text'],
+                'likes' => (int) $row['numLike'],
+                'dislikes' => (int) $row['numDislike'],
+                'status' => $row['status'],
+                'createdAt' => $row['spotted_created_at'],
+                'commentsCount' => (int) ($row['comments_count'] ?? 0),
+                'category' => [
+                    'id' => (int) $row['category_id'],
+                    'name' => $row['category_name']
+                ],
+                'user' => [
+                    'id' => (int) $row['user_id'],
+                    'username' => $row['username'],
+                    'name' => $row['user_name'],
+                    'surname' => $row['surname']
+                ]
+            ], $rows);
+
+            Response::json([
+                'status' => 'success',
+                'userId'=> $userId,
+                'data' => $spotted
+            ]);
+        } catch ( Throwable $e){
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch liked spotted for user',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     private function banUser(string $userId): void {
         try{
             $db = Database::getInstance();
@@ -556,10 +607,10 @@ class UserController {
         }
     }
 
-    private function likeSpotted(string $spottedId): void {
+    private function likeSpotted(string $spottedId, string $userId): void {
         try {
             $db = Database::getInstance();
-            $db->likeSpotted($spottedId);
+            $db->likeSpotted($spottedId, $userId);
 
             Response::json([
                 'status' => 'success',
