@@ -31,7 +31,6 @@ async function loadUserSpotted() {
         const response = await fetch("api/user/getUserSpotted");
         const spotted = await response.json();
 
-
         let containers = document.querySelectorAll('.userList');
         for (const container of containers) {
             container.innerHTML = '';
@@ -98,6 +97,7 @@ async function loadUserLikes() {
         for (const container of containers) {
             container.innerHTML = '';
             for (const like of likes.data) {
+                delete like.status;
                 container.appendChild(await Common.createSpottedCard(like));
             }
         }
@@ -106,5 +106,18 @@ async function loadUserLikes() {
         console.log(e)
         document.getElementById("userList").innerHTML =
             "<p class='text-muted'>Errore nel caricamento</p>";
+    }
+}
+
+function getStatusClass(status) {
+    switch (status) {
+        case "REJECTED":
+            return "bg-danger bg-opacity-25 text-danger";
+        case "PENDING":
+            return "bg-warning bg-opacity-25 text-warning";
+        case "APPROVED":
+            return "bg-success bg-opacity-25 text-success";
+        default:
+            return "bg-secondary bg-opacity-25 text-secondary";
     }
 }

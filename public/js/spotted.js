@@ -12,6 +12,7 @@ async function loadSpotted() {
         container.innerHTML = "";
 
         for (const post of spotted.data) {
+            delete post.status;
             container.appendChild(await Common.createSpottedCard(post));
         }
 

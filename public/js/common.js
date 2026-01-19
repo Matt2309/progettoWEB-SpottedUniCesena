@@ -132,7 +132,17 @@ window.Common = (function () {
                         <small class="text-muted">${timeAgo}</small>
                     </div>
                 </div>
-                <div id="categoryPlaceholder"></div>
+                <div class="d-flex gap-3 align-items-center">
+                    <div id="categoryPlaceholder"></div>
+                    ${post.status != null ?
+                        `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">
+                            ${post.status}
+                        </span>`
+                        :
+                    ''
+                    }
+                    
+                </div>
             </div>
 
             <p class="mt-3">${escapeHtml(post.text)}</p>
