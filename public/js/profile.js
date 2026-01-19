@@ -93,15 +93,12 @@ function commentWrapper(child) {
 async function loadUserLikes() {
     try {
         const response = await fetch("api/user/getLikedSpotted");
-        const comments = await response.json();
-
+        const likes = await response.json();
         let containers = document.querySelectorAll('.userList');
         for (const container of containers) {
             container.innerHTML = '';
-            for (const comment of comments.data) {
-                container.appendChild(
-                    commentWrapper(await Common.createCommentCard(comment))
-                );
+            for (const like of likes.data) {
+                container.appendChild(await Common.createSpottedCard(like));
             }
         }
 

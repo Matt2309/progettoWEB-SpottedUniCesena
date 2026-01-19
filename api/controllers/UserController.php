@@ -5,7 +5,7 @@ class UserController {
 
     public function handle() {
         $db = Database::getInstance();
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
         $path = parse_url($requestUri, PHP_URL_PATH) ?? '/';

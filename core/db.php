@@ -303,7 +303,7 @@ class Database {
               SET numDislike = numDislike + 1 
               WHERE id = :spottedId";
 
-        $stmt = $this->pdo->prepare($query);
+        $stmt = $this->db->prepare($query);
         return $stmt->execute([
             ':spottedId' => $spottedId
         ]);
@@ -313,7 +313,7 @@ class Database {
         $query = "INSERT INTO comments (text, user_id, spotted_id, created_at)
               VALUES (:text, :user_id, :spotted_id, NOW())";
 
-        $stmt = $this->pdo->prepare($query);
+        $stmt = $this->db->prepare($query);
         return $stmt->execute([
             ':text' => $text,
             ':user_id' => $userId,
