@@ -1,3 +1,5 @@
+<?php require_once '../api/auth/admin-check.php'; ?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>

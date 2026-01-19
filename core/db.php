@@ -330,17 +330,17 @@ class Database {
     //Controllo utente admin
     public function checkAdmin($userId){
         $query = "SELECT (r.title = 'admin') AS isAdmin
-        FROM users u
-        JOIN roles r ON r.id = u.role_id
-        WHERE u.id = :userId
-        LIMIT 1";
+              FROM users u
+              JOIN roles r ON r.id = u.role_id
+              WHERE u.id = :userId
+              LIMIT 1";
         $stmt = $this->db->prepare($query);
-        $stmt->execute([
-            ':userId' => $userId
-        ]);
+        $stmt->execute([':userId' => $userId]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return !empty($result) && $result['isAdmin'] == 1;
     }
+
 
     //registrazione
     public function register($nome, $cognome, $email, $username, $hash){
