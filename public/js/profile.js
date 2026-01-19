@@ -12,6 +12,7 @@ document.getElementById('comments').addEventListener("click", function (e) {
 })
 document.getElementById('likes').addEventListener("click", function (e) {
     setActiveTab(e.currentTarget);
+    loadUserLikes();
 })
 
 function setActiveTab(clicked) {
@@ -87,4 +88,26 @@ function commentWrapper(child) {
     card.appendChild(cardbody);
 
     return card;
+}
+
+async function loadUserLikes() {
+    try {
+        const response = await fetch("api/user/getLikedSpotted");
+        const comments = await response.json();
+
+        let containers = document.querySelectorAll('.userList');
+        for (const container of containers) {
+            container.innerHTML = '';
+            for (const comment of comments.data) {
+                container.appendChild(
+                    commentWrapper(await Common.createCommentCard(comment))
+                );
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
+        document.getElementById("userList").innerHTML =
+            "<p class='text-muted'>Errore nel caricamento</p>";
+    }
 }
