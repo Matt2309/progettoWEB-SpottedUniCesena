@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     loadSpotted();
+    Common.loadCategories();
 });
 
 async function loadSpotted() {
@@ -20,6 +21,3 @@ async function loadSpotted() {
             "<p class='text-muted'>Errore nel caricamento</p>";
     }
 }
-
-
-

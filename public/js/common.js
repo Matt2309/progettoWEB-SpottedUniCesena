@@ -1,4 +1,16 @@
 window.Common = (function () {
+    const ICON_COLORS = [
+        "blue",
+        "indigo",
+        "pink",
+        "red",
+        "orange",
+    ];
+
+    function getIconColor(index) {
+        return ICON_COLORS[index % ICON_COLORS.length];
+    }
+
     function formatTime(dateInput) {
         const diff = (Date.now() - new Date(dateInput)) / 1000;
 
@@ -14,20 +26,44 @@ window.Common = (function () {
         return div.innerHTML;
     }
 
+    async function getCategories() {
+        const response = await fetch("api/user/getCategories");
+        const categories = await response.json();
+        if (!categories.data.length) {
+            return [];
+        }
+
+        return categories.data;
+    }
+
+    function createCategoryCard(name, color) {
+        const card = document.createElement("span");
+
+        card.className = `badge bg-${color}-300 text-${color}-800`;
+        card.innerHTML = `
+            ${name}
+        `;
+
+        return card;
+    }
+
     function createCommentCard(comment) {
         const card = document.createElement("div");
         const timeAgo = formatTime(Date.parse(comment.created_at));
+        const initial = comment.user.username.charAt(0).toUpperCase();
 
         card.className = "d-flex gap-2 mb-3";
 
         card.innerHTML = `
         <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
           style="width:35px;height:35px;">
-          P
+          ${initial}
         </div>
         <div>
-          <strong>pippo_franco</strong>
-          <small class="text-muted ms-2">${timeAgo}</small>
+            <div class="d-flex align-items-center gap-2">
+                <strong>@${comment.user.username}</strong>
+                <small class="text-muted ms-2">${timeAgo}</small>
+            </div>
           <p class="mb-0">
             ${comment.text}
           </p>
@@ -55,6 +91,25 @@ window.Common = (function () {
         return container;
     }
 
+    async function loadCategories() {
+        try {
+            const categories = await Common.getCategories();
+
+            const container = document.getElementById("categories");
+            container.innerHTML = "";
+
+            for (let i = 0; i < categories.length; i++) {
+                const color = getIconColor(i);
+                container.appendChild(await Common.createCategoryCard(categories[i].name, color));
+            }
+
+        } catch (e) {
+            console.log(e)
+            document.getElementById("spottedList").innerHTML =
+                "<p class='text-muted'>Errore nel caricamento</p>";
+        }
+    }
+
     async function createSpottedCard(post) {
         const card = document.createElement("div");
         card.className = "card rounded-4 shadow-sm mb-4";
@@ -62,10 +117,11 @@ window.Common = (function () {
         const offcanvasId = `commentsDrawer-${post.id}`;
         const initial = post.user.username.charAt(0).toUpperCase();
         const timeAgo = formatTime(Date.parse(post.createdAt));
+        const categoryColor = getIconColor(post.category.id - 1);
 
         card.innerHTML = `
         <div class="card-body">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-2">
                     <div class="rounded-circle bg-primary text-white fw-bold d-flex justify-content-center align-items-center"
                          style="width:35px;height:35px;">
@@ -76,9 +132,7 @@ window.Common = (function () {
                         <small class="text-muted">${timeAgo}</small>
                     </div>
                 </div>
-                <span class="badge bg-light text-dark rounded-pill">
-                    ${post.category.name}
-                </span>
+                <div id="categoryPlaceholder"></div>
             </div>
 
             <p class="mt-3">${escapeHtml(post.text)}</p>
@@ -123,6 +177,9 @@ window.Common = (function () {
         </div>
     `;
 
+        const categoryPlaceholder = card.querySelector("#categoryPlaceholder");
+        categoryPlaceholder.replaceWith(createCategoryCard(post.category.name, categoryColor));
+
         const offcanvas = card.querySelector(`#${offcanvasId}`);
 
         offcanvas.addEventListener("show.bs.offcanvas", async () => {
@@ -149,6 +206,10 @@ window.Common = (function () {
         escapeHtml,
         createCommentCard,
         getCommentsSpotted,
-        createSpottedCard
+        createSpottedCard,
+        getCategories,
+        createCategoryCard,
+        loadCategories,
+        getIconColor
     };
 })();
