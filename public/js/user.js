@@ -6,13 +6,15 @@ async function getUserInfo() {
     try {
         const response = await fetch("api/user/getUserInfo");
         const userinfo = await response.json();
-        const area = document.getElementById("user-area");
-        if (response.ok) {
-            area.innerHTML = "";
-            area.appendChild(userInfo(userinfo.data));
-        } else {
-            area.innerHTML = "";
-            area.appendChild(loginButton());
+        let containers = document.querySelectorAll('.user-area');
+        for (const container of containers) {
+            if (response.ok) {
+                container.innerHTML = "";
+                container.appendChild(userInfo(userinfo.data));
+            } else {
+                container.innerHTML = "";
+                container.appendChild(loginButton());
+            }
         }
 
     } catch (e) {

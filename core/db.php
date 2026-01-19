@@ -150,17 +150,72 @@ class Database {
 
     //lista commenti per un certo utente
     public function getCommentUser($userId){
-        $query = "SELECT text, created_at FROM comments WHERE comments.user_id = :userId";
+        $query = "SELECT 
+                    c.id as comment_id, 
+                    c.text, 
+                    c.created_at, 
+                    c.user_id, 
+                    u.username 
+                    FROM comments c 
+                        JOIN users u ON c.user_id = u.id 
+                    WHERE c.user_id = :userId
+                    ORDER BY c.created_at DESC";
         $stmt = $this->db->prepare($query);
-        $stmt->execute(['userId' => $userId]);
+        $stmt->execute([':userId' => $userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //lista commenti spotted
     public function getCommentSpotted($spottedId){
-        $query = "SELECT * FROM comments WHERE spotted_id = :spottedId";
+        $query = "SELECT 
+                    c.id as comment_id, 
+                    c.text, 
+                    c.created_at, 
+                    c.user_id, 
+                    u.username 
+                    FROM comments c 
+                        JOIN users u ON c.user_id = u.id 
+                    WHERE c.spotted_id = :spottedId 
+                    ORDER BY c.created_at DESC";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':spottedId' => $spottedId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //lista spotted liked da un utente
+    public function getLikedSpottedByUser($userId){
+        $query = "SELECT
+                    s.id            AS spotted_id,
+                    s.title         AS spotted_title,
+                    s.text          AS spotted_text,
+                    s.numLike,
+                    s.numDislike,
+                    s.status,
+                    s.created_at    AS spotted_created_at,
+
+                    c.id            AS category_id,
+                    c.name          AS category_name,
+
+                    u.id            AS user_id,
+                    u.username,
+                    u.name          AS user_name,
+                    u.surname,
+                
+                    COUNT(co.id)    AS comments_count
+                FROM spotted s
+                JOIN categories c ON s.category_id = c.id
+                JOIN users u ON s.user_id = u.id
+                LEFT JOIN comments co ON co.spotted_id = s.id
+                WHERE s.numLike > 0 AND s.id IN (
+                    SELECT spotted_id FROM spotted_likes WHERE user_id = :userId
+                )
+                GROUP BY
+                    s.id,
+                    c.id,
+                    u.id
+                ORDER BY s.created_at DESC";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([':userId' => $userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -214,15 +269,33 @@ class Database {
     }
 
     //like spotted
-    public function likeSpotted(string $spottedId): bool {
+    public function likeSpotted(string $spottedId, string $userId = null): bool {
         $query = "UPDATE spotted 
               SET numLike = numLike + 1 
               WHERE id = :spottedId";
 
-        $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([
+        $stmt = $this->db->prepare($query);
+        $result = $stmt->execute([
             ':spottedId' => $spottedId
         ]);
+
+        // Insert into spotted_likes table if userId is provided
+        if ($userId !== null && $result) {
+            try {
+                $likeQuery = "INSERT INTO spotted_likes (user_id, spotted_id) 
+                             VALUES (:user_id, :spotted_id)
+                             ON DUPLICATE KEY UPDATE created_at = NOW()";
+                $likeStmt = $this->db->prepare($likeQuery);
+                $likeStmt->execute([
+                    ':user_id' => $userId,
+                    ':spotted_id' => $spottedId
+                ]);
+            } catch (PDOException $e) {
+                // Silently fail if like already exists
+            }
+        }
+
+        return $result;
     }
 
     public function dislikeSpotted(string $spottedId): bool {
@@ -250,7 +323,8 @@ class Database {
 
     public function getCategories(): array {
         $query = "SELECT id, name FROM categories";
-        $stmt = $this->pdo->query($query);
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

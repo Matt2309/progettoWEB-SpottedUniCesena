@@ -41,7 +41,7 @@
     </div>
 </nav>
 
-<div class="container-fluid my-4">
+<div class="container-fluid">
     <div class="row">
 
         <!-- BARRA LATERALE SINISTRA (DESKTOP) -->
@@ -54,7 +54,7 @@
 
             <hr>
 
-            <a href="#" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2"
+            <a href="#" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 fw-bold"
                aria-current="page">
                 <i class="bi bi-house" aria-hidden="true"></i>
                 <span>Home</span>
@@ -72,7 +72,7 @@
             </a>
 
             <hr>
-            <div class="mb-3" id="user-area">
+            <div class="mb-3 user-area">
                 <a href="Login.html" class="btn btn-primary w-100 mt-3">
                     <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
                     Login
@@ -108,11 +108,7 @@
                                 <li>Scegli la categoria giusta</li>
                             </ul>
 
-                            <div class="mt-2">
-                                <span class="badge bg-success">generale</span>
-                                <span class="badge bg-primary">persone</span>
-                                <span class="badge bg-danger">avvisi</span>
-                            </div>
+                            <div class="mt-2 d-flex flex-wrap gap-2" id="categories"></div>
 
                         </div>
                     </aside>
@@ -128,7 +124,7 @@
 <nav class="navbar fixed-bottom bg-white border-top d-md-none">
     <div class="container d-flex justify-content-around text-center">
 
-        <div>
+        <div class="fw-bold">
             <i class="bi bi-house fs-4"></i><br>
             <small>Home</small>
         </div>
