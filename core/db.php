@@ -252,16 +252,15 @@ class Database {
     }
 
     //Post Spotted
-    public function createSpotted($title, $text, $userId, $categoryId){
+    public function createSpotted($text, $userId, $categoryId){
         $query = "INSERT INTO spotted 
-              (title, text, numLike, numDislike, user_id, category_id, status, created_at)
+              (text, numLike, numDislike, user_id, category_id, status, created_at)
               VALUES 
-              (:title, :text, 0, 0, :user_id, :category_id, 'PENDING', NOW())";
+              (:text, 0, 0, :user_id, :category_id, 'PENDING', NOW())";
 
         $stmt = $this->db->prepare($query);
 
         return $stmt->execute([
-            ':title' => $title,
             ':text' => $text,
             ':user_id' => $userId,
             ':category_id' => $categoryId
