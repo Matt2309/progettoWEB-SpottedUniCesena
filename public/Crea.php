@@ -61,11 +61,16 @@
                     <span>Profilo</span>
                 </a>
 
-                <hr>
+                <a href="AdminPersonalArea.php"
+                   class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 admin-area">
+                    <i class="bi bi-list-check" aria-hidden="true"></i>
+                    <span>Gestione post</span>
+                </a>
 
-                <div class="mt-auto user-area">
-                    <a href="Login.html" class="btn btn-primary w-100">
-                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                <hr>
+                <div class="mb-3 user-area">
+                    <a href="Login.html" class="btn btn-primary w-100 mt-3">
+                        <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
                         Login
                     </a>
                 </div>
