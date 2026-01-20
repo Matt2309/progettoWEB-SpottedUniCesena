@@ -1,10 +1,6 @@
 window.Common = (function () {
     const ICON_COLORS = [
-        "blue",
-        "indigo",
-        "pink",
-        "red",
-        "orange",
+        "blue", "indigo", "pink", "red", "orange",
     ];
 
     function getIconColor(index) {
@@ -13,7 +9,6 @@ window.Common = (function () {
 
     function formatTime(dateInput) {
         const diff = (Date.now() - new Date(dateInput)) / 1000;
-
         if (diff < 60) return "ora";
         if (diff < 3600) return `${Math.floor(diff / 60)} min fa`;
         if (diff < 86400) return `${Math.floor(diff / 3600)} ore fa`;
@@ -29,21 +24,13 @@ window.Common = (function () {
     async function getCategories() {
         const response = await fetch("api/user/getCategories");
         const categories = await response.json();
-        if (!categories.data.length) {
-            return [];
-        }
-
-        return categories.data;
+        return categories.data.length ? categories.data : [];
     }
 
     function createCategoryCard(name, color) {
         const card = document.createElement("span");
-
         card.className = `badge bg-${color}-300 text-${color}-800`;
-        card.innerHTML = `
-            ${name}
-        `;
-
+        card.innerHTML = `${name}`;
         return card;
     }
 
@@ -53,7 +40,6 @@ window.Common = (function () {
         const initial = comment.user.username.charAt(0).toUpperCase();
 
         card.className = "d-flex gap-2 mb-3";
-
         card.innerHTML = `
         <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
           style="width:35px;height:35px;">
@@ -64,19 +50,15 @@ window.Common = (function () {
                 <strong>@${comment.user.username}</strong>
                 <small class="text-muted ms-2">${timeAgo}</small>
             </div>
-          <p class="mb-0">
-            ${comment.text}
-          </p>
+          <p class="mb-0">${comment.text}</p>
         </div>
     `;
-
         return card;
     }
 
     async function getCommentsSpotted(id) {
         const response = await fetch("api/user/getCommentSpotted?spottedId=" + id);
         const comments = await response.json();
-
         const container = document.createElement("div");
 
         if (!comments.data.length) {
@@ -84,6 +66,7 @@ window.Common = (function () {
             return container;
         }
 
+        // FIXED: Only append cards here. Do NOT attach event listeners here.
         comments.data.forEach(comment => {
             container.appendChild(createCommentCard(comment));
         });
@@ -91,22 +74,75 @@ window.Common = (function () {
         return container;
     }
 
+    async function validateAndSubmitComment(e) {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        const submitButtons = form.querySelectorAll(".submit-comment-btn");
+
+        // reset errors
+        form.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+        const fields = ["spottedId", "text"];
+        let formFields = {};
+        let hasError = false;
+
+        for (const name of fields) {
+            const input = form.querySelector(`[name="${name}"]`);
+            const value = input?.value?.trim();
+
+            if (!value && name === "text") { // Only text is user-facing required
+                // FIXED: Added '.' to select by class
+                form.querySelector(`.text-error`).textContent = "Testo obbligatorio";
+                hasError = true;
+            } else {
+                formFields[name] = value;
+            }
+        }
+
+        if (hasError) return;
+
+        submitButtons.forEach(btn => {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Invio...`;
+        });
+
+        try {
+            const response = await fetch("/api/user/createComment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formFields)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Errore server");
+            }
+
+            // Reload page on success
+            window.location.href = "index.php";
+        } catch (err) {
+            alert(err.message || "Errore server");
+            submitButtons.forEach(btn => {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="bi bi-send"></i>`;
+            });
+        }
+    }
+
     async function loadCategories() {
         try {
             const categories = await Common.getCategories();
-
             const container = document.getElementById("categories");
             container.innerHTML = "";
-
             for (let i = 0; i < categories.length; i++) {
                 const color = getIconColor(i);
                 container.appendChild(await Common.createCategoryCard(categories[i].name, color));
             }
-
         } catch (e) {
             console.log(e)
-            document.getElementById("spottedList").innerHTML =
-                "<p class='text-muted'>Errore nel caricamento</p>";
+            document.getElementById("spottedList").innerHTML = "<p class='text-muted'>Errore nel caricamento</p>";
         }
     }
 
@@ -115,6 +151,9 @@ window.Common = (function () {
         card.className = "card rounded-4 shadow-sm mb-4";
 
         const offcanvasId = `commentsDrawer-${post.id}`;
+        // FIXED: Unique form ID
+        const formId = `commentForm-${post.id}`;
+
         const initial = post.user.username.charAt(0).toUpperCase();
         const timeAgo = formatTime(Date.parse(post.createdAt));
         const categoryColor = getIconColor(post.category.id - 1);
@@ -135,13 +174,8 @@ window.Common = (function () {
                 <div class="d-flex gap-3 align-items-center">
                     <div id="categoryPlaceholder"></div>
                     ${post.status != null ?
-                        `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">
-                            ${post.status}
-                        </span>`
-                        :
-                    ''
-                    }
-                    
+            `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">${post.status}</span>`
+            : ''}
                 </div>
             </div>
 
@@ -167,11 +201,7 @@ window.Common = (function () {
             </div>
         </div>
 
-        <div class="offcanvas offcanvas-bottom"
-             tabindex="-1"
-             id="${offcanvasId}"
-             data-loaded="false">
-
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="${offcanvasId}" data-loaded="false">
             <div class="offcanvas-header justify-content-center">
                 <h6 class="text-danger fw-bold m-0">Commenti</h6>
             </div>
@@ -180,16 +210,21 @@ window.Common = (function () {
                 <div class="spinner-border text-secondary" role="status"></div>
             </div>
 
-            <div class="border-top p-3 bg-white">
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control rounded-pill bg-light border-0"
-                           placeholder="Aggiungi un commento...">
-                    <button class="btn btn-light rounded-pill ms-2">
-                        <i class="bi bi-send"></i>
-                    </button>
+            <form id="${formId}">
+                <div class="border-top p-3 bg-white">
+                    <div class="input-group">
+                        <input type="text" name="text"
+                               class="form-control rounded-pill bg-light border-0"
+                               placeholder="Aggiungi un commento...">
+                        <input type="hidden" name="spottedId" value="${post.id}">
+                        
+                        <button class="submit-comment-btn btn btn-light rounded-pill ms-2">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                    <p class="error text-danger mt-2 mb-0 text-error"></p>
                 </div>
-            </div>
+            </form>
         </div>
     `;
 
@@ -197,6 +232,10 @@ window.Common = (function () {
         categoryPlaceholder.replaceWith(createCategoryCard(post.category.name, categoryColor));
 
         const offcanvas = card.querySelector(`#${offcanvasId}`);
+        const form = card.querySelector(`#${formId}`);
+
+        // FIXED: Attach listener immediately for this specific form
+        form.addEventListener("submit", validateAndSubmitComment);
 
         offcanvas.addEventListener("show.bs.offcanvas", async () => {
             if (offcanvas.dataset.loaded === "true") return;
@@ -209,8 +248,7 @@ window.Common = (function () {
                 body.appendChild(comments);
                 offcanvas.dataset.loaded = "true";
             } catch {
-                body.innerHTML =
-                    "<p class='text-danger text-center'>Errore nel caricamento</p>";
+                body.innerHTML = "<p class='text-danger text-center'>Errore nel caricamento</p>";
             }
         });
 
@@ -219,14 +257,10 @@ window.Common = (function () {
 
     function getStatusClass(status) {
         switch (status) {
-            case "REJECTED":
-                return "bg-danger bg-opacity-25 text-danger";
-            case "PENDING":
-                return "bg-warning bg-opacity-25 text-warning";
-            case "APPROVED":
-                return "bg-success bg-opacity-25 text-success";
-            default:
-                return "bg-secondary bg-opacity-25 text-secondary";
+            case "REJECTED": return "bg-danger bg-opacity-25 text-danger";
+            case "PENDING": return "bg-warning bg-opacity-25 text-warning";
+            case "APPROVED": return "bg-success bg-opacity-25 text-success";
+            default: return "bg-secondary bg-opacity-25 text-secondary";
         }
     }
 
@@ -240,6 +274,7 @@ window.Common = (function () {
         createCategoryCard,
         loadCategories,
         getIconColor,
-        getStatusClass
+        getStatusClass,
+        validateAndSubmitComment
     };
 })();
