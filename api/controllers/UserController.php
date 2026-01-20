@@ -5,7 +5,7 @@ class UserController {
 
     public function handle() {
         $db = Database::getInstance();
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
         $path = parse_url($requestUri, PHP_URL_PATH) ?? '/';
@@ -171,11 +171,10 @@ class UserController {
 
             $data = json_decode(file_get_contents('php://input'), true);
 
-            $title = $data['title'] ?? '';
             $text = $data['text'] ?? '';
             $categoryId = $data['category_id'] ?? '';
 
-            if ($title === '' || $text === '' || $categoryId === '') {
+            if ($text === '' || $categoryId === '') {
                 Response::json([
                     'status' => 'error',
                     'message' => 'Missing required parameters'
@@ -183,7 +182,7 @@ class UserController {
                 return;
             }
 
-            $this->createSpotted($title, $text, $userId, $categoryId);
+            $this->createSpotted($text, $userId, $categoryId);
             return;
         }
 
@@ -588,10 +587,10 @@ class UserController {
         }
     }
 
-    private function createSpotted(string $title, string $text, string $userId, string $categoryId): void {
+    private function createSpotted(string $text, string $userId, string $categoryId): void {
         try {
             $db = Database::getInstance();
-            $db->createSpotted($title, $text, $userId, $categoryId);
+            $db->createSpotted($text, $userId, $categoryId);
 
             Response::json([
                 'status' => 'success',

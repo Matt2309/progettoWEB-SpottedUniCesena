@@ -252,16 +252,15 @@ class Database {
     }
 
     //Post Spotted
-    public function createSpotted($title, $text, $userId, $categoryId){
+    public function createSpotted($text, $userId, $categoryId){
         $query = "INSERT INTO spotted 
-              (title, text, numLike, numDislike, user_id, category_id, status, created_at)
+              (text, numLike, numDislike, user_id, category_id, status, created_at)
               VALUES 
-              (:title, :text, 0, 0, :user_id, :category_id, 'PENDING', NOW())";
+              (:text, 0, 0, :user_id, :category_id, 'PENDING', NOW())";
 
         $stmt = $this->db->prepare($query);
 
         return $stmt->execute([
-            ':title' => $title,
             ':text' => $text,
             ':user_id' => $userId,
             ':category_id' => $categoryId
@@ -303,7 +302,7 @@ class Database {
               SET numDislike = numDislike + 1 
               WHERE id = :spottedId";
 
-        $stmt = $this->pdo->prepare($query);
+        $stmt = $this->db->prepare($query);
         return $stmt->execute([
             ':spottedId' => $spottedId
         ]);
@@ -313,7 +312,7 @@ class Database {
         $query = "INSERT INTO comments (text, user_id, spotted_id, created_at)
               VALUES (:text, :user_id, :spotted_id, NOW())";
 
-        $stmt = $this->pdo->prepare($query);
+        $stmt = $this->db->prepare($query);
         return $stmt->execute([
             ':text' => $text,
             ':user_id' => $userId,
@@ -331,17 +330,17 @@ class Database {
     //Controllo utente admin
     public function checkAdmin($userId){
         $query = "SELECT (r.title = 'admin') AS isAdmin
-        FROM users u
-        JOIN roles r ON r.id = u.role_id
-        WHERE u.id = :userId
-        LIMIT 1";
+              FROM users u
+              JOIN roles r ON r.id = u.role_id
+              WHERE u.id = :userId
+              LIMIT 1";
         $stmt = $this->db->prepare($query);
-        $stmt->execute([
-            ':userId' => $userId
-        ]);
+        $stmt->execute([':userId' => $userId]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return !empty($result) && $result['isAdmin'] == 1;
     }
+
 
     //registrazione
     public function register($nome, $cognome, $email, $username, $hash){

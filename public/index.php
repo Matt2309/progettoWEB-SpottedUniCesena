@@ -19,8 +19,6 @@
 
 
     <link rel="stylesheet" href="theme.css">
-
-
 </head>
 
 <body class="bg-background">
@@ -69,6 +67,12 @@
                class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
                 <i class="bi bi-person" aria-hidden="true"></i>
                 <span>Profilo</span>
+            </a>
+
+            <a href="AdminPersonalArea.php"
+               class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 admin-area">
+                <i class="bi bi-list-check" aria-hidden="true"></i>
+                <span>Gestione post</span>
             </a>
 
             <hr>
@@ -139,6 +143,10 @@
             <small>Profilo</small>
         </a>
 
+        <a href="AdminPersonalArea.php" class="text-dark text-decoration-none admin-area">
+            <i class="bi bi-list-check"></i><br>
+            <small>Gestione post</small>
+        </a>
     </div>
 </nav>
 

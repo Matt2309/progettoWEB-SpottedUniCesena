@@ -132,15 +132,31 @@ window.Common = (function () {
                         <small class="text-muted">${timeAgo}</small>
                     </div>
                 </div>
-                <div id="categoryPlaceholder"></div>
+                <div class="d-flex gap-3 align-items-center">
+                    <div id="categoryPlaceholder"></div>
+                    ${post.status != null ?
+                        `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">
+                            ${post.status}
+                        </span>`
+                        :
+                    ''
+                    }
+                    
+                </div>
             </div>
 
             <p class="mt-3">${escapeHtml(post.text)}</p>
 
             <div class="d-flex justify-content-between text-muted">
-                <span>
-                    <i class="bi bi-hand-thumbs-up"></i> ${post.likes}
-                </span>
+                <div class="d-flex gap-2">
+                    <span role="button" class="like" spottedid=${post.id}>
+                        <i class="bi bi-hand-thumbs-up mr-2 text-primary"></i>
+                        <span class="like-count text-primary">${post.likes}</span>
+                    </span>
+                    <span role="button" class="dislike" spottedid=${post.id}>
+                        <i class="bi bi-hand-thumbs-down mr-2"></i>
+                    </span>
+                </div>
 
                 <button class="bg-transparent border-0 text-muted d-flex align-items-center gap-1"
                         data-bs-toggle="offcanvas"

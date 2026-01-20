@@ -16,6 +16,15 @@ async function getUserInfo() {
                 container.appendChild(loginButton());
             }
         }
+        if (!parseInt(userinfo.data.isAdmin)) {
+            for (doc of document.getElementsByClassName('admin-area')) {
+                doc.classList.add("d-none")
+            }
+        } else {
+            for (doc of document.getElementsByClassName('admin-area')) {
+                doc.classList.remove("d-none")
+            }
+        }
 
     } catch (e) {
         console.log(e)
@@ -35,22 +44,30 @@ function loginButton() {
 }
 
 function userInfo(user) {
-    const button = document.createElement("div");
-    button.className = "d-flex align-items-center gap-3";
-    button.innerHTML = `
-        <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-          style="width:50px;height:50px;">
-          <p class="h4 m-0">${user.user_name.charAt(0).toUpperCase()}<p/>
+    const container = document.createElement("div");
+    container.className = "d-flex flex-column gap-3";
+
+    container.innerHTML = `
+        <div class="d-flex align-items-center gap-3">
+            <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
+              style="width:50px;height:50px;">
+              <p class="h4 m-0">${user.user_name.charAt(0).toUpperCase()}</p>
+            </div>
+            <div>
+              <h5 class="mb-0 hind-bold">${user.user_name} ${user.surname}</h5>
+              ${
+        parseInt(user.isAdmin)
+            ? `<small class="text-muted">Admin</small>`
+            : `<small class="text-muted">@${user.username}</small>`
+    }
+            </div>
         </div>
-        <div>
-          <h5 class="mb-0 hind-bold">${user.user_name} ${user.surname}</h5>
-          ${
-            parseInt(user.isAdmin)
-                ? `<small class="text-muted">Admin</small>`
-                : `<small class="text-muted">@${user.username}</small>`
-          }
-        </div>
+
+        <a href="../api/auth/logout.php" class="btn btn-outline-danger w-100 btn-sm">
+            <i class="bi bi-box-arrow-right me-1" aria-hidden="true"></i>
+            Logout
+        </a>
     `;
 
-    return button;
+    return container;
 }
