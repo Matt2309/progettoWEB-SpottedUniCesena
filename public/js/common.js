@@ -135,12 +135,12 @@ window.Common = (function () {
                 <div class="d-flex gap-3 align-items-center">
                     <div id="categoryPlaceholder"></div>
                     ${post.status != null ?
-                        `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">
+                `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">
                             ${post.status}
                         </span>`
-                        :
-                    ''
-                    }
+                :
+                ''
+            }
                     
                 </div>
             </div>
@@ -167,13 +167,13 @@ window.Common = (function () {
             </div>
         </div>
 
-        <div class="offcanvas offcanvas-bottom"
-             tabindex="-1"
-             id="${offcanvasId}"
-             data-loaded="false">
+      <div class="offcanvas offcanvas-bottom border-top border-2 border-primary rounded-top-4"
+     tabindex="-1"
+     id="${offcanvasId}"
+     data-loaded="false">
 
             <div class="offcanvas-header justify-content-center">
-                <h6 class="text-danger fw-bold m-0">Commenti</h6>
+                <h6 class="text-primary fw-bold m-0">Commenti</h6>
             </div>
 
             <div class="offcanvas-body text-center">

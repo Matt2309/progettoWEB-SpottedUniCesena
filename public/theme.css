@@ -64,6 +64,16 @@
   --bs-btn-disabled-border-color: var(--bs-primary);
 }
 
+
+.profile-title-line {
+  width: 42px;
+  height: 3px;
+  background-color: var(--bs-primary);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+
 /* Text utilities mapped to brand color without changing HTML */
 .text-primary { color: var(--bs-primary) !important; }
 .border-primary { border-color: var(--bs-primary) !important; }
