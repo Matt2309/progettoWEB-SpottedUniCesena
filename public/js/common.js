@@ -217,6 +217,19 @@ window.Common = (function () {
         return card;
     }
 
+    function getStatusClass(status) {
+        switch (status) {
+            case "REJECTED":
+                return "bg-danger bg-opacity-25 text-danger";
+            case "PENDING":
+                return "bg-warning bg-opacity-25 text-warning";
+            case "APPROVED":
+                return "bg-success bg-opacity-25 text-success";
+            default:
+                return "bg-secondary bg-opacity-25 text-secondary";
+        }
+    }
+
     return {
         formatTime,
         escapeHtml,
@@ -226,6 +239,7 @@ window.Common = (function () {
         getCategories,
         createCategoryCard,
         loadCategories,
-        getIconColor
+        getIconColor,
+        getStatusClass
     };
 })();
