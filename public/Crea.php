@@ -24,7 +24,7 @@
             <i class="bi bi-x-lg"></i>
         </a>
 
-        <h5 class="text-primary fw-semibold m-0">Crea spotted:</h5>
+        <h1 class="text-primary fw-semibold m-0">Crea spotted:</h1>
 
         <button type="submit"
                 class="btn btn-primary btn-sm fw-semibold rounded-pill px-3 submit-btn">
@@ -38,7 +38,7 @@
 
             <!-- ========== SIDEBAR DESKTOP ========== -->
             <aside class="col-md-3 bg-white border-end p-4 d-none d-md-flex flex-column">
-                <h2 class="h4 fw-bold text-primary">
+                <h2 class="h2 fw-bold text-primary">
                     SpottedUniCesena
                 </h2>
 
@@ -81,9 +81,9 @@
 
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <h4 class="fw-bold mb-4 d-none d-md-block">
+                        <h3 class="fw-bold mb-4 d-none d-md-block">
                             Crea spotted:
-                        </h4>
+                        </h3>
 
                         <div class="card shadow-sm rounded-4">
                             <div class="card-body">
@@ -128,7 +128,7 @@
                     <aside class="col-md-4 d-none d-md-block">
                         <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
 
-                            <h5 class="fw-bold">Come funziona spotted?</h5>
+                            <h3 class="fw-bold">Come funziona spotted?</h3>
 
                             <ul class="mt-3">
                                 <li>Scrivi per spottare chiunque</li>

@@ -43,7 +43,7 @@
     <div class="row">
 
         <!-- BARRA LATERALE SINISTRA (DESKTOP) -->
-        <aside class="col-md-3 d-none d-md-flex flex-column bg-white border-end min-vh-100 p-4" role="complementary"
+        <aside class="col-md-3 d-none d-md-flex flex-column bg-white border-end min-vh-100 p-4"
                aria-labelledby="sidebar-title">
 
             <h2 id="sidebar-title" class="h4 fw-bold text-primary text-break">
@@ -89,7 +89,7 @@
         <div class="col-md-9">
             <div class="container py-5">
 
-                <h4 class="fw-bold mb-4">Ultimi spotted:</h4>
+                <h2 class="fw-bold mb-4">Ultimi spotted:</h2>
 
                 <div class="row align-items-start">
 
@@ -102,7 +102,7 @@
                     <aside class="col-md-4 d-none d-md-block">
                         <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
 
-                            <h5 class="fw-bold">Come funziona spotted?</h5>
+                            <h3 class="fw-bold">Come funziona spotted?</h3>
 
                             <ul class="mt-3">
                                 <li>Scrivi per spottare chiunque</li>
