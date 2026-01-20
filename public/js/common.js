@@ -29,11 +29,7 @@ window.Common = (function () {
     async function getCategories() {
         const response = await fetch("api/user/getCategories");
         const categories = await response.json();
-        if (!categories.data.length) {
-            return [];
-        }
-
-        return categories.data;
+        return categories.data.length ? categories.data : [];
     }
 
     function createCategoryCard(name, color) {
@@ -91,13 +87,68 @@ window.Common = (function () {
         return container;
     }
 
+    async function validateAndSubmitComment(e) {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        const submitButtons = form.querySelectorAll(".submit-comment-btn");
+
+        // reset errors
+        form.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+        const fields = ["spottedId", "text"];
+        let formFields = {};
+        let hasError = false;
+
+        for (const name of fields) {
+            const input = form.querySelector(`[name="${name}"]`);
+            const value = input?.value?.trim();
+
+            if (!value && name === "text") { // Only text is user-facing required
+                // FIXED: Added '.' to select by class
+                form.querySelector(`.text-error`).textContent = "Testo obbligatorio";
+                hasError = true;
+            } else {
+                formFields[name] = value;
+            }
+        }
+
+        if (hasError) return;
+
+        submitButtons.forEach(btn => {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Invio...`;
+        });
+
+        try {
+            const response = await fetch("/api/user/createComment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formFields)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Errore server");
+            }
+
+            // Reload page on success
+            window.location.href = "index.php";
+        } catch (err) {
+            alert(err.message || "Errore server");
+            submitButtons.forEach(btn => {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="bi bi-send"></i>`;
+            });
+        }
+    }
+
     async function loadCategories() {
         try {
             const categories = await Common.getCategories();
-
             const container = document.getElementById("categories");
             container.innerHTML = "";
-
             for (let i = 0; i < categories.length; i++) {
                 const color = getIconColor(i);
                 container.appendChild(await Common.createCategoryCard(categories[i].name, color));
@@ -115,6 +166,9 @@ window.Common = (function () {
         card.className = "card rounded-4 shadow-sm mb-4";
 
         const offcanvasId = `commentsDrawer-${post.id}`;
+        // FIXED: Unique form ID
+        const formId = `commentForm-${post.id}`;
+
         const initial = post.user.username.charAt(0).toUpperCase();
         const timeAgo = formatTime(Date.parse(post.createdAt));
         const categoryColor = getIconColor(post.category.id - 1);
@@ -135,13 +189,8 @@ window.Common = (function () {
                 <div class="d-flex gap-3 align-items-center">
                     <div id="categoryPlaceholder"></div>
                     ${post.status != null ?
-                `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">
-                            ${post.status}
-                        </span>`
-                :
-                ''
-            }
-                    
+            `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">${post.status}</span>`
+            : ''}
                 </div>
             </div>
 
@@ -180,16 +229,21 @@ window.Common = (function () {
                 <div class="spinner-border text-secondary" role="status"></div>
             </div>
 
-            <div class="border-top p-3 bg-white">
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control rounded-pill bg-light border-0"
-                           placeholder="Aggiungi un commento...">
-                    <button class="btn btn-light rounded-pill ms-2">
-                        <i class="bi bi-send"></i>
-                    </button>
+            <form id="${formId}">
+                <div class="border-top p-3 bg-white">
+                    <div class="input-group">
+                        <input type="text" name="text"
+                               class="form-control rounded-pill bg-light border-0"
+                               placeholder="Aggiungi un commento...">
+                        <input type="hidden" name="spottedId" value="${post.id}">
+                        
+                        <button class="submit-comment-btn btn btn-light rounded-pill ms-2">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                    <p class="error text-danger mt-2 mb-0 text-error"></p>
                 </div>
-            </div>
+            </form>
         </div>
     `;
 
@@ -197,6 +251,10 @@ window.Common = (function () {
         categoryPlaceholder.replaceWith(createCategoryCard(post.category.name, categoryColor));
 
         const offcanvas = card.querySelector(`#${offcanvasId}`);
+        const form = card.querySelector(`#${formId}`);
+
+        // FIXED: Attach listener immediately for this specific form
+        form.addEventListener("submit", validateAndSubmitComment);
 
         offcanvas.addEventListener("show.bs.offcanvas", async () => {
             if (offcanvas.dataset.loaded === "true") return;
@@ -217,6 +275,15 @@ window.Common = (function () {
         return card;
     }
 
+    function getStatusClass(status) {
+        switch (status) {
+            case "REJECTED": return "bg-danger bg-opacity-25 text-danger";
+            case "PENDING": return "bg-warning bg-opacity-25 text-warning";
+            case "APPROVED": return "bg-success bg-opacity-25 text-success";
+            default: return "bg-secondary bg-opacity-25 text-secondary";
+        }
+    }
+
     return {
         formatTime,
         escapeHtml,
@@ -226,6 +293,8 @@ window.Common = (function () {
         getCategories,
         createCategoryCard,
         loadCategories,
-        getIconColor
+        getIconColor,
+        getStatusClass,
+        validateAndSubmitComment
     };
 })();

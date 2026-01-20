@@ -48,6 +48,12 @@ class UserController {
             return;
         }
 
+        //GET /api/user/getAllSpotted
+        if ($resource === 'user' && $subroute === 'getAllSpotted') {
+            $this->getSpotteds();
+            return;
+        }
+
         //GET /api/user/getUsers
         if ($resource === 'user' && $subroute === 'getUsers'){
             $this->usersList();
@@ -81,33 +87,49 @@ class UserController {
 
         //GET /api/user/userBan
         if ($resource === 'user' && $subroute === 'userBan') {
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
             if (!$db->checkAdmin($userId)) {
                 Response::json(['error' => 'Unauthorized'], 401);
                 return;
             }
-            if ($userId === '') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $userToBan = $data['userId'] ?? '';
+            if ($userToBan === '') {
                 Response::json([
                     'status' => 'error',
                     'message' => "Missing required 'userId' parameter"
                 ], 400);
+                return;
             }
-            $this->banUser($userId);
+            $this->banUser($userToBan);
+            Response::json(['status' => 'ok'], 200);
             return;
         }
 
         //GET /api/user/userSban
         if ($resource === 'user' && $subroute === 'userSban') {
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                Response::json(['error' => 'Method Not Allowed'], 405);
+                return;
+            }
             if (!$db->checkAdmin($userId)) {
                 Response::json(['error' => 'Unauthorized'], 401);
                 return;
             }
-            if ($userId === '') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $userToBan = $data['userId'] ?? '';
+            if ($userToBan === '') {
                 Response::json([
                     'status' => 'error',
                     'message' => "Missing required 'userId' parameter"
                 ], 400);
+                return;
             }
-            $this->sbanUser($userId);
+            $this->sbanUser($userToBan);
+            Response::json(['status' => 'ok'], 200);
             return;
         }
 
@@ -179,6 +201,14 @@ class UserController {
                     'status' => 'error',
                     'message' => 'Missing required parameters'
                 ], 400);
+                return;
+            }
+
+            if ($user["isBanned"]) {
+                Response::json([
+                    'status' => 'error',
+                    'message' => 'Non puoi postare in quanto sei stato bannato'
+                ], 401);
                 return;
             }
 
@@ -377,6 +407,46 @@ class UserController {
                     'username' => $row['username'],
                     'name' => $row['user_name'],
                     'surname' => $row['surname']
+                ]
+            ], $rows);
+
+            Response::json([
+                'status' => 'success',
+                'data' => $spotted
+            ]);
+        } catch (Throwable $e) {
+            Response::json([
+                'status' => 'error',
+                'message' => 'Failed to fetch spotted',
+                'detail' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    private function getSpotteds(): void {
+        try {
+            $db = Database::getInstance();
+            $rows = $db->getSpotteds();
+
+            $spotted = array_map(fn($row) => [
+                'id' => (int) $row['spotted_id'],
+                'title' => $row['spotted_title'],
+                'text' => $row['spotted_text'],
+                'likes' => (int) $row['numLike'],
+                'dislikes' => (int) $row['numDislike'],
+                'status' => $row['status'],
+                'createdAt' => $row['spotted_created_at'],
+                'commentsCount' => (int) ($row['comments_count'] ?? 0),
+                'category' => [
+                    'id' => (int) $row['category_id'],
+                    'name' => $row['category_name']
+                ],
+                'user' => [
+                    'id' => (int) $row['user_id'],
+                    'username' => $row['username'],
+                    'name' => $row['user_name'],
+                    'surname' => $row['surname'],
+                    'isBanned' => $row['isBanned']
                 ]
             ], $rows);
 
