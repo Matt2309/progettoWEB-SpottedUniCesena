@@ -16,7 +16,7 @@
 
 <body class="bg-white">
 
-<!-- ================= MOBILE (TUO CODICE, INALTERATO) ================= -->
+<!-- ================= MOBILE================= -->
 
 <div class="d-md-none">
 
@@ -47,9 +47,14 @@
       </small>
     </div>
 
-    <p class="text-center text-muted fw-semibold">
-      Spotted pubblicati
-    </p>
+  <p class="text-center text-muted fw-semibold mb-1">
+  Spotted pubblicati
+</p>
+
+<hr class="d-block d-md-none mt-0 mb-2 border-2 border-secondary opacity-50">
+
+
+
 
     <!-- POST -->
       <main class="col-md-8">
@@ -82,7 +87,7 @@
 
 </div>
 
-<!-- ================= DESKTOP (AGGIUNTO) ================= -->
+<!-- ================= DESKTOP ================= -->
 
 <div class="container-fluid d-none d-md-block">
   <div class="row min-vh-100">

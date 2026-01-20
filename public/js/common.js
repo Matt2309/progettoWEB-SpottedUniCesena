@@ -1,6 +1,10 @@
 window.Common = (function () {
     const ICON_COLORS = [
-        "blue", "indigo", "pink", "red", "orange",
+        "blue",
+        "indigo",
+        "pink",
+        "red",
+        "orange",
     ];
 
     function getIconColor(index) {
@@ -9,6 +13,7 @@ window.Common = (function () {
 
     function formatTime(dateInput) {
         const diff = (Date.now() - new Date(dateInput)) / 1000;
+
         if (diff < 60) return "ora";
         if (diff < 3600) return `${Math.floor(diff / 60)} min fa`;
         if (diff < 86400) return `${Math.floor(diff / 3600)} ore fa`;
@@ -29,8 +34,12 @@ window.Common = (function () {
 
     function createCategoryCard(name, color) {
         const card = document.createElement("span");
+
         card.className = `badge bg-${color}-300 text-${color}-800`;
-        card.innerHTML = `${name}`;
+        card.innerHTML = `
+            ${name}
+        `;
+
         return card;
     }
 
@@ -40,6 +49,7 @@ window.Common = (function () {
         const initial = comment.user.username.charAt(0).toUpperCase();
 
         card.className = "d-flex gap-2 mb-3";
+
         card.innerHTML = `
         <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
           style="width:35px;height:35px;">
@@ -50,15 +60,19 @@ window.Common = (function () {
                 <strong>@${comment.user.username}</strong>
                 <small class="text-muted ms-2">${timeAgo}</small>
             </div>
-          <p class="mb-0">${comment.text}</p>
+          <p class="mb-0">
+            ${comment.text}
+          </p>
         </div>
     `;
+
         return card;
     }
 
     async function getCommentsSpotted(id) {
         const response = await fetch("api/user/getCommentSpotted?spottedId=" + id);
         const comments = await response.json();
+
         const container = document.createElement("div");
 
         if (!comments.data.length) {
@@ -66,7 +80,6 @@ window.Common = (function () {
             return container;
         }
 
-        // FIXED: Only append cards here. Do NOT attach event listeners here.
         comments.data.forEach(comment => {
             container.appendChild(createCommentCard(comment));
         });
@@ -140,9 +153,11 @@ window.Common = (function () {
                 const color = getIconColor(i);
                 container.appendChild(await Common.createCategoryCard(categories[i].name, color));
             }
+
         } catch (e) {
             console.log(e)
-            document.getElementById("spottedList").innerHTML = "<p class='text-muted'>Errore nel caricamento</p>";
+            document.getElementById("spottedList").innerHTML =
+                "<p class='text-muted'>Errore nel caricamento</p>";
         }
     }
 
@@ -201,9 +216,13 @@ window.Common = (function () {
             </div>
         </div>
 
-        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="${offcanvasId}" data-loaded="false">
+      <div class="offcanvas offcanvas-bottom border-top border-2 border-primary rounded-top-4"
+     tabindex="-1"
+     id="${offcanvasId}"
+     data-loaded="false">
+
             <div class="offcanvas-header justify-content-center">
-                <h6 class="text-danger fw-bold m-0">Commenti</h6>
+                <h6 class="text-primary fw-bold m-0">Commenti</h6>
             </div>
 
             <div class="offcanvas-body text-center">
@@ -248,7 +267,8 @@ window.Common = (function () {
                 body.appendChild(comments);
                 offcanvas.dataset.loaded = "true";
             } catch {
-                body.innerHTML = "<p class='text-danger text-center'>Errore nel caricamento</p>";
+                body.innerHTML =
+                    "<p class='text-danger text-center'>Errore nel caricamento</p>";
             }
         });
 
