@@ -78,6 +78,7 @@
 
             <!-- ========== MAIN CONTENT ========== -->
             <main class="col-md-9 bg-background py-4 py-md-5">
+                <div class="container">
 
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -143,7 +144,7 @@
                         </div>
                     </aside>
                 </div>
-
+                </div>
             </main>
         </div>
     </div>
