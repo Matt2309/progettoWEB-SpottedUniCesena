@@ -77,15 +77,11 @@
             </aside>
 
             <!-- ========== MAIN CONTENT ========== -->
-            <main class="col-md-9 bg-background py-5 py-md-5">
-                <div class="main-wrapper mx-auto d-f">
-
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <h3 class="fw-bold mb-4 d-none d-md-block">
-                                Crea spotted:
-                            </h3>
-
+            <div class="col-md-9 bg-background">
+                    <div class="container py-5">
+                        <h2 class="fw-bold mb-4">Crea spotted:</h2>
+                        <div class="row align-items-start">
+                        <main class="col-md-8">
                             <div class="card shadow-sm rounded-4">
                                 <div class="card-body">
                                     <!-- CATEGORY -->
@@ -125,7 +121,7 @@
 
                             </div>
 
-                        </div>
+                        </main>
                         <aside class="col-md-3 d-none d-md-block pe-md-4">
                             <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
 
@@ -143,9 +139,9 @@
 
                             </div>
                         </aside>
+                        </div>
                     </div>
-                </div>
-            </main>
+            </div>
         </div>
     </div>
 

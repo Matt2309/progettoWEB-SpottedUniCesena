@@ -16,7 +16,7 @@ async function getUserInfo() {
                 container.appendChild(loginButton());
             }
         }
-        if (!parseInt(userinfo.data.isAdmin)) {
+        if (!parseInt(userinfo.data.isAdmin) || !userinfo.data) {
             for (doc of document.getElementsByClassName('admin-area')) {
                 doc.classList.add("d-none")
             }
@@ -27,6 +27,9 @@ async function getUserInfo() {
         }
 
     } catch (e) {
+        for (doc of document.getElementsByClassName('admin-area')) {
+            doc.classList.add("d-none")
+        }
         console.log(e)
     }
 }
