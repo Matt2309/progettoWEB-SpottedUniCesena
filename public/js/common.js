@@ -48,7 +48,7 @@ window.Common = (function () {
         const timeAgo = formatTime(Date.parse(comment.created_at));
         const initial = comment.user.username.charAt(0).toUpperCase();
 
-        card.className = "d-flex gap-2 mb-3";
+        card.className = "d-flex gap-2";
 
         card.innerHTML = `
         <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
@@ -224,11 +224,13 @@ window.Common = (function () {
             <div class="offcanvas-header justify-content-center">
                 <h6 class="text-primary fw-bold m-0">Commenti</h6>
             </div>
-
-            <div class="offcanvas-body text-center">
-                <div class="spinner-border text-secondary" role="status"></div>
+    
+            <div class="offcanvas-body d-flex flex-column gap-3">
+                <div class="text-center w-100 mt-5">
+                    <div class="spinner-border text-secondary" role="status"></div>
+                </div>
             </div>
-
+    
             <form id="${formId}">
                 <div class="border-top p-3 bg-white">
                     <div class="input-group">

@@ -182,3 +182,31 @@ a.text-primary:focus,
 .border-pink-800 { border-color: var(--bs-pink-800) !important; }
 .border-red-800 { border-color: var(--bs-red-800) !important; }
 .border-orange-800 { border-color: var(--bs-orange-800) !important; }
+
+/* Custom Underline Tabs */
+.nav-tabs-custom {
+    border-bottom: 2px solid #ccd2d6; /* The continuous gray line */
+}
+
+.nav-tabs-custom .nav-link {
+    border: none; /* Remove default box borders */
+    margin-bottom: -2px; /* Pull active border down to overlap the gray line */
+    background: transparent;
+    color: #6c757d; /* Gray text for inactive tabs */
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent; /* Invisible border for spacing */
+    transition: color 0.2s ease;
+}
+
+.nav-tabs-custom .nav-link:hover {
+    border-color: transparent; /* Prevent hover border boxes */
+    color: #000;
+}
+
+.nav-tabs-custom .nav-link.active {
+    background: transparent;
+    color: var(--bs-primary); /* Red text (Spotted color) */
+    border-bottom: 2px solid var(--bs-primary);
+    font-weight: 700;
+}

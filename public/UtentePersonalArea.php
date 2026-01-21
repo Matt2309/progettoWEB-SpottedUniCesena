@@ -138,17 +138,50 @@
               <div class="row align-items-start">
 
                   <div class="col-md-8">
-                      <ul class="nav nav-tabs mb-4">
-                          <li class="nav-item">
-                              <button class="nav-link active text-primary fw-semibold" id="spotted">Spotted</button>
+                      <ul class="nav nav-tabs nav-tabs-custom mb-4" id="myTab" role="tablist">
+                          <li class="nav-item" role="presentation">
+                              <button class="nav-link active"
+                                      id="spotted"
+                                      data-bs-toggle="tab"
+                                      data-bs-target="#spotted-pane"
+                                      type="button"
+                                      role="tab"
+                                      aria-selected="true">
+                                  Spotted
+                              </button>
                           </li>
-                          <li class="nav-item">
-                              <button class="nav-link text-muted" id="comments">Commenti</button>
+                          <li class="nav-item" role="presentation">
+                              <button class="nav-link"
+                                      id="comments"
+                                      data-bs-toggle="tab"
+                                      data-bs-target="#comments-pane"
+                                      type="button"
+                                      role="tab"
+                                      aria-selected="false">
+                                  Commenti
+                              </button>
                           </li>
-                          <li class="nav-item">
-                              <button class="nav-link text-muted" id="likes">Like</button>
+                          <li class="nav-item" role="presentation">
+                              <button class="nav-link"
+                                      id="likes"
+                                      data-bs-toggle="tab"
+                                      data-bs-target="#likes-pane"
+                                      type="button"
+                                      role="tab"
+                                      aria-selected="false">
+                                  Like
+                              </button>
                           </li>
                       </ul>
+
+                      <div class="tab-content">
+                          <div class="tab-pane fade show active" id="spotted-pane" role="tabpanel">
+                          </div>
+                          <div class="tab-pane fade" id="comments-pane" role="tabpanel">
+                          </div>
+                          <div class="tab-pane fade" id="likes-pane" role="tabpanel">
+                          </div>
+                      </div>
 
                       <main>
                           <div class="userList"></div>

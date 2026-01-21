@@ -71,7 +71,7 @@ async function loadUserComments() {
 
 function commentWrapper(child) {
     const card = document.createElement("div");
-    card.className = "card rounded-4 shadow-sm";
+    card.className = "card rounded-4 shadow-sm mb-4";
 
     const cardbody = document.createElement("div");
     cardbody.className = "card-body";
