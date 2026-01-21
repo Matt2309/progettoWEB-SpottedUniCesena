@@ -34,10 +34,10 @@
 
     <!-- ================= LAYOUT ================= -->
     <div class="container-fluid">
-        <div class="row min-vh-100">
+        <div class="row">
 
             <!-- ========== SIDEBAR DESKTOP ========== -->
-            <aside class="col-md-3 bg-white border-end p-4 d-none d-md-flex flex-column">
+            <aside class="col-md-3 bg-white border-end min-vh-100 p-4">
                 <h2 class="h2 fw-bold text-primary">
                     SpottedUniCesena
                 </h2>
@@ -77,73 +77,73 @@
             </aside>
 
             <!-- ========== MAIN CONTENT ========== -->
-            <main class="col-md-9 bg-background py-4 py-md-5">
-                <div class="container">
+            <main class="col-md-9 bg-background py-5 py-md-5">
+                <div class="main-wrapper mx-auto d-f">
 
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <h3 class="fw-bold mb-4 d-none d-md-block">
-                            Crea spotted:
-                        </h3>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <h3 class="fw-bold mb-4 d-none d-md-block">
+                                Crea spotted:
+                            </h3>
 
-                        <div class="card shadow-sm rounded-4">
-                            <div class="card-body">
-                                <!-- CATEGORY -->
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div class="user-area">
+                            <div class="card shadow-sm rounded-4">
+                                <div class="card-body">
+                                    <!-- CATEGORY -->
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="user-area">
+                                        </div>
+
+                                        <label for="category" class="visually-hidden">Categoria</label>
+                                        <select id="category"
+                                                name="category_id"
+                                                class="form-select form-select-sm w-auto category-select"
+                                                required>
+                                            <option value="" disabled selected>Categoria</option>
+                                        </select>
+                                    </div>
+                                    <p class="error text-danger mb-3 category-error"></p>
+
+                                    <!-- TEXT -->
+                                    <label for="text" class="visually-hidden">Testo spotted</label>
+                                    <textarea id="text"
+                                              name="text"
+                                              class="form-control fs-5"
+                                              rows="6"
+                                              placeholder="Chi o che cosa vuoi spottare?"
+                                              required></textarea>
+                                    <p class="error text-danger mb-3 text-error"></p>
+
+                                    <!-- DESKTOP SUBMIT -->
+                                    <div class="text-end mt-3 d-none d-md-block">
+                                        <button type="submit"
+                                                class="btn btn-primary rounded-pill px-4 fw-semibold submit-btn">
+                                            Posta
+                                        </button>
                                     </div>
 
-                                    <label for="category" class="visually-hidden">Categoria</label>
-                                    <select id="category"
-                                            name="category_id"
-                                            class="form-select form-select-sm w-auto category-select"
-                                            required>
-                                        <option value="" disabled selected>Categoria</option>
-                                    </select>
-                                </div>
-                                <p class="error text-danger mb-3 category-error"></p>
-
-                                <!-- TEXT -->
-                                <label for="text" class="visually-hidden">Testo spotted</label>
-                                <textarea id="text"
-                                          name="text"
-                                          class="form-control fs-5"
-                                          rows="6"
-                                          placeholder="Chi o che cosa vuoi spottare?"
-                                          required></textarea>
-                                <p class="error text-danger mb-3 text-error"></p>
-
-                                <!-- DESKTOP SUBMIT -->
-                                <div class="text-end mt-3 d-none d-md-block">
-                                    <button type="submit"
-                                            class="btn btn-primary rounded-pill px-4 fw-semibold submit-btn">
-                                        Posta
-                                    </button>
                                 </div>
 
                             </div>
 
                         </div>
+                        <aside class="col-md-3 d-none d-md-block pe-md-4">
+                            <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
 
+                                <h3 class="fw-bold">Come funziona spotted?</h3>
+
+                                <ul class="mt-3">
+                                    <li>Scrivi per spottare chiunque</li>
+                                    <li>I messaggi restano anonimi</li>
+                                    <li>Mantieni il rispetto</li>
+                                    <li>Evita dati personali</li>
+                                    <li>Scegli la categoria giusta</li>
+                                </ul>
+
+                                <div class="mt-2 d-flex flex-wrap gap-2" id="categories"></div>
+
+                            </div>
+                        </aside>
                     </div>
-                    <aside class="col-md-4 d-none d-md-block">
-                        <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
-
-                            <h3 class="fw-bold">Come funziona spotted?</h3>
-
-                            <ul class="mt-3">
-                                <li>Scrivi per spottare chiunque</li>
-                                <li>I messaggi restano anonimi</li>
-                                <li>Mantieni il rispetto</li>
-                                <li>Evita dati personali</li>
-                                <li>Scegli la categoria giusta</li>
-                            </ul>
-
-                            <div class="mt-2 d-flex flex-wrap gap-2" id="categories"></div>
-
-                        </div>
-                    </aside>
-                </div>
                 </div>
             </main>
         </div>
