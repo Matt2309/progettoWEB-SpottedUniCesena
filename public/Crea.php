@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crea Spotted</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Theme -->
     <link rel="stylesheet" href="theme.css">
 </head>
 
@@ -18,7 +16,6 @@
 
 <form id="spottedForm" method="POST">
 
-    <!-- ================= MOBILE TOP BAR ================= -->
     <div class="d-flex d-md-none justify-content-between align-items-center p-3 border-bottom bg-white">
         <a href="index.php" class="text-dark fs-4 text-decoration-none">
             <i class="bi bi-x-lg"></i>
@@ -32,12 +29,10 @@
         </button>
     </div>
 
-    <!-- ================= LAYOUT ================= -->
     <div class="container-fluid">
         <div class="row min-vh-100">
 
-            <!-- ========== SIDEBAR DESKTOP ========== -->
-            <aside class="col-md-3 bg-white border-end p-4 d-flex flex-column" role="complementary" aria-labelledby="sidebar-title">
+            <aside class="col-md-3 bg-white border-end p-4 d-none d-md-flex flex-column" role="complementary" aria-labelledby="sidebar-title">
                 <h2 class="h4 fw-bold text-primary text-break">
                     SpottedUniCesena
                 </h2>
@@ -76,15 +71,14 @@
                 </div>
             </aside>
 
-            <!-- ========== MAIN CONTENT ========== -->
             <div class="col-md-9 bg-background">
-                    <div class="container py-5">
-                        <h2 class="fw-bold mb-4">Crea spotted:</h2>
-                        <div class="row align-items-start">
+                <div class="container py-5">
+                    <h2 class="fw-bold mb-4 d-none d-md-block">Crea spotted:</h2>
+
+                    <div class="row align-items-start">
                         <main class="col-md-8">
                             <div class="card shadow-sm rounded-4">
                                 <div class="card-body">
-                                    <!-- CATEGORY -->
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <div class="user-area">
                                         </div>
@@ -99,7 +93,6 @@
                                     </div>
                                     <p class="error text-danger mb-3 category-error"></p>
 
-                                    <!-- TEXT -->
                                     <label for="text" class="visually-hidden">Testo spotted</label>
                                     <textarea id="text"
                                               name="text"
@@ -109,7 +102,6 @@
                                               required></textarea>
                                     <p class="error text-danger mb-3 text-error"></p>
 
-                                    <!-- DESKTOP SUBMIT -->
                                     <div class="text-end mt-3 d-none d-md-block">
                                         <button type="submit"
                                                 class="btn btn-primary rounded-pill px-4 fw-semibold submit-btn">
@@ -122,7 +114,8 @@
                             </div>
 
                         </main>
-                        <aside class="col-md-4 d-md-block">
+
+                        <aside class="col-md-4 d-none d-md-block">
                             <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
 
                                 <h3 class="fw-bold">Come funziona spotted?</h3>
@@ -139,15 +132,14 @@
 
                             </div>
                         </aside>
-                        </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
 
 </form>
 
-<!-- ================= SCRIPTS ================= -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/common.js"></script>
 <script src="js/user.js"></script>
