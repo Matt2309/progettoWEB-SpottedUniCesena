@@ -146,34 +146,32 @@ async function createAcceptCard(post) {
     const disabledAttr = isBanned ? 'disabled' : '';
     const banText = isBanned ? 'Rimuovi ban' : 'Banna utente';
 
-    // Optional: Switch button class/color (Red for Ban, Dark/Green for Unban)
-    // I updated the class to 'unban' when applicable so you can attach a different event listener
     const banClass = isBanned ? 'unban text-dark' : 'ban text-danger';
     const banIcon = isBanned ? 'bi-person-check' : 'bi-slash-circle';
 
     card.innerHTML = `
     <div class="card-body">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+        <div class="d-flex justify-content-between align-items-center">
             
-            <div class="d-flex align-items-center gap-2 mb-2 mb-md-0">
+            <div class="d-flex align-items-center gap-2">
                 <div class="rounded-circle bg-primary text-white fw-bold d-flex justify-content-center align-items-center"
-                     style="width:35px;height:35px;">
+                     style="width:35px;height:35px; min-width:35px;">
                     ${initial}
                 </div>
-                <div>
+                <div class="lh-1">
                     <strong>@${post.user.username}</strong><br>
                     <small class="text-muted">${timeAgo}</small>
                 </div>
             </div>
 
-            <div class="d-flex gap-3 align-items-center">
+            <div class="d-flex gap-2 align-items-center justify-content-end text-end">
                 <div id="categoryPlaceholder"></div>
                 ${post.status != null ?
-                `<span class="px-2 rounded fw-semibold ${Common.getStatusClass(post.status)}">
+        `<span class="px-2 rounded fw-semibold ${Common.getStatusClass(post.status)}">
                                 ${post.status}
                             </span>`
-                : ''
-            }
+        : ''
+    }
             </div>
         </div>
 
