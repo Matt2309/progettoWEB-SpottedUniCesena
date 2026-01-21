@@ -134,9 +134,7 @@ class Database {
     ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->execute([
-            ':status' => 'APPROVED'
-        ]);
+        $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
