@@ -15,7 +15,7 @@
         @media (min-width: 768px) {
             .desktop-card-style {
                 border: var(--bs-card-border-width) solid var(--bs-card-border-color) !important;
-                border-radius: var(--bs-card-border-radius) !important;
+                border-radius: 1rem !important;
             }
         }
     </style>
@@ -83,7 +83,7 @@
 
                     <div class="row align-items-start m-0 m-md-n2"> <main class="col-md-8 px-0 px-md-2">
 
-                            <div class="card responsive-card w-100 border-0 rounded-0 desktop-card-style">
+                            <div class="card responsive-card w-100 border-0 rounded-0 shadow-sm desktop-card-style">
                                 <div class="card-body p-3 p-md-4">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <div class="user-area"></div>
@@ -91,7 +91,7 @@
                                         <label for="category" class="visually-hidden">Categoria</label>
                                         <select id="category"
                                                 name="category_id"
-                                                class="form-select form-select-sm w-auto category-select border-0 bg-light"
+                                                class="form-select form-select-sm w-auto category-select border-primary rounded-3"
                                                 required>
                                             <option value="" disabled selected>Categoria</option>
                                         </select>
