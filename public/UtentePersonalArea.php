@@ -129,32 +129,53 @@
         </a>
       </div>
     </aside>
+      <!-- POST + FUNZIONAMENTO -->
+      <div class="col-md-9 bg-background">
+          <div class="container py-5">
 
-    <!-- MAIN -->
-    <main class="col-md-9 bg-background py-5 px-5">
+              <h2 class="fw-bold mb-4">Il mio profilo:</h2>
 
-      <h4 class="fw-bold mb-2">Il mio profilo:</h4>
+              <div class="row align-items-start">
 
-      <!-- TABS -->
-      <ul class="nav nav-tabs mb-4">
-        <li class="nav-item">
-          <button class="nav-link active text-primary fw-semibold" id="spotted">Spotted</button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link text-muted" id="comments">Commenti</button>
-        </li>
-        <li class="nav-item">
-          <button class="nav-link text-muted" id="likes">Like</button>
-        </li>
-      </ul>
+                  <div class="col-md-8">
+                      <ul class="nav nav-tabs mb-4">
+                          <li class="nav-item">
+                              <button class="nav-link active text-primary fw-semibold" id="spotted">Spotted</button>
+                          </li>
+                          <li class="nav-item">
+                              <button class="nav-link text-muted" id="comments">Commenti</button>
+                          </li>
+                          <li class="nav-item">
+                              <button class="nav-link text-muted" id="likes">Like</button>
+                          </li>
+                      </ul>
 
-      <!-- POST DESKTOP -->
-        <main class="col-md-8">
-            <div class="userList"></div>
-        </main>
+                      <main>
+                          <div class="userList"></div>
+                      </main>
+                  </div>
 
-    </main>
+                  <aside class="col-md-4 d-md-block">
+                      <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
 
+                          <h3 class="fw-bold">Come funziona spotted?</h3>
+
+                          <ul class="mt-3">
+                              <li>Scrivi per spottare chiunque</li>
+                              <li>I messaggi restano anonimi</li>
+                              <li>Mantieni il rispetto</li>
+                              <li>Evita dati personali</li>
+                              <li>Scegli la categoria giusta</li>
+                          </ul>
+
+                          <div class="mt-2 d-flex flex-wrap gap-2" id="categories"></div>
+
+                      </div>
+                  </aside>
+
+              </div>
+          </div>
+      </div>
   </div>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

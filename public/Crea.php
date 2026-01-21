@@ -34,11 +34,11 @@
 
     <!-- ================= LAYOUT ================= -->
     <div class="container-fluid">
-        <div class="row">
+        <div class="row min-vh-100">
 
             <!-- ========== SIDEBAR DESKTOP ========== -->
-            <aside class="col-md-3 bg-white border-end min-vh-100 p-4">
-                <h2 class="h2 fw-bold text-primary">
+            <aside class="col-md-3 bg-white border-end p-4 d-flex flex-column" role="complementary" aria-labelledby="sidebar-title">
+                <h2 class="h4 fw-bold text-primary text-break">
                     SpottedUniCesena
                 </h2>
 
@@ -122,7 +122,7 @@
                             </div>
 
                         </main>
-                        <aside class="col-md-3 d-none d-md-block pe-md-4">
+                        <aside class="col-md-4 d-md-block">
                             <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
 
                                 <h3 class="fw-bold">Come funziona spotted?</h3>

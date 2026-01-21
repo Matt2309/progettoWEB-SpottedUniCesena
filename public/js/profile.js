@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     loadUserSpotted();
+    Common.loadCategories();
 });
 
 document.getElementById('spotted').addEventListener("click", function (e) {
