@@ -33,7 +33,7 @@
         </h1>
 
         <a href="Login.html" class="btn btn-primary btn-sm">
-            <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
+            <span class="bi bi-box-arrow-in-right" aria-hidden="true"></span>
             <span class="visually-hidden">Login</span>
         </a>
     </div>
@@ -46,7 +46,7 @@
         <aside class="col-md-3 d-none d-md-flex flex-column bg-white border-end min-vh-100 p-4" role="complementary"
                aria-labelledby="sidebar-title">
 
-            <h2 id="sidebar-title" class="h4 fw-bold text-primary text-break">
+            <h2 id="sidebar-title" class="h2 fw-bold text-primary text-break">
                 SpottedUniCesena
             </h2>
 
@@ -54,31 +54,31 @@
 
             <a href="index.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2"
                aria-current="page">
-                <i class="bi bi-house" aria-hidden="true"></i>
+                <span class="bi bi-house" aria-hidden="true"></span>
                 <span>Home</span>
             </a>
 
             <a href="Crea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
-                <i class="bi bi-plus-square" aria-hidden="true"></i>
+                <span class="bi bi-plus-square" aria-hidden="true"></span>
                 <span>Crea</span>
             </a>
 
             <a href="UtentePersonalArea.php"
                class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
-                <i class="bi bi-person" aria-hidden="true"></i>
+                <span class="bi bi-person" aria-hidden="true"></span>
                 <span>Profilo</span>
             </a>
 
             <a href="#"
                class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 admin-area fw-bold">
-                <i class="bi bi-list-check" aria-hidden="true"></i>
+                <span class="bi bi-list-check" aria-hidden="true"></span>
                 <span>Gestione post</span>
             </a>
 
             <hr>
             <div class="mb-3 user-area">
                 <a href="Login.html" class="btn btn-primary w-100 mt-3">
-                    <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
+                    <span class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></span>
                     Login
                 </a>
             </div>
@@ -89,7 +89,7 @@
         <div class="col-md-9">
             <div class="container py-5">
 
-                <h4 class="fw-bold mb-4">Approvazione spotted:</h4>
+                <h3 class="fw-bold mb-4">Approvazione spotted:</h3>
 
                 <div class="row align-items-start">
 
@@ -110,22 +110,22 @@
     <div class="container d-flex justify-content-around text-center">
 
         <a href="index.php" class="text-dark text-decoration-none">
-            <i class="bi bi-house fs-4"></i><br>
+            <span class="bi bi-house fs-4"></span><br>
             <small>Home</small>
         </a>
 
         <a href="Crea.php" class="text-dark text-decoration-none">
-            <i class="bi bi-plus-square fs-4"></i><br>
+            <span class="bi bi-plus-square fs-4"></span><br>
             <small>Crea</small>
         </a>
 
         <a href="UtentePersonalArea.php" class="text-dark text-decoration-none">
-            <i class="bi bi-person fs-4"></i><br>
+            <span class="bi bi-person fs-4"></span><br>
             <small>Profilo</small>
         </a>
 
         <a href="#" class="text-dark text-decoration-none admin-area">
-            <i class="bi bi-list-check"></i><br>
+            <span class="bi bi-list-check"></span><br>
             <small>Gestione post</small>
         </a>
     </div>
