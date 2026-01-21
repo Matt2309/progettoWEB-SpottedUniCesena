@@ -16,74 +16,79 @@
 
 <body class="bg-white">
 
-  <div class="container min-vh-100 d-flex justify-content-center align-items-start">
+  <main class="container min-vh-100 d-flex justify-content-center align-items-start">
     <div class="w-100" style="max-width:420px;">
 
       <!-- Titolo App -->
-      <h2 class="text-primary text-center fw-semibold mt-4">
+      <h1 class="text-primary text-center fw-semibold mt-4">
         SpottedUniCesena
-      </h2>
+      </h1>
 
       <!-- Titolo Pagina -->
-      <h4 class="text-primary text-center fw-bold mt-4 mb-4">
+      <h2 class="text-primary text-center fw-bold mt-4 mb-4">
         Registrati
-      </h4>
+      </h2>
 
       <!-- FORM -->
       <form onsubmit="validateAndSubmitRegister(event);">
-
+        <label for="nome" class="visually-hidden">Nome</label>
         <input type="text"
                name="nome"
                id="nome"
                class="form-control rounded-pill border-primary"
                placeholder="Nome *"
-               required>
+               required />
           <p class="error mb-3 text-danger mb-3" id="nomeError"></p>
 
+        <label for="cognome" class="visually-hidden">Cognome</label>
         <input type="text"
                name="cognome"
                id="cognome"
                class="form-control rounded-pill border-primary"
                placeholder="Cognome *"
-               required>
+               required />
           <p class="error mb-3 text-danger mb-3" id="cognomeError"></p>
 
+        <label for="username" class="visually-hidden">Username</label>
         <input type="text"
                 name="username"
                id="username"
                class="form-control rounded-pill border-danger"
                 placeholder="Username *"
-                required>
+                required />
           <p class="error mb-3 text-danger mb-3" id="usernameError"></p>
 
+        <label for="email" class="visually-hidden">Email</label>
         <input type="email"
                name="email"
                id="email"
                class="form-control rounded-pill border-primary"
                placeholder="Email *"
-               required>
+               required />
           <p class="error mb-3 text-danger mb-3" id="emailError"></p>
 
+        <label for="password" class="visually-hidden">password</label>
         <input type="password"
                name="password"
                id="password"
                class="form-control rounded-pill border-primary"
                placeholder="Password *"
-               required>
+               required />
           <p class="error mb-3 text-danger mb-3" id="passwordError"></p>
 
+        <label for="confirm_password" class="visually-hidden">confirm_password</label>
         <input type="password"
                name="confirm_password"
                id="confirm_password"
                class="form-control rounded-pill border-primary"
                placeholder="Conferma password *"
-               required>
+               required />
           <p class="error mb-3 text-danger mb-4" id="cfPasswordError"></p>
           <p class="error mb-3 text-danger mb-4" id="formError"></p>
 
         <div class="text-center">
           <button type="submit" class="btn btn-primary rounded-pill px-5 fw-semibold">
-            <i class="bi bi-person-plus me-1"></i>
+            <span class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></span>
             Registrati
           </button>
         </div>
@@ -98,7 +103,7 @@
       </p>
 
     </div>
-  </div>
+  </main>
   <script src="js/auth/auth.js"></script>
 </body>
 </html>
