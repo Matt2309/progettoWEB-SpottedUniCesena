@@ -22,8 +22,8 @@
 
   <!-- TOP BAR -->
   <div class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
-    <a href="index.php" class="text-dark fs-4 text-decoration-none">
-      <i class="bi bi-x-lg"></i>
+    <a href="index.php" class="text-dark fs-4 text-decoration-none" title="Close">
+      <span class="bi bi-x-lg"></span>
     </a>
 
     <h5 class="text-primary fw-semibold m-0">
@@ -67,19 +67,19 @@
   <nav class="navbar fixed-bottom bg-white border-top">
     <div class="container d-flex justify-content-around text-center">
       <a href="index.php" class="text-dark text-decoration-none">
-        <i class="bi bi-house fs-4"></i><br>
+        <span class="bi bi-house fs-4"></span><br>
         <small>Home</small>
       </a>
       <a href="Crea.php" class="text-dark text-decoration-none">
-        <i class="bi bi-plus-square fs-4"></i><br>
+        <span class="bi bi-plus-square fs-4"></span><br>
         <small>Crea</small>
       </a>
       <a href="#" class="text-dark text-decoration-none fw-bold">
-        <i class="bi bi-person fs-4"></i><br>
+        <span class="bi bi-person fs-4"></span><br>
         <small>Profilo</small>
       </a>
         <a href="AdminPersonalArea.php" class="admin-area text-dark text-decoration-none">
-            <i class="bi bi-list-check"></i><br>
+            <span class="bi bi-list-check"></span><br>
             <small>Gestione post</small>
         </a>
     </div>
@@ -101,30 +101,30 @@
       <hr>
 
       <a href="index.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
-        <i class="bi bi-house" aria-hidden="true"></i>
+        <span class="bi bi-house" aria-hidden="true"></span>
         <span>Home</span>
       </a>
 
       <a href="Crea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
-        <i class="bi bi-plus-square" aria-hidden="true"></i>
+        <span class="bi bi-plus-square" aria-hidden="true"></span>
         <span>Crea</span>
       </a>
 
       <a href="#"
          class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 fw-bold" aria-current="page">
-        <i class="bi bi-person" aria-hidden="true"></i>
+        <span class="bi bi-person" aria-hidden="true"></span>
         <span>Profilo</span>
       </a>
         <a href="AdminPersonalArea.php"
            class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 admin-area">
-            <i class="bi bi-list-check" aria-hidden="true"></i>
+            <span class="bi bi-list-check" aria-hidden="true"></span>
             <span>Gestione post</span>
         </a>
 
       <hr>
       <div class="mb-3 user-area">
         <a href="Login.html" class="btn btn-primary w-100 mt-3">
-          <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>
+          <span class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></span>
           Login
         </a>
       </div>
