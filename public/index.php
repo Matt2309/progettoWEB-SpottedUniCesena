@@ -82,7 +82,7 @@
         </aside>
 
         <!-- POST + FUNZIONAMENTO -->
-        <div class="col-md-9">
+        <div class="col-md-9 bg-background">
             <div class="container py-5">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">

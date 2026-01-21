@@ -48,7 +48,8 @@
 :root {
     /* Primary brand color */
     --bs-primary: #a51e1e;
-    --bs-background-color: #EDEDED;
+    --bs-background-color: #EDEDED; /* Custom variable for main page background */
+    --bs-body-bg: #fff; /* White for light mode body/cards/sidebars */
 
     /* === Custom palette (300) === */
     --bs-blue-300: #93c5fd;
@@ -68,7 +69,8 @@
 }
 
 [data-bs-theme="dark"] {
-    --bs-background-color: #212529;
+    --bs-background-color: #212529; /* Dark background for main page */
+    --bs-body-bg: #343a40; /* Darker background for cards/sidebars in dark mode */
 }
 
 .btn-primary {

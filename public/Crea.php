@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="theme.css" />
 </head>
 
-<body class="bg-body">
+<body class="bg-background">
 
 <form id="spottedForm" method="POST">
 
@@ -71,7 +71,7 @@
                 </div>
             </aside>
 
-            <div class="col-md-9 bg-body">
+            <div class="col-md-9">
                 <div class="container py-5">
                     <h2 class="fw-bold mb-4 d-none d-md-block">Crea spotted:</h2>
 

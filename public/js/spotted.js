@@ -3,6 +3,8 @@ let spottedList = [];
 Common.ready(() => {
     loadSpotted();
     Common.populateCategorySelect();
+    Common.loadCategories();
+
 
     const desktopCategorySelect = document.getElementById('category');
     const mobileCategorySelect = document.getElementById('category-mobile');

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="theme.css" />
 </head>
 
-<body class="bg-body">
+<body class="bg-background">
 
 <!-- NAVBAR SOLO MOBILE -->
 <nav class="navbar bg-body shadow-sm d-md-none">
