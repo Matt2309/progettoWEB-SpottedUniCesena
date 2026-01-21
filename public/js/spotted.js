@@ -1,37 +1,95 @@
-document.addEventListener("DOMContentLoaded", () => {
+let spottedList = [];
+
+Common.ready(() => {
     loadSpotted();
-    Common.loadCategories();
+    Common.populateCategorySelect();
+
+    const desktopCategorySelect = document.getElementById('category');
+    const mobileCategorySelect = document.getElementById('category-mobile');
+
+    if (desktopCategorySelect) {
+        desktopCategorySelect.addEventListener('change', (e) => {
+            const selectedCategoryId = e.currentTarget.value;
+            filterSpotted(selectedCategoryId);
+            if (mobileCategorySelect) {
+                mobileCategorySelect.value = selectedCategoryId;
+            }
+        });
+    }
+
+    if (mobileCategorySelect) {
+        mobileCategorySelect.addEventListener('change', (e) => {
+            const selectedCategoryId = e.currentTarget.value;
+            filterSpotted(selectedCategoryId);
+            if (desktopCategorySelect) {
+                desktopCategorySelect.value = selectedCategoryId;
+            }
+        });
+    }
 });
+
+async function renderList(listToRender) {
+    const container = document.getElementById("spottedList");
+    container.innerHTML = ""; // Clear current list
+
+    // Render Cards
+    if (!listToRender || listToRender.length === 0) {
+        container.innerHTML = "<p class='text-muted text-center'>Nessun spotted trovato per questa categoria.</p>";
+        return;
+    }
+
+    for (const post of listToRender) {
+        const postData = { ...post };
+        delete postData.status;
+        container.appendChild(await Common.createSpottedCard(postData));
+    }
+
+    // Attach Listeners (Likes)
+    for (let doc of document.getElementsByClassName('like')) {
+        doc.addEventListener("click", async function (e) {
+            await giveLike(e.currentTarget.getAttribute("spottedid"), e.currentTarget);
+        });
+    }
+
+    // Attach Listeners (Dislikes)
+    for (let doc of document.getElementsByClassName('dislike')) {
+        doc.addEventListener("click", async function (e) {
+            await giveDislike(e.currentTarget.getAttribute("spottedid"), e.currentTarget);
+        });
+    }
+}
 
 async function loadSpotted() {
     try {
         const response = await fetch("api/user/getSpottedAccept");
         const spotted = await response.json();
 
-        const container = document.getElementById("spottedList");
-        container.innerHTML = "";
+        // Store data globally
+        spottedList = spotted.data;
 
-        for (const post of spotted.data) {
-            delete post.status;
-            container.appendChild(await Common.createSpottedCard(post));
-        }
-
-        for(let doc of document.getElementsByClassName('like')) {
-            doc.addEventListener("click", async function (e) {
-                await giveLike(e.currentTarget.getAttribute("spottedid"), e.currentTarget);
-            })
-        }
-        for(let doc of document.getElementsByClassName('dislike')) {
-            doc.addEventListener("click", async function (e) {
-                await giveDislike(e.currentTarget.getAttribute("spottedid"), e.currentTarget);
-            })
-        }
+        // Render the full list initially
+        await renderList(spottedList);
 
     } catch (e) {
-        console.log(e)
+        console.log(e);
         document.getElementById("spottedList").innerHTML =
             "<p class='text-muted'>Errore nel caricamento</p>";
     }
+}
+
+async function filterSpotted(categoryId) {
+    if (!spottedList) return;
+
+    let newList = [];
+    if (!categoryId || categoryId === "") {
+        newList = spottedList; // Show all
+    } else {
+        newList = spottedList.filter((spotted) => {
+            return spotted.category.id.toString() === categoryId;
+        });
+    }
+
+    await renderList(newList);
 }
 
 async function giveLike(spottedId, target) {
@@ -56,7 +114,7 @@ async function giveLike(spottedId, target) {
         }
         return;
     } catch (e) {
-        document.getElementById("formError").textContent = "Errore server";
+        console.error("Error giving like:", e);
     }
 }
 
@@ -79,6 +137,6 @@ async function giveDislike(spottedId, target) {
         }
         return;
     } catch (e) {
-        document.getElementById("formError").textContent = "Errore server";
+        console.getElementById("formError").textContent = "Errore server";
     }
 }

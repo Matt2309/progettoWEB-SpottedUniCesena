@@ -24,9 +24,9 @@
 <body class="bg-body">
 
 <!-- NAVBAR SOLO MOBILE -->
-<nav class="navbar bg-body shadow-sm d-md-none">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-        <div id="mobile-theme-toggle-placeholder" class="ms-2"></div>
+<nav class="navbar bg-white shadow-sm d-md-none">
+    <div class="container d-flex justify-content-between align-items-center">
+        <span></span>
         <h1 class="h5 fw-semibold m-0 text-primary text-truncate">
             SpottedUniCesena
         </h1>
@@ -87,7 +87,26 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="fw-bold m-0">Ultimi spotted:</h2>
+                    <!-- Desktop category select -->
+                    <label for="category" class="visually-hidden d-none d-md-block">Categoria</label>
+                    <select id="category"
+                            name="category_id"
+                            class="form-select form-select-sm w-auto category-select border-primary rounded-3 d-none d-md-block"
+                            required>
+                        <option value="" selected>Tutti</option>
+                    </select>
                     <div id="desktop-main-theme-toggle-placeholder"></div>
+                </div>
+
+                <!-- Mobile category select - new placement -->
+                <div class="d-md-none mb-4">
+                    <label for="category-mobile" class="visually-hidden">Categoria</label>
+                    <select id="category-mobile"
+                            name="category_id_mobile"
+                            class="form-select form-select-sm w-100 category-select border-primary rounded-3"
+                            required>
+                        <option value="" selected>Tutti</option>
+                    </select>
                 </div>
 
                 <div class="row align-items-start">

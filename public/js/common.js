@@ -286,6 +286,50 @@ window.Common = (function () {
         }
     }
 
+    async function populateCategorySelect() {
+        try {
+            const categories = await Common.getCategories();
+            let selectors = document.querySelectorAll('.category-select');
+            for (const select of selectors) {
+                for(let category of categories)
+                {
+                    let opt = document.createElement("option");
+                    opt.value = category.id;
+                    opt.innerHTML = category.name;
+
+                    select.appendChild(opt);
+                }
+            }
+
+        } catch (e) {
+            console.log(e)
+            document.getElementById("spottedList").innerHTML =
+                "<p class='text-muted'>Errore nel caricamento</p>";
+        }
+    }
+
+    // A queue for callbacks to be executed when the module is ready
+    let onReadyCallbacks = [];
+    let isReady = false;
+    // Function to execute all queued callbacks
+    function executeReadyCallbacks() {
+        if (isReady) {
+            onReadyCallbacks.forEach(callback => callback());
+            onReadyCallbacks = []; // Clear the queue
+        }
+    }
+    function ready(callback) {
+        if (isReady) {
+            callback();
+        } else {
+            onReadyCallbacks.push(callback);
+        }
+    }
+     document.addEventListener("DOMContentLoaded", () => {
+         isReady = true;
+         executeReadyCallbacks();
+     });
+
     return {
         formatTime,
         escapeHtml,
@@ -297,6 +341,8 @@ window.Common = (function () {
         loadCategories,
         getIconColor,
         getStatusClass,
-        validateAndSubmitComment
+        validateAndSubmitComment,
+        populateCategorySelect,
+        ready
     };
 })();
