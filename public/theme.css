@@ -67,6 +67,10 @@
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+[data-bs-theme="dark"] {
+    --bs-background-color: #212529;
+}
+
 .btn-primary {
   --bs-btn-bg: var(--bs-primary);
   --bs-btn-border-color: var(--bs-primary);
@@ -209,4 +213,17 @@ a.text-primary:focus,
     color: var(--bs-primary); /* Red text (Spotted color) */
     border-bottom: 2px solid var(--bs-primary);
     font-weight: 700;
+}
+
+/* Dark mode overrides for custom tabs */
+[data-bs-theme="dark"] .nav-tabs-custom {
+    border-bottom-color: #495057;
+}
+
+[data-bs-theme="dark"] .nav-tabs-custom .nav-link {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .nav-tabs-custom .nav-link:hover {
+    color: #fff;
 }

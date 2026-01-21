@@ -21,10 +21,10 @@
     <link rel="stylesheet" href="theme.css" />
 </head>
 
-<body class="bg-background">
+<body class="bg-body">
 
 <!-- NAVBAR SOLO MOBILE -->
-<nav class="navbar bg-white shadow-sm d-md-none">
+<nav class="navbar bg-body shadow-sm d-md-none">
     <div class="container d-flex justify-content-between align-items-center">
         <span></span>
 
@@ -43,34 +43,33 @@
     <div class="row">
 
         <!-- BARRA LATERALE SINISTRA (DESKTOP) -->
-        <aside class="col-md-3 d-none d-md-flex flex-column bg-white border-end min-vh-100 p-4" role="complementary"
+        <aside class="col-md-3 d-none d-md-flex flex-column bg-body border-end min-vh-100 p-4" role="complementary"
                aria-labelledby="sidebar-title">
 
-            <h2 id="sidebar-title" class="h2 fw-bold text-primary text-break">
+            <h2 id="sidebar-title" class="h4 fw-light text-primary text-break">
                 SpottedUniCesena
             </h2>
+            <hr class="w-50">
 
-            <hr>
-
-            <a href="index.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2"
+            <a href="index.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2"
                aria-current="page">
                 <span class="bi bi-house" aria-hidden="true"></span>
                 <span>Home</span>
             </a>
 
-            <a href="Crea.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+            <a href="Crea.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
                 <span class="bi bi-plus-square" aria-hidden="true"></span>
                 <span>Crea</span>
             </a>
 
             <a href="UtentePersonalArea.php"
-               class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+               class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
                 <span class="bi bi-person" aria-hidden="true"></span>
                 <span>Profilo</span>
             </a>
 
             <a href="#"
-               class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 admin-area fw-bold">
+               class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 admin-area fw-bold">
                 <span class="bi bi-list-check" aria-hidden="true"></span>
                 <span>Gestione post</span>
             </a>
@@ -106,25 +105,25 @@
 </div>
 
 <!-- BOTTOM NAV SOLO MOBILE -->
-<nav class="navbar fixed-bottom bg-white border-top d-md-none">
+<nav class="navbar fixed-bottom bg-body border-top d-md-none">
     <div class="container d-flex justify-content-around text-center">
 
-        <a href="index.php" class="text-dark text-decoration-none">
+        <a href="index.php" class="text-body text-decoration-none">
             <span class="bi bi-house fs-4"></span><br>
             <small>Home</small>
         </a>
 
-        <a href="Crea.php" class="text-dark text-decoration-none">
+        <a href="Crea.php" class="text-body text-decoration-none">
             <span class="bi bi-plus-square fs-4"></span><br>
             <small>Crea</small>
         </a>
 
-        <a href="UtentePersonalArea.php" class="text-dark text-decoration-none">
+        <a href="UtentePersonalArea.php" class="text-body text-decoration-none">
             <span class="bi bi-person fs-4"></span><br>
             <small>Profilo</small>
         </a>
 
-        <a href="#" class="text-dark text-decoration-none admin-area">
+        <a href="#" class="text-body text-decoration-none admin-area">
             <span class="bi bi-list-check"></span><br>
             <small>Gestione post</small>
         </a>
@@ -132,6 +131,7 @@
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/theme-toggle.js"></script>
 <script src="js/common.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/user.js"></script>

@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="theme.css" />
 </head>
 
-<body class="bg-white">
+<body class="bg-body">
 
 <form id="spottedForm" method="POST">
 
-    <div class="d-flex d-md-none justify-content-between align-items-center p-3 border-bottom bg-white">
-        <a href="index.php" class="text-dark fs-4 text-decoration-none">
+    <div class="d-flex d-md-none justify-content-between align-items-center p-3 border-bottom bg-body">
+        <a href="index.php" class="text-body fs-4 text-decoration-none">
             <i class="bi bi-x-lg"></i>
         </a>
 
@@ -32,32 +32,32 @@
     <div class="container-fluid">
         <div class="row min-vh-100">
 
-            <aside class="col-md-3 bg-white border-end p-4 d-none d-md-flex flex-column" role="complementary" aria-labelledby="sidebar-title">
-                <h2 class="h4 fw-bold text-primary text-break">
+            <aside class="col-md-3 bg-body border-end p-4 d-none d-md-flex flex-column" role="complementary" aria-labelledby="sidebar-title">
+                <h2 class="h4 fw-light text-primary text-break">
                     SpottedUniCesena
                 </h2>
 
                 <hr>
 
-                <a href="index.php" class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+                <a href="index.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
                     <i class="bi bi-house"></i>
                     <span>Home</span>
                 </a>
 
                 <a href="Crea.php"
-                   class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 fw-bold">
+                   class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 fw-bold">
                     <i class="bi bi-plus-square"></i>
                     <span>Crea</span>
                 </a>
 
                 <a href="UtentePersonalArea.php"
-                   class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2">
+                   class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
                     <i class="bi bi-person"></i>
                     <span>Profilo</span>
                 </a>
 
                 <a href="AdminPersonalArea.php"
-                   class="d-flex align-items-center gap-2 text-dark text-decoration-none py-2 admin-area">
+                   class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 admin-area">
                     <i class="bi bi-list-check" aria-hidden="true"></i>
                     <span>Gestione post</span>
                 </a>
@@ -71,7 +71,7 @@
                 </div>
             </aside>
 
-            <div class="col-md-9 bg-background">
+            <div class="col-md-9 bg-body">
                 <div class="container py-5">
                     <h2 class="fw-bold mb-4 d-none d-md-block">Crea spotted:</h2>
 
@@ -141,6 +141,7 @@
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/theme-toggle.js"></script>
 <script src="js/common.js"></script>
 <script src="js/user.js"></script>
 <script src="js/crea.js"></script>

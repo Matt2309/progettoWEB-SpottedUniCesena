@@ -146,7 +146,7 @@ async function createAcceptCard(post) {
     const disabledAttr = isBanned ? 'disabled' : '';
     const banText = isBanned ? 'Rimuovi ban' : 'Banna utente';
 
-    const banClass = isBanned ? 'unban text-dark' : 'ban text-danger';
+    const banClass = isBanned ? 'unban text-green-300' : 'ban text-danger';
     const banIcon = isBanned ? 'bi-person-check' : 'bi-slash-circle';
 
     card.innerHTML = `
