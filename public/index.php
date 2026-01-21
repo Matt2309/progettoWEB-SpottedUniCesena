@@ -46,7 +46,7 @@
             <h2 id="sidebar-title" class="h4 fw-light text-primary text-break">
                 SpottedUniCesena
             </h2>
-            <hr>
+            <hr class="w-50">
 
             <a href="#" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 fw-bold"
                aria-current="page">

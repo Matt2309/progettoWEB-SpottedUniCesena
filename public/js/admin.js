@@ -164,16 +164,16 @@ async function createAcceptCard(post) {
                 </div>
             </div>
 
-            <div class="d-flex gap-2 align-items-center justify-content-end text-end">
+            <div class="d-flex flex-column flex-md-row gap-1 gap-md-2 align-items-end align-items-md-center justify-content-end text-end">
                 <div id="categoryPlaceholder"></div>
                 ${post.status != null ?
         `<span class="px-2 rounded fw-semibold ${Common.getStatusClass(post.status)}">
-                                ${post.status}
-                            </span>`
+                    ${post.status}
+                </span>`
         : ''
     }
             </div>
-        </div>
+            </div>
 
         <p class="mt-3">${Common.escapeHtml(post.text)}</p>
 

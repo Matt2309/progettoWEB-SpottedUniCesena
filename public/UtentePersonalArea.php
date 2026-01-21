@@ -97,7 +97,7 @@
         <h2 id="sidebar-title" class="h4 fw-light text-primary text-break fw-light">
             SpottedUniCesena
         </h2>
-      <hr>
+      <hr class="w-50">
 
       <a href="index.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
         <span class="bi bi-house" aria-hidden="true"></span>

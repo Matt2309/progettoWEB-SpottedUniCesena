@@ -8,12 +8,15 @@ async function getUserInfo() {
         const userinfo = await response.json();
         let containers = document.querySelectorAll('.user-area');
         for (const container of containers) {
+            const showButtons = container.closest('aside') !== null;
+            container.innerHTML = "";
+
             if (response.ok) {
-                container.innerHTML = "";
-                container.appendChild(userInfo(userinfo.data));
+                container.appendChild(userInfo(userinfo.data, showButtons));
             } else {
-                container.innerHTML = "";
-                container.appendChild(loginButton());
+                if (showButtons) {
+                    container.appendChild(loginButton());
+                }
             }
         }
         if (!parseInt(userinfo.data.isAdmin) || !userinfo.data) {
@@ -46,11 +49,21 @@ function loginButton() {
     return button;
 }
 
-function userInfo(user) {
+function userInfo(user, showButtons = true) {
     const container = document.createElement("div");
-    container.className = "d-flex flex-column gap-3";
 
-    container.innerHTML = `
+    let buttonHtml = '';
+    if (showButtons) {
+        container.className = "d-flex flex-column gap-3";
+        buttonHtml = `
+        <a href="../api/auth/logout.php" class="btn btn-outline-danger w-100 btn-sm">
+            <i class="bi bi-box-arrow-right me-1" aria-hidden="true"></i>
+            Logout
+        </a>
+        `;
+    }
+
+    const userInfoHtml = `
         <div class="d-flex align-items-center gap-3">
             <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
               style="width:50px;height:50px;">
@@ -65,12 +78,13 @@ function userInfo(user) {
     }
             </div>
         </div>
-
-        <a href="../api/auth/logout.php" class="btn btn-outline-danger w-100 btn-sm">
-            <i class="bi bi-box-arrow-right me-1" aria-hidden="true"></i>
-            Logout
-        </a>
     `;
+
+    container.innerHTML = userInfoHtml + buttonHtml;
+
+    if (!showButtons) {
+        return container.firstElementChild;
+    }
 
     return container;
 }

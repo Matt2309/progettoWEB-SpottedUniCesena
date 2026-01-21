@@ -232,14 +232,14 @@ window.Common = (function () {
             </div>
     
             <form id="${formId}">
-                <div class="border-top p-3 bg-white">
+                <div class="border-top p-3">
                     <div class="input-group">
                         <input type="text" name="text"
-                               class="form-control rounded-pill bg-light border-0"
+                               class="form-control rounded-pill"
                                placeholder="Aggiungi un commento...">
                         <input type="hidden" name="spottedId" value="${post.id}">
                         
-                        <button class="submit-comment-btn btn btn-light rounded-pill ms-2">
+                        <button class="submit-comment-btn btn rounded-pill ms-2">
                             <i class="bi bi-send"></i>
                         </button>
                     </div>

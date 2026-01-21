@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     Common.loadCategories();
-    populateCategorySelect();
+    Common.populateCategorySelect();
     document
         .getElementById("spottedForm")
         .addEventListener("submit", validateAndSubmitSpotted);
