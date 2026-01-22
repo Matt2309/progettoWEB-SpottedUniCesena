@@ -20,13 +20,17 @@ async function getUserInfo() {
             }
         }
         if (!parseInt(userinfo.data.isAdmin) || !userinfo.data) {
-            for (doc of document.getElementsByClassName('admin-area')) {
+            for (let doc of document.getElementsByClassName('admin-area')) {
                 doc.classList.add("d-none")
             }
         } else {
-            for (doc of document.getElementsByClassName('admin-area')) {
+            for (let doc of document.getElementsByClassName('admin-area')) {
                 doc.classList.remove("d-none")
             }
+        }
+        const stats = document.querySelector('#user-stats');
+        if (stats) {
+            stats.innerHTML = `${userinfo.data.total_spotted} post • ${userinfo.data.total_likes} likes`;
         }
 
     } catch (e) {

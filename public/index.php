@@ -83,7 +83,7 @@
 
         <!-- POST + FUNZIONAMENTO -->
         <div class="col-md-9 bg-background">
-            <div class="container py-5">
+            <div class="container py-4 py-md-5">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="fw-bold m-0">Ultimi spotted:</h2>

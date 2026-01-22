@@ -477,20 +477,25 @@ class Database {
 
     public function getUserInformation(string $userId)
     {
+        // We added two subqueries in the SELECT clause:
+        // 1. counts rows in 'spotted' table for this user.
+        // 2. sums the 'numLike' column for this user (handling NULLs with COALESCE).
         $query = "
-        SELECT
-            u.id AS user_id,
-            u.username AS username,
-            u.name AS user_name,
-            u.surname AS surname,
-            u.email AS email,
-            r.title AS role,
-            (r.title = 'admin') AS isAdmin
-        FROM users u
-        JOIN roles r ON r.id = u.role_id
-        WHERE u.id = :userId
-        LIMIT 1
-    ";
+            SELECT
+                u.id AS user_id,
+                u.username AS username,
+                u.name AS user_name,
+                u.surname AS surname,
+                u.email AS email,
+                r.title AS role,
+                (r.title = 'admin') AS isAdmin,
+                (SELECT COUNT(*) FROM spotted s WHERE s.user_id = u.id) AS total_spotted,
+                (SELECT COALESCE(SUM(s.numLike), 0) FROM spotted s WHERE s.user_id = u.id) AS total_likes
+            FROM users u
+            JOIN roles r ON r.id = u.role_id
+            WHERE u.id = :userId
+            LIMIT 1
+           ";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute([

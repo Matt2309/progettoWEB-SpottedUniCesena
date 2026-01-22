@@ -181,15 +181,15 @@ window.Common = (function () {
                          style="width:35px;height:35px;">
                         ${initial}
                     </div>
-                    <div>
+                    <div class="lh-1">
                         <strong>@${post.user.username}</strong><br>
                         <small class="text-muted">${timeAgo}</small>
                     </div>
                 </div>
-                <div class="d-flex gap-3 align-items-center">
+                <div class="d-flex flex-column flex-md-row gap-1 gap-md-2 align-items-end align-items-md-center justify-content-center text-end">
                     <div id="categoryPlaceholder"></div>
                     ${post.status != null ?
-            `<span class="px-2 rounded fw-semibold ${getStatusClass(post.status)}">${post.status}</span>`
+            `<span class="px-2 rounded fw-semibold small ${getStatusClass(post.status)}">${post.status}</span>`
             : ''}
                 </div>
             </div>
