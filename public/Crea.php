@@ -28,7 +28,7 @@
 
     <div class="d-flex d-md-none justify-content-between align-items-center p-3 border-bottom bg-body sticky-top">
         <a href="index.php" class="text-body fs-4 text-decoration-none" aria-label="Chiudi e torna alla home">
-            <i class="bi bi-x-lg"></i>
+            <span class="bi bi-x-lg"></span>
         </a>
 
         <h1 class="text-primary fw-semibold m-0 fs-4">Crea spotted</h1>
@@ -50,25 +50,25 @@
                 <hr class="w-50">
 
                 <a href="index.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
-                    <i class="bi bi-house"></i>
+                    <span class="bi bi-house"></span>
                     <span>Home</span>
                 </a>
 
                 <a href="Crea.php"
                    class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 fw-bold">
-                    <i class="bi bi-plus-square"></i>
+                    <span class="bi bi-plus-square"></span>
                     <span>Crea</span>
                 </a>
 
                 <a href="UtentePersonalArea.php"
                    class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
-                    <i class="bi bi-person"></i>
+                    <span class="bi bi-person"></span>
                     <span>Profilo</span>
                 </a>
 
                 <a href="AdminPersonalArea.php"
                    class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 admin-area">
-                    <i class="bi bi-list-check" aria-hidden="true"></i>
+                    <span class="bi bi-list-check" aria-hidden="true"></span>
                     <span>Gestione post</span>
                 </a>
 
