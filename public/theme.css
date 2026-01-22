@@ -29,14 +29,48 @@
   font-style: normal;
 }
 
+/* Contenitore principale del main */
+.main-wrapper {
+    max-width: 1400px;
+    width: 100%;
+}
+.form-control:focus,
+.btn:focus {
+    outline: 3px solid #0d6efd;
+    outline-offset: 2px;
+}
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.5); /* blu Bootstrap */
+    border-color: #0d6efd;
+}
 
 :root {
-  /* Primary brand color */
-  --bs-primary: #a51e1e;
-    --bs-background-color: #EDEDED;
+    /* Primary brand color */
+    --bs-primary: #a51e1e;
+    --bs-background-color: #EDEDED; /* Custom variable for main page background */
+    --bs-body-bg: #fff; /* White for light mode body/cards/sidebars */
 
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /* === Custom palette (300) === */
+    --bs-blue-300: #93c5fd;
+    --bs-indigo-300: #a5b4fc;
+    --bs-pink-300: #f9a8d4;
+    --bs-red-300: #fca5a5;
+    --bs-orange-300: #fdba74;
+    /* === Custom palette (800) === */
+    --bs-blue-800: #1e40af;
+    --bs-indigo-800: #3730a3;
+    --bs-pink-800: #9d174d;
+    --bs-red-800: #991b1b;
+    --bs-orange-800: #9a3412;
+
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+[data-bs-theme="dark"] {
+    --bs-background-color: #212529; /* Dark background for main page */
+    --bs-body-bg: #343a40; /* Darker background for cards/sidebars in dark mode */
 }
 
 .btn-primary {
@@ -50,6 +84,16 @@
   --bs-btn-disabled-bg: var(--bs-primary);
   --bs-btn-disabled-border-color: var(--bs-primary);
 }
+
+
+.profile-title-line {
+  width: 42px;
+  height: 3px;
+  background-color: var(--bs-primary);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
 
 /* Text utilities mapped to brand color without changing HTML */
 .text-primary { color: var(--bs-primary) !important; }
@@ -93,4 +137,95 @@ a.text-primary:focus,
 
 .bg-background {
   background-color: var(--bs-background-color);
+}
+
+/* =========================================================
+   CUSTOM COLOR UTILITIES — 300 SCALE
+   ========================================================= */
+
+/* Backgrounds */
+.bg-blue-300 { background-color: var(--bs-blue-300) !important; }
+.bg-indigo-300 { background-color: var(--bs-indigo-300) !important; }
+.bg-pink-300 { background-color: var(--bs-pink-300) !important; }
+.bg-red-300 { background-color: var(--bs-red-300) !important; }
+.bg-orange-300 { background-color: var(--bs-orange-300) !important; }
+
+/* Text */
+.text-blue-300 { color: var(--bs-blue-300) !important; }
+.text-indigo-300 { color: var(--bs-indigo-300) !important; }
+.text-pink-300 { color: var(--bs-pink-300) !important; }
+.text-red-300 { color: var(--bs-red-300) !important; }
+.text-orange-300 { color: var(--bs-orange-300) !important; }
+
+/* Borders */
+.border-blue-300 { border-color: var(--bs-blue-300) !important; }
+.border-indigo-300 { border-color: var(--bs-indigo-300) !important; }
+.border-pink-300 { border-color: var(--bs-pink-300) !important; }
+.border-red-300 { border-color: var(--bs-red-300) !important; }
+.border-orange-300 { border-color: var(--bs-orange-300) !important; }
+
+/* =========================================================
+   CUSTOM COLOR UTILITIES — 800 SCALE
+   ========================================================= */
+
+/* Backgrounds */
+.bg-blue-800 { background-color: var(--bs-blue-800) !important; }
+.bg-indigo-800 { background-color: var(--bs-indigo-800) !important; }
+.bg-pink-800 { background-color: var(--bs-pink-800) !important; }
+.bg-red-800 { background-color: var(--bs-red-800) !important; }
+.bg-orange-800 { background-color: var(--bs-orange-800) !important; }
+
+/* Text */
+.text-blue-800 { color: var(--bs-blue-800) !important; }
+.text-indigo-800 { color: var(--bs-indigo-800) !important; }
+.text-pink-800 { color: var(--bs-pink-800) !important; }
+.text-red-800 { color: var(--bs-red-800) !important; }
+.text-orange-800 { color: var(--bs-orange-800) !important; }
+
+/* Borders */
+.border-blue-800 { border-color: var(--bs-blue-800) !important; }
+.border-indigo-800 { border-color: var(--bs-indigo-800) !important; }
+.border-pink-800 { border-color: var(--bs-pink-800) !important; }
+.border-red-800 { border-color: var(--bs-red-800) !important; }
+.border-orange-800 { border-color: var(--bs-orange-800) !important; }
+
+/* Custom Underline Tabs */
+.nav-tabs-custom {
+    border-bottom: 2px solid #ccd2d6; /* The continuous gray line */
+}
+
+.nav-tabs-custom .nav-link {
+    border: none; /* Remove default box borders */
+    margin-bottom: -2px; /* Pull active border down to overlap the gray line */
+    background: transparent;
+    color: #6c757d; /* Gray text for inactive tabs */
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent; /* Invisible border for spacing */
+    transition: color 0.2s ease;
+}
+
+.nav-tabs-custom .nav-link:hover {
+    border-color: transparent; /* Prevent hover border boxes */
+    color: #000;
+}
+
+.nav-tabs-custom .nav-link.active {
+    background: transparent;
+    color: var(--bs-primary); /* Red text (Spotted color) */
+    border-bottom: 2px solid var(--bs-primary);
+    font-weight: 700;
+}
+
+/* Dark mode overrides for custom tabs */
+[data-bs-theme="dark"] .nav-tabs-custom {
+    border-bottom-color: #495057;
+}
+
+[data-bs-theme="dark"] .nav-tabs-custom .nav-link {
+    color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .nav-tabs-custom .nav-link:hover {
+    color: #fff;
 }

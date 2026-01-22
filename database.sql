@@ -32,23 +32,42 @@ CREATE TABLE IF NOT EXISTS spotted (
     numLike INT DEFAULT 0,
     numDislike INT DEFAULT 0,
     user_id INT NOT NULL,
+    category_id INT NOT NULL,
     status ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_spotted_user
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_spotted_category
+    FOREIGN KEY (category_id) REFERENCES categories(id)
     ) ENGINE=InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS comments (
                                         id INT AUTO_INCREMENT PRIMARY KEY,
                                         `text` TEXT NOT NULL,
                                         user_id INT NOT NULL,
                                         spotted_id INT NOT NULL,
+                                        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                                         CONSTRAINT fk_comments_user
                                         FOREIGN KEY (user_id) REFERENCES users(id),
     CONSTRAINT fk_comments_spotted
     FOREIGN KEY (spotted_id) REFERENCES spotted(id) ON DELETE CASCADE
     ) ENGINE=InnoDB;
 
+
 CREATE TABLE IF NOT EXISTS categories (
                                           id INT AUTO_INCREMENT PRIMARY KEY,
                                           name VARCHAR(50) NOT NULL
+    ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS spotted_likes (
+                                          id INT AUTO_INCREMENT PRIMARY KEY,
+                                          user_id INT NOT NULL,
+                                          spotted_id INT NOT NULL,
+                                          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                                          UNIQUE KEY unique_like (user_id, spotted_id),
+                                          CONSTRAINT fk_likes_user
+                                          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                                          CONSTRAINT fk_likes_spotted
+                                          FOREIGN KEY (spotted_id) REFERENCES spotted(id) ON DELETE CASCADE
     ) ENGINE=InnoDB;

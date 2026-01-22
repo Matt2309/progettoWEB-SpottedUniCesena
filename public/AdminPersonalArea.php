@@ -1,151 +1,141 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profilo Admin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SpottedUniCesena</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="theme.css">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="theme.css" />
 </head>
 
-<body class="bg-white">
+<body class="bg-background">
 
-  <!-- TOP BAR -->
-  <div class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
-    <a href="index.php" class="text-dark fs-4 text-decoration-none">
-      <i class="bi bi-x-lg"></i>
-    </a>
+<!-- NAVBAR SOLO MOBILE -->
+<nav class="navbar bg-body shadow-sm d-md-none">
+    <div class="container d-flex justify-content-between align-items-center">
+        <span></span>
 
-    <h5 class="text-danger fw-semibold m-0">
-      Il mio profilo
-    </h5>
+        <h1 class="h5 fw-semibold m-0 text-primary text-truncate">
+            SpottedUniCesena
+        </h1>
 
-    <span></span>
-  </div>
-
-  <div class="container">
-
-    <!-- ADMIN INFO -->
-    <div class="d-flex justify-content-between align-items-center py-4">
-      <div class="d-flex align-items-center gap-3">
-        <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-             style="width:70px;height:70px;">
-          F
-        </div>
-
-        <div>
-          <h5 class="mb-0">Francesco</h5>
-          <small class="text-muted fw-semibold">Admin</small>
-        </div>
-      </div>
-
-      <small class="text-muted text-end">
-        5 post • 34 likes
-      </small>
+        <a href="Login.html" class="btn btn-primary btn-sm">
+            <span class="bi bi-box-arrow-in-right" aria-hidden="true"></span>
+            <span class="visually-hidden">Login</span>
+        </a>
     </div>
+</nav>
 
-    <!-- TABS -->
-    <ul class="nav nav-tabs justify-content-center mb-4">
-      <li class="nav-item">
-        <button class="nav-link">
-          Spotted pubblicati
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link active fw-semibold text-danger">
-          Gestione post
-        </button>
-      </li>
-    </ul>
+<div class="container-fluid">
+    <div class="row">
 
-    <!-- POST DA MODERARE -->
-    <div class="card rounded-4 shadow-sm mb-4">
-      <div class="card-body">
+        <!-- BARRA LATERALE SINISTRA (DESKTOP) -->
+        <aside class="col-md-3 d-none d-md-flex flex-column bg-body border-end min-vh-100 p-4" role="complementary"
+               aria-labelledby="sidebar-title">
 
-        <div class="d-flex justify-content-between align-items-start">
-          <div class="d-flex align-items-center gap-2">
-            <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                 style="width:35px;height:35px;">
-              P
+            <h2 id="sidebar-title" class="h4 fw-light text-primary text-break">
+                SpottedUniCesena
+            </h2>
+            <hr class="w-50">
+
+            <a href="index.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2"
+               aria-current="page">
+                <span class="bi bi-house" aria-hidden="true"></span>
+                <span>Home</span>
+            </a>
+
+            <a href="Crea.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
+                <span class="bi bi-plus-square" aria-hidden="true"></span>
+                <span>Crea</span>
+            </a>
+
+            <a href="UtentePersonalArea.php"
+               class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
+                <span class="bi bi-person" aria-hidden="true"></span>
+                <span>Profilo</span>
+            </a>
+
+            <a href="#"
+               class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 admin-area fw-bold">
+                <span class="bi bi-list-check" aria-hidden="true"></span>
+                <span>Gestione post</span>
+            </a>
+
+            <hr>
+            <div class="mb-3 user-area">
+                <a href="Login.html" class="btn btn-primary w-100 mt-3">
+                    <span class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></span>
+                    Login
+                </a>
             </div>
-            <div>
-              <strong>pippo_franco</strong><br>
-              <small class="text-muted">2 ore fa</small>
-            </div>
-          </div>
 
-          <span class="badge bg-light text-dark rounded-pill">
-            persone
-          </span>
+        </aside>
+
+        <!-- POST + FUNZIONAMENTO -->
+        <div class="col-md-9">
+            <div class="container py-5">
+
+                <h3 class="fw-bold mb-4">Approvazione spotted:</h3>
+
+                <div class="row align-items-start">
+
+                    <!-- COLONNA CENTRALE -->
+                    <main class="col-md-8">
+                        <div id="spottedList"></div>
+                    </main>
+
+                </div>
+            </div>
         </div>
 
-        <p class="mt-3">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        </p>
-
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-
-          <div>
-            <button class="btn btn-success btn-sm fw-semibold">
-              <i class="bi bi-check-lg"></i> Accetta
-            </button>
-
-            <button class="btn btn-danger btn-sm fw-semibold ms-2">
-              <i class="bi bi-x-lg"></i> Rifiuta
-            </button>
-          </div>
-
-          <a href="#" class="text-danger fw-semibold text-decoration-none">
-            <i class="bi bi-slash-circle"></i> Banna utente
-          </a>
-
-        </div>
-
-      </div>
     </div>
+</div>
 
-    <!-- POST DA MODERARE (ESEMPIO) -->
-    <div class="card rounded-4 shadow-sm mb-5">
-      <div class="card-body">
+<!-- BOTTOM NAV SOLO MOBILE -->
+<nav class="navbar fixed-bottom bg-body border-top d-md-none">
+    <div class="container d-flex justify-content-around text-center">
 
-        <div class="d-flex justify-content-between align-items-start">
-          <div class="d-flex align-items-center gap-2">
-            <div class="rounded-circle bg-info text-white fw-bold d-flex justify-content-center align-items-center"
-                 style="width:35px;height:35px;">
-              P
-            </div>
-            <div>
-              <strong>pippo_franco</strong><br>
-              <small class="text-muted">2 ore fa</small>
-            </div>
-          </div>
+        <a href="index.php" class="text-body text-decoration-none">
+            <span class="bi bi-house fs-4"></span><br>
+            <small>Home</small>
+        </a>
 
-          <span class="badge bg-light text-dark rounded-pill">
-            persone
-          </span>
-        </div>
+        <a href="Crea.php" class="text-body text-decoration-none">
+            <span class="bi bi-plus-square fs-4"></span><br>
+            <small>Crea</small>
+        </a>
 
-        <p class="mt-3">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        </p>
+        <a href="UtentePersonalArea.php" class="text-body text-decoration-none">
+            <span class="bi bi-person fs-4"></span><br>
+            <small>Profilo</small>
+        </a>
 
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <a href="#" class="text-body text-decoration-none admin-area">
+            <span class="bi bi-list-check"></span><br>
+            <small>Gestione post</small>
+        </a>
+    </div>
+</nav>
 
-          <div>
-            <button class="btn btn-success btn-sm fw-semibold">
-              <i class="bi bi-check-lg"></i> Accetta
-            </button>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/theme-toggle.js"></script>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/user.js"></script>
 
-            <button class="btn btn-danger btn-sm fw-semibold ms-2">
-              <i class="bi bi-x-lg"></i> Rifiuta
-            </button>
-          </div>
+</body>
 
-          <a href="#" class="text-danger fw-semibold text-decoration-none">
-            <i class="bi bi-slash-circle"></i> Banna utente
-          </
+</html>

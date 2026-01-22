@@ -5,28 +5,36 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     exit;
 }
+header("Content-Type: application/json");
+
 $db = Database::getInstance();
 
-$nome = trim($_POST['nome']);
-$cognome = trim($_POST['cognome']);
-$username = trim($_POST['username']);
-$email = trim($_POST['email']);
-$password = $_POST['password'];
-$confirm = $_POST['confirm_password'];
+$data = json_decode(file_get_contents("php://input"), true);
+$nome = trim($data['nome']);
+$cognome = trim($data['cognome']);
+$username = trim($data['username']);
+$email = trim($data['email']);
+$password = $data['password'];
+$confirm = $data['confirm_password'];
 
 if ($password !== $confirm) {
     http_response_code(400);
-    die('Le password non coincidono');
+    echo json_encode([
+        "errors" => ["cfPassword" => "Le password non coincidono"]
+    ]);
+    exit;
 }
 
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
 try {
     $db->register($nome, $cognome, $email, $username, $hash);
-    header('Location: /public/Login.html', true, 302);
+    echo json_encode(["success" => true]);
     exit;
 } catch (PDOException $e) {
-    echo($e->getMessage());
     http_response_code(400);
-    die('Email già registrata');
+    echo json_encode([
+        "errors" => ["form" => "Email già registrata"]
+    ]);
+    exit;
 }
