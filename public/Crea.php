@@ -1,0 +1,155 @@
+<?php require_once '../api/auth/auth-check.php'; ?>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Crea Spotted</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="theme.css" />
+
+    <style>
+        @media (min-width: 768px) {
+            .desktop-card-style {
+                border: var(--bs-card-border-width) solid var(--bs-card-border-color) !important;
+                border-radius: 1rem !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="bg-background">
+
+<form id="spottedForm" method="POST">
+
+    <div class="d-flex d-md-none justify-content-between align-items-center p-3 border-bottom bg-body sticky-top">
+        <a href="index.php" class="text-body fs-4 text-decoration-none" aria-label="Chiudi e torna alla home">
+            <span class="bi bi-x-lg"></span>
+        </a>
+
+        <h1 class="text-primary fw-semibold m-0 fs-4">Crea spotted</h1>
+
+        <button type="submit"
+                class="btn btn-primary btn-sm fw-semibold rounded-pill px-3 submit-btn">
+            Post
+        </button>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+
+            <aside class="col-md-3 bg-body border-end p-4 d-none d-md-flex flex-column" role="complementary" aria-labelledby="sidebar-title">
+                <h2 class="h4 fw-light text-primary text-break" id="sidebar-title">
+                    SpottedUniCesena
+                </h2>
+
+                <hr class="w-50">
+
+                <a href="index.php" class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
+                    <span class="bi bi-house"></span>
+                    <span>Home</span>
+                </a>
+
+                <a href="Crea.php"
+                   class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 fw-bold">
+                    <span class="bi bi-plus-square"></span>
+                    <span>Crea</span>
+                </a>
+
+                <a href="UtentePersonalArea.php"
+                   class="d-flex align-items-center gap-2 text-body text-decoration-none py-2">
+                    <span class="bi bi-person"></span>
+                    <span>Profilo</span>
+                </a>
+
+                <a href="AdminPersonalArea.php"
+                   class="d-flex align-items-center gap-2 text-body text-decoration-none py-2 admin-area">
+                    <span class="bi bi-list-check" aria-hidden="true"></span>
+                    <span>Gestione post</span>
+                </a>
+
+                <hr>
+                <div class="mb-3 user-area"></div>
+            </aside>
+
+            <div class="col-md-9 px-0 px-md-3">
+                <div class="container-fluid container-md p-0 py-md-5">
+
+                    <h2 class="fw-bold mb-4 d-none d-md-block">Crea spotted:</h2>
+
+                    <div class="row align-items-start m-0 m-md-n2"> <main class="col-md-8 px-0 px-md-2">
+
+                            <div class="card responsive-card w-100 border-0 rounded-0 shadow-sm desktop-card-style">
+                                <div class="card-body p-3 p-md-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="user-area"></div>
+
+                                        <label for="category" class="visually-hidden">Categoria</label>
+                                        <select id="category"
+                                                name="category_id"
+                                                class="form-select form-select-sm w-auto category-select border-primary rounded-3"
+                                                required>
+                                            <option value="" disabled selected>Categoria</option>
+                                        </select>
+                                    </div>
+                                    <p class="error text-danger mb-3 category-error"></p>
+
+                                    <label for="text" class="visually-hidden">Testo spotted</label>
+                                    <textarea id="text"
+                                              name="text"
+                                              class="form-control fs-5 mobile-edge-to-edge border-0 shadow-none px-0 px-md-2"
+                                              rows="6"
+                                              placeholder="Chi o che cosa vuoi spottare?"
+                                              required></textarea>
+                                    <p class="error text-danger mb-3 text-error"></p>
+
+                                    <div class="text-end mt-3 d-none d-md-block">
+                                        <button type="submit"
+                                                class="btn btn-primary rounded-pill px-4 fw-semibold submit-btn">
+                                            Posta
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </main>
+
+                        <aside class="col-md-4 d-none d-md-block">
+                            <div class="card rounded-4 shadow-sm p-4 sticky-top" style="top: 100px;">
+
+                                <h3 class="fw-bold">Come funziona spotted?</h3>
+
+                                <ul class="mt-3">
+                                    <li>Scrivi per spottare chiunque</li>
+                                    <li>I messaggi restano anonimi</li>
+                                    <li>Mantieni il rispetto</li>
+                                    <li>Evita dati personali</li>
+                                    <li>Scegli la categoria giusta</li>
+                                </ul>
+
+                                <div class="mt-2 d-flex flex-wrap gap-2" id="categories"></div>
+
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/theme-toggle.js"></script>
+<script src="js/common.js"></script>
+<script src="js/user.js"></script>
+<script src="js/crea.js"></script>
+
+</body>
+</html>

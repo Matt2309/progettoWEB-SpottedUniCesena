@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registrazione</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+   <link rel="stylesheet" href="theme.css" />
+</head>
+
+<body class="bg-body">
+
+  <main class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="w-100" style="max-width:420px;">
+
+      <!-- Titolo App -->
+      <h1 class="text-primary text-center fw-light h2 mt-4">
+        SpottedUniCesena
+      </h1>
+
+      <!-- Titolo Pagina -->
+      <h2 class="text-primary text-center h5 mt-4 mb-4">
+        Registrati
+      </h2>
+
+      <!-- FORM -->
+      <form onsubmit="validateAndSubmitRegister(event);">
+        <label for="nome" class="visually-hidden">Nome</label>
+        <input type="text"
+               name="nome"
+               id="nome"
+               class="form-control rounded-pill border-primary"
+               placeholder="Nome *"
+               required />
+          <p class="error mb-3 text-danger mb-3" id="nomeError"></p>
+
+        <label for="cognome" class="visually-hidden">Cognome</label>
+        <input type="text"
+               name="cognome"
+               id="cognome"
+               class="form-control rounded-pill border-primary"
+               placeholder="Cognome *"
+               required />
+          <p class="error mb-3 text-danger mb-3" id="cognomeError"></p>
+
+        <label for="username" class="visually-hidden">Username</label>
+        <input type="text"
+                name="username"
+               id="username"
+               class="form-control rounded-pill border-danger"
+                placeholder="Username *"
+                required />
+          <p class="error mb-3 text-danger mb-3" id="usernameError"></p>
+
+        <label for="email" class="visually-hidden">Email</label>
+        <input type="email"
+               name="email"
+               id="email"
+               class="form-control rounded-pill border-primary"
+               placeholder="Email *"
+               required />
+          <p class="error mb-3 text-danger mb-3" id="emailError"></p>
+
+        <label for="password" class="visually-hidden">password</label>
+        <input type="password"
+               name="password"
+               id="password"
+               class="form-control rounded-pill border-primary"
+               placeholder="Password *"
+               required />
+          <p class="error mb-3 text-danger mb-3" id="passwordError"></p>
+
+        <label for="confirm_password" class="visually-hidden">confirm_password</label>
+        <input type="password"
+               name="confirm_password"
+               id="confirm_password"
+               class="form-control rounded-pill border-primary"
+               placeholder="Conferma password *"
+               required />
+          <p class="error mb-3 text-danger mb-4" id="cfPasswordError"></p>
+          <p class="error mb-3 text-danger mb-4" id="formError"></p>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary rounded-pill px-5 fw-semibold">
+            <span class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></span>
+            Registrati
+          </button>
+        </div>
+      </form>
+
+      <!-- Link Login -->
+      <p class="text-center text-primary mt-4">
+        Hai già un account?
+        <a href="Login.html" class="text-primary fw-semibold">
+          Accedi
+        </a>
+      </p>
+
+    </div>
+  </main>
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/auth/auth.js"></script>
+</body>
+</html>
